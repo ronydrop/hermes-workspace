@@ -38,7 +38,6 @@ import { ErrorBoundary } from '@/components/error-boundary'
 // System metrics footer removed — not used in Hermes Workspace
 import { CommandPalette } from '@/components/command-palette'
 import { useSettings } from '@/hooks/use-settings'
-import { t } from '@/lib/i18n'
 // ActivityTicker moved to dashboard-only (too noisy for global header)
 
 const TerminalWorkspace = lazy(() =>
@@ -126,13 +125,13 @@ export function WorkspaceShell() {
 
   // Derive active session from URL
   const mobilePageTitle = (() => {
-    if (pathname.startsWith('/terminal')) return t('nav.terminal')
-    if (pathname.startsWith('/files')) return t('nav.files')
-    if (pathname.startsWith('/jobs')) return t('nav.jobs')
-    if (pathname.startsWith('/memory')) return t('nav.memory')
-    if (pathname.startsWith('/skills')) return t('nav.skills')
-    if (pathname.startsWith('/profiles')) return t('nav.profiles')
-    if (pathname.startsWith('/settings')) return t('nav.settings')
+    if (pathname.startsWith('/terminal')) return 'Terminal'
+    if (pathname.startsWith('/files')) return 'Files'
+    if (pathname.startsWith('/jobs')) return 'Jobs'
+    if (pathname.startsWith('/memory')) return 'Memory'
+    if (pathname.startsWith('/skills')) return 'Skills'
+    if (pathname.startsWith('/profiles')) return 'Profiles'
+    if (pathname.startsWith('/settings')) return 'Settings'
     if (pathname.startsWith('/debug')) return 'Debug'
     if (pathname.startsWith('/activity')) return 'Activity'
     return null
@@ -346,7 +345,7 @@ export function WorkspaceShell() {
               }}
             >
               {isMobile && isOnTerminalRoute && (
-                <MobilePageHeader title={t('nav.terminal')} />
+                <MobilePageHeader title="Terminal" />
               )}
               <div className="flex-1 min-h-0 overflow-hidden">
                 <Suspense fallback={null}>

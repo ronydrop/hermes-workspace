@@ -53,21 +53,21 @@ const PROVIDERS = [
     id: 'nous',
     name: 'Nous Portal',
     logo: '/providers/nous.png',
-    desc: 'Grátis via OAuth',
+    desc: 'Free via OAuth',
     authType: 'oauth',
   },
   {
     id: 'openai-codex',
     name: 'OpenAI Codex',
     logo: '/providers/openai.png',
-    desc: 'Grátis via ChatGPT Pro',
+    desc: 'Free via ChatGPT Pro',
     authType: 'oauth',
   },
   {
     id: 'anthropic',
     name: 'Anthropic',
     logo: '/providers/anthropic.png',
-    desc: 'Chave de API necessária',
+    desc: 'API key required',
     authType: 'api_key',
     envKey: 'ANTHROPIC_API_KEY',
   },
@@ -75,7 +75,7 @@ const PROVIDERS = [
     id: 'openrouter',
     name: 'OpenRouter',
     logo: '/providers/openrouter.png',
-    desc: 'Chave de API necessária',
+    desc: 'API key required',
     authType: 'api_key',
     envKey: 'OPENROUTER_API_KEY',
   },
@@ -83,14 +83,14 @@ const PROVIDERS = [
     id: 'ollama',
     name: 'Ollama',
     logo: '/providers/ollama.png',
-    desc: 'Modelos locais, sem chave necessária',
+    desc: 'Local models, no key needed',
     authType: 'none',
   },
   {
     id: 'custom',
     name: 'Custom (OpenAI-compat)',
     logo: '/providers/openai.png',
-    desc: 'Qualquer endpoint compatível com OpenAI',
+    desc: 'Any OpenAI-compatible endpoint',
     authType: 'custom',
   },
 ]
@@ -100,10 +100,10 @@ function getEnhancedFeatureNames(
 ): Array<string> {
   if (!capabilities) return []
   const features: Array<{ enabled?: boolean; label: string }> = [
-    { enabled: capabilities.sessions, label: 'Sessões' },
+    { enabled: capabilities.sessions, label: 'Sessions' },
     { enabled: capabilities.skills, label: 'Skills' },
-    { enabled: capabilities.memory, label: 'Memória' },
-    { enabled: capabilities.config, label: 'Config. no app' },
+    { enabled: capabilities.memory, label: 'Memory' },
+    { enabled: capabilities.config, label: 'In-app config' },
     { enabled: capabilities.jobs, label: 'Jobs' },
   ]
 
@@ -215,8 +215,8 @@ export function HermesOnboarding() {
         setBackendStatus('ready')
         setBackendMessage(
           data.capabilities.sessions
-            ? 'Backend conectado. Chat principal funciona, e as melhorias do gateway Hermes estão disponíveis.'
-            : 'Backend conectado. Chat principal pronto.',
+            ? 'Backend connected. Core chat works, and Hermes gateway enhancements are available.'
+            : 'Backend connected. Core chat is ready.',
         )
         return
       }
@@ -224,18 +224,18 @@ export function HermesOnboarding() {
       if (data.capabilities?.health) {
         setBackendStatus('error')
         setBackendMessage(
-          'O backend está acessível, mas /v1/chat/completions ainda não está disponível.',
+          'Backend is reachable, but /v1/chat/completions is not available yet.',
         )
         return
       }
 
       setBackendStatus('error')
-      setBackendMessage('Nenhum backend compatível detectado ainda.')
+      setBackendMessage('No compatible backend detected yet.')
     } catch (err) {
       setBackendInfo(null)
       setBackendStatus('error')
       setBackendMessage(
-        err instanceof Error ? err.message : 'Verificação de conexão falhou',
+        err instanceof Error ? err.message : 'Connection check failed',
       )
     }
   }, [])
@@ -271,7 +271,7 @@ export function HermesOnboarding() {
       await loadModels()
       return true
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : 'Falha ao salvar')
+      setSaveError(err instanceof Error ? err.message : 'Failed to save')
       return false
     } finally {
       setSaving(false)
@@ -306,7 +306,7 @@ export function HermesOnboarding() {
       if (!res.ok) throw new Error(`Save failed: ${res.status}`)
       return true
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : 'Falha ao salvar modelo')
+      setSaveError(err instanceof Error ? err.message : 'Failed to save model')
       return false
     }
   }, [canEditConfig, configuredModel, selectedModel, selectedProvider])
@@ -329,7 +329,7 @@ export function HermesOnboarding() {
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const reader = res.body?.getReader()
-      if (!reader) throw new Error('Nenhum stream retornado')
+      if (!reader) throw new Error('No stream returned')
 
       const decoder = new TextDecoder()
       let text = ''
@@ -346,11 +346,11 @@ export function HermesOnboarding() {
         }
       }
 
-      setTestMessage(text.slice(0, 240) || 'Teste de chat bem-sucedido.')
+      setTestMessage(text.slice(0, 240) || 'Chat test succeeded.')
       setTestStatus('success')
       void checkBackend()
     } catch (err) {
-      setTestMessage(err instanceof Error ? err.message : 'Conexão falhou')
+      setTestMessage(err instanceof Error ? err.message : 'Connection failed')
       setTestStatus('error')
     }
   }, [checkBackend])
@@ -374,7 +374,7 @@ export function HermesOnboarding() {
       }
 
       if (!res.ok || data.error) {
-        setOauthError(data.error || 'Falha ao iniciar OAuth')
+        setOauthError(data.error || 'Failed to start OAuth')
         setOauthStep('error')
         return
       }
@@ -413,14 +413,14 @@ export function HermesOnboarding() {
 
           if (pollData.status === 'error') {
             if (oauthPollRef.current) clearInterval(oauthPollRef.current)
-            setOauthError(pollData.message || 'Autenticação falhou')
+            setOauthError(pollData.message || 'Authentication failed')
             setOauthStep('error')
           }
         } catch {}
       }, intervalMs)
     } catch (err) {
       setOauthError(
-        err instanceof Error ? err.message : 'Falha ao iniciar OAuth',
+        err instanceof Error ? err.message : 'Failed to start OAuth',
       )
       setOauthStep('error')
     }
@@ -500,10 +500,10 @@ export function HermesOnboarding() {
                   filter: 'drop-shadow(0 8px 24px rgba(99,102,241,0.3))',
                 }}
               />
-              <h2 className="text-xl font-bold">Bem-vindo ao Hermes Workspace</h2>
+              <h2 className="text-xl font-bold">Welcome to Hermes Workspace</h2>
               <p className="text-sm" style={mutedStyle}>
-                Funciona com qualquer backend compatível com OpenAI. As APIs do gateway
-                Hermes desbloqueiam sessões, memória, skills e outros extras automaticamente.
+                Works with any OpenAI-compatible backend. Hermes gateway APIs
+                unlock sessions, memory, skills, and other extras automatically.
               </p>
               <button
                 onClick={() => {
@@ -512,10 +512,10 @@ export function HermesOnboarding() {
                 }}
                 className="w-full rounded-xl bg-accent-500 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600"
               >
-                Conectar Backend
+                Connect Backend
               </button>
               <button onClick={complete} className="text-xs" style={mutedStyle}>
-                Pular configuração
+                Skip setup
               </button>
             </div>
           )}
@@ -523,10 +523,10 @@ export function HermesOnboarding() {
           {step === 'connect' && (
             <div className="space-y-4 text-center">
               <div className="text-4xl">🔌</div>
-              <h2 className="text-lg font-bold">Conectar Seu Backend</h2>
+              <h2 className="text-lg font-bold">Connect Your Backend</h2>
               <p className="text-sm" style={mutedStyle}>
-                Comece verificando que o Hermes Workspace pode alcançar seu
-                backend compatível com OpenAI.
+                Start by verifying that Hermes Workspace can reach your
+                OpenAI-compatible backend.
               </p>
 
               {backendStatus === 'checking' && (
@@ -535,7 +535,7 @@ export function HermesOnboarding() {
                   style={mutedStyle}
                 >
                   <span className="size-2 animate-pulse rounded-full bg-accent-500" />
-                  Verificando capacidades do backend...
+                  Checking backend capabilities...
                 </div>
               )}
 
@@ -549,9 +549,9 @@ export function HermesOnboarding() {
                     className="rounded-xl p-3 text-left text-xs"
                     style={cardStyle}
                   >
-                    <p style={mutedStyle}>URL do Backend</p>
+                    <p style={mutedStyle}>Backend URL</p>
                     <p className="mt-1 font-mono">
-                      {backendInfo?.hermesUrl || 'Configurado automaticamente'}
+                      {backendInfo?.hermesUrl || 'Configured automatically'}
                     </p>
                   </div>
                 </div>
@@ -568,13 +568,13 @@ export function HermesOnboarding() {
                     style={{ ...cardStyle, borderColor: 'var(--theme-border)' }}
                   >
                     <p className="font-medium text-white">
-                      Backends compatíveis
+                      Compatible backends
                     </p>
                     <p className="mt-2" style={mutedStyle}>
-                      Use qualquer backend que exponha{' '}
-                      <code>/v1/chat/completions</code>. Se você apontar o Hermes
-                      Workspace para um gateway Hermes, recursos aprimorados são
-                      desbloqueados automaticamente.
+                      Use any backend that exposes{' '}
+                      <code>/v1/chat/completions</code>. If you point Hermes
+                      Workspace at a Hermes gateway, enhanced features unlock
+                      automatically.
                     </p>
                     <div
                       className="mt-3 rounded-lg px-3 py-2 font-mono text-[11px]"
@@ -598,7 +598,7 @@ export function HermesOnboarding() {
                   className="flex-1 rounded-xl border py-3 text-sm font-semibold transition-colors"
                   style={{ borderColor: 'var(--theme-border)' }}
                 >
-                  Tentar novamente
+                  Retry
                 </button>
                 <button
                   onClick={() => {
@@ -608,7 +608,7 @@ export function HermesOnboarding() {
                   disabled={backendStatus !== 'ready'}
                   className="flex-1 rounded-xl bg-accent-500 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 disabled:opacity-50"
                 >
-                  Continuar
+                  Continue
                 </button>
               </div>
             </div>
@@ -617,24 +617,24 @@ export function HermesOnboarding() {
           {step === 'provider' && (
             <div className="space-y-4">
               <h2 className="text-center text-lg font-bold">
-                Escolher Provedor e Modelo
+                Choose Provider and Model
               </h2>
               <p className="text-center text-xs" style={mutedStyle}>
                 {canEditConfig
-                  ? 'Salve as configurações do provedor aqui, depois escolha um modelo antes de testar o chat.'
-                  : 'Este backend gerencia as configurações do provedor fora do Hermes Workspace. Confirme o modelo que deseja usar e teste o chat.'}
+                  ? 'Save provider settings here, then choose a model before testing chat.'
+                  : 'This backend manages provider settings outside Hermes Workspace. Confirm the model you expect to use, then test chat.'}
               </p>
 
               <div className="rounded-xl p-3 text-xs" style={cardStyle}>
-                <p style={mutedStyle}>Modo do backend</p>
+                <p style={mutedStyle}>Backend mode</p>
                 <p className="mt-1">
                   {backendInfo?.capabilities?.sessions
-                    ? 'Gateway Hermes detectado'
-                    : 'Backend portátil compatível com OpenAI'}
+                    ? 'Hermes gateway detected'
+                    : 'Portable OpenAI-compatible backend'}
                 </p>
                 {configuredModel ? (
                   <p className="mt-2" style={mutedStyle}>
-                    Modelo atual:{' '}
+                    Current model:{' '}
                     <span className="font-mono text-accent-400">
                       {configuredModel}
                     </span>
@@ -689,7 +689,7 @@ export function HermesOnboarding() {
                         onClick={startNousOAuth}
                         className="w-full rounded-lg bg-accent-500 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-600"
                       >
-                        Conectar com Nous Portal
+                        Connect with Nous Portal
                       </button>
                     )}
                     {oauthStep === 'loading' && (
@@ -698,7 +698,7 @@ export function HermesOnboarding() {
                         style={mutedStyle}
                       >
                         <span className="size-2 animate-pulse rounded-full bg-accent-500" />
-                        Iniciando fluxo OAuth...
+                        Starting OAuth flow...
                       </div>
                     )}
                     {oauthStep === 'waiting' && (
@@ -708,12 +708,12 @@ export function HermesOnboarding() {
                           style={mutedStyle}
                         >
                           <span className="size-2 animate-pulse rounded-full bg-yellow-400" />
-                          Aguardando aprovação...
+                          Waiting for approval...
                         </div>
                         {oauthUserCode ? (
                           <div className="space-y-1 text-center">
                             <p className="text-xs" style={mutedStyle}>
-                              Seu código
+                              Your code
                             </p>
                             <p className="text-2xl font-mono font-bold tracking-widest">
                               {oauthUserCode}
@@ -728,7 +728,7 @@ export function HermesOnboarding() {
                             className="w-full rounded-lg border py-2 text-xs font-medium"
                             style={{ borderColor: 'var(--theme-border)' }}
                           >
-                            Abrir Nous Portal ↗
+                            Open Nous Portal ↗
                           </button>
                         ) : null}
                       </div>
@@ -736,19 +736,19 @@ export function HermesOnboarding() {
                     {oauthStep === 'success' && (
                       <div className="flex items-center gap-2 text-sm text-green-500">
                         <span>✓</span>
-                        <span>Autenticado com sucesso.</span>
+                        <span>Authenticated successfully.</span>
                       </div>
                     )}
                     {oauthStep === 'error' && (
                       <div className="space-y-2">
                         <p className="text-xs text-red-400">
-                          {oauthError || 'Autenticação falhou'}
+                          {oauthError || 'Authentication failed'}
                         </p>
                         <button
                           onClick={startNousOAuth}
                           className="w-full rounded-lg bg-accent-500 py-2 text-xs font-medium text-white"
                         >
-                          Tentar novamente
+                          Retry
                         </button>
                       </div>
                     )}
@@ -763,7 +763,7 @@ export function HermesOnboarding() {
                     className="space-y-2 rounded-xl p-4 text-left"
                     style={{ ...cardStyle, borderColor: 'var(--theme-border)' }}
                   >
-                    <p className="text-sm font-medium">Execute no seu terminal</p>
+                    <p className="text-sm font-medium">Run in your terminal</p>
                     <div
                       className="rounded-lg px-3 py-2 font-mono text-xs"
                       style={{ background: 'rgba(0,0,0,0.2)' }}
@@ -771,8 +771,8 @@ export function HermesOnboarding() {
                       hermes auth login openai-codex
                     </div>
                     <p className="text-xs" style={mutedStyle}>
-                      Após o fluxo de login ser concluído, clique abaixo para atualizar
-                      as configurações do provedor.
+                      After the login flow completes, click below to refresh
+                      provider settings.
                     </p>
                     <button
                       onClick={async () => {
@@ -781,7 +781,7 @@ export function HermesOnboarding() {
                       }}
                       className="w-full rounded-lg bg-accent-500 py-2 text-xs font-medium text-white"
                     >
-                      Já me autentiquei
+                      I&apos;ve authenticated
                     </button>
                   </div>
                 )}
@@ -838,7 +838,7 @@ export function HermesOnboarding() {
                   className="mb-1 block text-xs font-medium"
                   style={mutedStyle}
                 >
-                  Modelo
+                  Model
                 </label>
                 {availableModels.length > 0 ? (
                   <select
@@ -867,16 +867,16 @@ export function HermesOnboarding() {
                 )}
                 <p className="mt-2 text-xs" style={mutedStyle}>
                   {canFetchModels
-                    ? 'Os modelos foram buscados do backend quando disponíveis.'
-                    : 'Se o seu backend não expõe /v1/models, insira o nome do modelo manualmente.'}
+                    ? 'Models were fetched from the backend when available.'
+                    : 'If your backend does not expose /v1/models, enter the model name manually.'}
                 </p>
               </div>
 
               {!canEditConfig ? (
                 <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-3 text-xs text-yellow-200">
-                  A edição de provedor no app não está disponível neste backend. Isso
-                  é opcional. Se o backend já está configurado, continue para
-                  o teste de chat.
+                  In-app provider editing is unavailable on this backend. That
+                  is optional. If the backend is already configured, continue to
+                  the chat test.
                 </div>
               ) : null}
 
@@ -895,7 +895,7 @@ export function HermesOnboarding() {
                     }
                     className="flex-1 rounded-xl bg-indigo-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 disabled:opacity-50"
                   >
-                    {saving ? 'Salvando...' : 'Salvar Configurações'}
+                    {saving ? 'Saving...' : 'Save Settings'}
                   </button>
                 ) : null}
                 <button
@@ -920,7 +920,7 @@ export function HermesOnboarding() {
                   disabled={!backendSupportsChat}
                   className="flex-1 rounded-xl bg-accent-500 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 disabled:opacity-50"
                 >
-                  Continuar →
+                  Continue →
                 </button>
               </div>
             </div>
@@ -929,10 +929,10 @@ export function HermesOnboarding() {
           {step === 'test' && (
             <div className="space-y-4 text-center">
               <div className="text-4xl">🧪</div>
-              <h2 className="text-lg font-bold">Testar Chat</h2>
+              <h2 className="text-lg font-bold">Test Chat</h2>
               <p className="text-sm" style={mutedStyle}>
-                Verifique se o chat principal funciona primeiro. Os recursos avançados do Hermes
-                são opcionais e aparecem automaticamente quando suportados.
+                Verify that core chat works first. Enhanced Hermes features are
+                optional and appear automatically when supported.
               </p>
 
               <div
@@ -941,11 +941,11 @@ export function HermesOnboarding() {
               >
                 <p style={mutedStyle}>Backend</p>
                 <p className="mt-1 font-mono">
-                  {backendInfo?.hermesUrl || 'Configurado automaticamente'}
+                  {backendInfo?.hermesUrl || 'Configured automatically'}
                 </p>
                 {selectedModel || configuredModel ? (
                   <p className="mt-2" style={mutedStyle}>
-                    Modelo:{' '}
+                    Model:{' '}
                     <span className="font-mono text-accent-400">
                       {stripProviderPrefix(selectedModel || configuredModel)}
                     </span>
@@ -958,7 +958,7 @@ export function HermesOnboarding() {
                   onClick={testConnection}
                   className="w-full rounded-xl bg-accent-500 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600"
                 >
-                  Enviar Mensagem de Teste
+                  Send Test Message
                 </button>
               ) : null}
 
@@ -968,7 +968,7 @@ export function HermesOnboarding() {
                   style={mutedStyle}
                 >
                   <span className="size-2 animate-pulse rounded-full bg-accent-500" />
-                  Aguardando a resposta do backend...
+                  Waiting for the backend response...
                 </div>
               ) : null}
 
@@ -979,7 +979,7 @@ export function HermesOnboarding() {
                     style={cardStyle}
                   >
                     <span className="font-medium text-green-500">
-                      Assistente:
+                      Assistant:
                     </span>{' '}
                     <span>{testMessage}</span>
                   </div>
@@ -987,7 +987,7 @@ export function HermesOnboarding() {
                     onClick={() => setStep('done')}
                     className="w-full rounded-xl bg-green-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-700"
                   >
-                    Continuar
+                    Continue
                   </button>
                 </div>
               ) : null}
@@ -996,7 +996,7 @@ export function HermesOnboarding() {
                 <div className="space-y-3">
                   <div className="rounded-xl border border-red-500/30 bg-red-900/20 p-3 text-left text-sm">
                     <p className="mb-1 font-medium text-red-400">
-                      Teste de chat falhou
+                      Chat test failed
                     </p>
                     <p className="text-xs" style={mutedStyle}>
                       {testMessage}
@@ -1004,15 +1004,15 @@ export function HermesOnboarding() {
                     {testMessage.includes('401') ||
                     testMessage.toLowerCase().includes('key') ? (
                       <p className="mt-2 text-xs text-yellow-400">
-                        Verifique suas credenciais do provedor e acesso à conta.
+                        Check your provider credentials and account access.
                       </p>
                     ) : testMessage.toLowerCase().includes('model') ? (
                       <p className="mt-2 text-xs text-yellow-400">
-                        Confirme que o modelo selecionado existe neste backend.
+                        Confirm the selected model exists on this backend.
                       </p>
                     ) : (
                       <p className="mt-2 text-xs text-yellow-400">
-                        Confirme que o backend está em execução e ainda acessível pelo
+                        Confirm the backend is running and still reachable from
                         Hermes Workspace.
                       </p>
                     )}
@@ -1022,14 +1022,14 @@ export function HermesOnboarding() {
                       onClick={testConnection}
                       className="flex-1 rounded-lg bg-accent-500 py-2 text-xs font-medium text-white"
                     >
-                      Tentar novamente
+                      Retry
                     </button>
                     <button
                       onClick={() => setStep('provider')}
                       className="flex-1 rounded-lg border py-2 text-xs font-medium"
                       style={{ borderColor: 'var(--theme-border)' }}
                     >
-                      ← Voltar
+                      ← Back
                     </button>
                   </div>
                   <button
@@ -1037,7 +1037,7 @@ export function HermesOnboarding() {
                     className="mx-auto block text-xs"
                     style={mutedStyle}
                   >
-                    Pular por agora
+                    Skip for now
                   </button>
                 </div>
               ) : null}
@@ -1047,12 +1047,12 @@ export function HermesOnboarding() {
           {step === 'done' && (
             <div className="space-y-4 text-center">
               <div className="text-5xl">🎉</div>
-              <h2 className="text-xl font-bold">Workspace Pronto</h2>
+              <h2 className="text-xl font-bold">Workspace Ready</h2>
               <p className="text-sm" style={mutedStyle}>
-                Chat principal configurado.{' '}
+                Core chat is set up.{' '}
                 {enhancedFeatures.length > 0
-                  ? 'Este backend também expõe melhorias do gateway Hermes.'
-                  : 'Se você conectar um gateway Hermes depois, recursos aprimorados são desbloqueados automaticamente.'}
+                  ? 'This backend also exposes Hermes gateway enhancements.'
+                  : 'If you later connect a Hermes gateway, enhanced features unlock automatically.'}
               </p>
               <div
                 className="grid grid-cols-3 gap-2 text-xs"
@@ -1060,12 +1060,12 @@ export function HermesOnboarding() {
               >
                 <div className="rounded-xl p-2" style={cardStyle}>
                   <div className="mb-1 text-lg">💬</div>
-                  <div>Chat Pronto</div>
+                  <div>Chat Ready</div>
                 </div>
                 <div className="rounded-xl p-2" style={cardStyle}>
                   <div className="mb-1 text-lg">🔗</div>
                   <div>
-                    {enhancedFeatures.length > 0 ? 'Aprimorado' : 'Portátil'}
+                    {enhancedFeatures.length > 0 ? 'Enhanced' : 'Portable'}
                   </div>
                 </div>
                 <div className="rounded-xl p-2" style={cardStyle}>
@@ -1073,21 +1073,21 @@ export function HermesOnboarding() {
                   <div>
                     {enhancedFeatures.length > 0
                       ? enhancedFeatures.length
-                      : 'Opcional'}{' '}
+                      : 'Optional'}{' '}
                     Extras
                   </div>
                 </div>
               </div>
               {enhancedFeatures.length > 0 ? (
                 <p className="text-xs" style={mutedStyle}>
-                  Disponível agora: {enhancedFeatures.join(', ')}.
+                  Available now: {enhancedFeatures.join(', ')}.
                 </p>
               ) : null}
               <button
                 onClick={complete}
                 className="w-full rounded-xl bg-accent-500 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600"
               >
-                Abrir Workspace
+                Open Workspace
               </button>
             </div>
           )}

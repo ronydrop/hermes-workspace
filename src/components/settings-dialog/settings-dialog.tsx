@@ -70,15 +70,15 @@ type SectionId =
   | 'language'
 
 const SECTIONS: Array<{ id: SectionId; label: string; icon: any }> = [
-  { id: 'hermes', label: 'Modelo & Provedor', icon: CloudIcon },
-  { id: 'agent', label: 'Agente', icon: Settings02Icon },
-  { id: 'routing', label: 'Roteamento Inteligente', icon: SparklesIcon },
-  { id: 'voice', label: 'Voz', icon: VolumeHighIcon },
-  { id: 'display', label: 'Exibição', icon: PaintBoardIcon },
-  { id: 'appearance', label: 'Tema', icon: PaintBoardIcon },
+  { id: 'hermes', label: 'Model & Provider', icon: CloudIcon },
+  { id: 'agent', label: 'Agent', icon: Settings02Icon },
+  { id: 'routing', label: 'Smart Routing', icon: SparklesIcon },
+  { id: 'voice', label: 'Voice', icon: VolumeHighIcon },
+  { id: 'display', label: 'Display', icon: PaintBoardIcon },
+  { id: 'appearance', label: 'Theme', icon: PaintBoardIcon },
   { id: 'chat', label: 'Chat', icon: MessageMultiple01Icon },
-  { id: 'notifications', label: 'Alertas', icon: Notification03Icon },
-  { id: 'language', label: 'Idioma', icon: MessageMultiple01Icon },
+  { id: 'notifications', label: 'Alerts', icon: Notification03Icon },
+  { id: 'language', label: 'Language', icon: MessageMultiple01Icon },
 ]
 
 const DARK_ENTERPRISE_THEMES = new Set<ThemeId>([
@@ -106,7 +106,7 @@ function SectionHeader({
   return (
     <div className="mb-2">
       <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
-        Configurações
+        Settings
       </p>
       <h3 className="text-base font-semibold text-primary-900 dark:text-neutral-100">
         {title}
@@ -806,18 +806,18 @@ function AppearanceContent() {
   return (
     <div className="space-y-4">
       <SectionHeader
-        title="Aparência"
-        description="Tema e cores de destaque."
+        title="Appearance"
+        description="Theme and color accents."
       />
       <div className={SETTINGS_CARD_CLASS}>
         <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
-          Modo de Tema
+          Theme Mode
         </p>
         <div className="inline-flex rounded-lg border border-primary-200 p-1">
           {[
-            { value: 'light', label: 'Claro', icon: Sun01Icon },
-            { value: 'dark', label: 'Escuro', icon: Moon01Icon },
-            { value: 'system', label: 'Sistema', icon: ComputerIcon },
+            { value: 'light', label: 'Light', icon: Sun01Icon },
+            { value: 'dark', label: 'Dark', icon: Moon01Icon },
+            { value: 'system', label: 'System', icon: ComputerIcon },
           ].map((option) => (
             <button
               key={option.value}
@@ -839,7 +839,7 @@ function AppearanceContent() {
       {/* Accent color removed — themes control accent */}
       <div className={SETTINGS_CARD_CLASS}>
         <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
-          Tema Empresarial
+          Enterprise Theme
         </p>
         <EnterpriseThemePicker />
       </div>
@@ -1061,7 +1061,7 @@ function EnterpriseThemePicker() {
                 </span>
                 {isActive && (
                   <span className="ml-auto text-[9px] font-bold text-accent-600 uppercase tracking-wide">
-                    Ativo
+                    Active
                   </span>
                 )}
               </div>
@@ -1397,8 +1397,8 @@ function AgentBehaviorContent() {
   return (
     <div className="space-y-4">
       <SectionHeader
-        title="Comportamento do Agente"
-        description="Limites de execução e acesso às ferramentas."
+        title="Agent Behavior"
+        description="Execution limits and tool access."
       />
       {msg && (
         <div
@@ -1414,8 +1414,8 @@ function AgentBehaviorContent() {
       )}
       <div className={SETTINGS_CARD_CLASS}>
         <Row
-          label="Máx. turnos"
-          description="Máximo de turnos do agente por solicitação (1-100)"
+          label="Max turns"
+          description="Maximum agent turns per request (1-100)"
         >
           <input
             type="number"
@@ -1426,7 +1426,7 @@ function AgentBehaviorContent() {
             className="h-8 w-20 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-center text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
           />
         </Row>
-        <Row label="Timeout do gateway" description="Segundos antes do timeout">
+        <Row label="Gateway timeout" description="Seconds before timeout">
           <input
             type="number"
             min={10}
@@ -1436,7 +1436,7 @@ function AgentBehaviorContent() {
             className="h-8 w-20 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-center text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
           />
         </Row>
-        <Row label="Aplicação de ferramentas" description="Quando o agente deve usar ferramentas">
+        <Row label="Tool enforcement" description="When agent must use tools">
           <select
             value={String(config.tool_use_enforcement || 'auto')}
             onChange={(e) => save('tool_use_enforcement', e.target.value)}
@@ -1497,8 +1497,8 @@ function SmartRoutingContent() {
   return (
     <div className="space-y-4">
       <SectionHeader
-        title="Roteamento Inteligente"
-        description="Roteia consultas simples para modelos mais baratos."
+        title="Smart Routing"
+        description="Route simple queries to cheaper models."
       />
       {msg && (
         <div
@@ -1514,15 +1514,15 @@ function SmartRoutingContent() {
       )}
       <div className={SETTINGS_CARD_CLASS}>
         <Row
-          label="Ativar roteamento inteligente"
-          description="Rotear consultas simples automaticamente"
+          label="Enable smart routing"
+          description="Auto-route simple queries"
         >
           <Switch
             checked={config.enabled !== false}
             onCheckedChange={(c) => save('enabled', c)}
           />
         </Row>
-        <Row label="Modelo econômico" description="Modelo para consultas simples">
+        <Row label="Cheap model" description="Model for simple queries">
           <select
             value={String(config.cheap_model || '')}
             onChange={(e) => save('cheap_model', e.target.value)}
@@ -1536,7 +1536,7 @@ function SmartRoutingContent() {
             ))}
           </select>
         </Row>
-        <Row label="Máx. caracteres" description="Mensagens menores usam o modelo econômico">
+        <Row label="Max chars" description="Messages shorter use cheap model">
           <input
             type="number"
             min={10}
@@ -1547,8 +1547,8 @@ function SmartRoutingContent() {
           />
         </Row>
         <Row
-          label="Máx. palavras"
-          description="Mensagens com menos palavras usam o modelo econômico"
+          label="Max words"
+          description="Messages with fewer words use cheap model"
         >
           <input
             type="number"
@@ -1618,8 +1618,8 @@ function VoiceContent() {
   return (
     <div className="space-y-4">
       <SectionHeader
-        title="Voz"
-        description="Texto para fala e fala para texto."
+        title="Voice"
+        description="Text-to-speech and speech-to-text."
       />
       {msg && (
         <div
@@ -1635,9 +1635,9 @@ function VoiceContent() {
       )}
       <div className={SETTINGS_CARD_CLASS}>
         <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
-          Texto para Fala
+          Text-to-Speech
         </p>
-        <Row label="Provedor TTS">
+        <Row label="TTS Provider">
           <select
             value={ttsProvider}
             onChange={(e) => saveTts('provider', e.target.value)}
@@ -1650,7 +1650,7 @@ function VoiceContent() {
           </select>
         </Row>
         {ttsProvider === 'openai' && (
-          <Row label="Voz">
+          <Row label="Voice">
             <select
               value={String(
                 (tts.openai as Record<string, unknown>)?.voice || 'nova',
@@ -1676,15 +1676,15 @@ function VoiceContent() {
       </div>
       <div className={SETTINGS_CARD_CLASS}>
         <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
-          Fala para Texto
+          Speech-to-Text
         </p>
-        <Row label="Ativar STT">
+        <Row label="Enable STT">
           <Switch
             checked={stt.enabled !== false}
             onCheckedChange={(c) => saveStt('enabled', c)}
           />
         </Row>
-        <Row label="Provedor STT">
+        <Row label="STT Provider">
           <select
             value={String(stt.provider || 'local')}
             onChange={(e) => saveStt('provider', e.target.value)}
@@ -1733,8 +1733,8 @@ function DisplayContent() {
   return (
     <div className="space-y-4">
       <SectionHeader
-        title="Exibição"
-        description="Estilo de resposta do agente e preferências de saída."
+        title="Display"
+        description="Agent response style and output preferences."
       />
       {msg && (
         <div
@@ -1749,7 +1749,7 @@ function DisplayContent() {
         </div>
       )}
       <div className={SETTINGS_CARD_CLASS}>
-        <Row label="Personalidade" description="Estilo de resposta do agente">
+        <Row label="Personality" description="Agent response style">
           <select
             value={String(config.personality || 'default')}
             onChange={(e) => save('personality', e.target.value)}
@@ -1761,28 +1761,28 @@ function DisplayContent() {
             <option value="creative">Creative</option>
           </select>
         </Row>
-        <Row label="Streaming" description="Transmitir respostas em tempo real">
+        <Row label="Streaming" description="Stream responses in real-time">
           <Switch
             checked={config.streaming !== false}
             onCheckedChange={(c) => save('streaming', c)}
           />
         </Row>
         <Row
-          label="Mostrar raciocínio"
-          description="Exibir processo de pensamento do modelo"
+          label="Show reasoning"
+          description="Display model thinking process"
         >
           <Switch
             checked={config.show_reasoning !== false}
             onCheckedChange={(c) => save('show_reasoning', c)}
           />
         </Row>
-        <Row label="Mostrar custo" description="Exibir custo de tokens por resposta">
+        <Row label="Show cost" description="Display token cost per response">
           <Switch
             checked={config.show_cost === true}
             onCheckedChange={(c) => save('show_cost', c)}
           />
         </Row>
-        <Row label="Modo compacto" description="Reduzir espaçamento nas respostas">
+        <Row label="Compact mode" description="Reduce spacing in responses">
           <Switch
             checked={config.compact === true}
             onCheckedChange={(c) => save('compact', c)}
@@ -1870,10 +1870,10 @@ export function SettingsDialog({
           <div className="flex items-center justify-between border-b border-primary-200 bg-primary-50/80 px-4 py-4 md:rounded-t-2xl md:px-5">
             <div>
               <DialogTitle className="text-base font-semibold text-primary-900 dark:text-neutral-100">
-                Configurações
+                Settings
               </DialogTitle>
               <DialogDescription className="sr-only">
-                Configurar Hermes Workspace
+                Configure Hermes Workspace
               </DialogDescription>
             </div>
             <DialogClose
@@ -1943,7 +1943,7 @@ export function SettingsDialog({
                       size={16}
                       strokeWidth={1.5}
                     />
-                    Voltar
+                    Back
                   </Button>
                 </div>
                 <ActiveContent />
@@ -1952,12 +1952,12 @@ export function SettingsDialog({
           </SettingsErrorBoundary>
 
           <div className="sticky bottom-0 z-10 border-t border-primary-200 bg-primary-50/60 px-4 py-3 text-xs text-primary-500 dark:text-neutral-400 md:rounded-b-2xl md:px-5">
-            Alterações salvas automaticamente.{' '}
+            Changes saved automatically.{' '}
             <a
               href="/settings"
               className="ml-2 font-medium underline underline-offset-2 hover:text-primary-700 dark:hover:text-neutral-200"
             >
-              Todas as configurações →
+              All settings →
             </a>
           </div>
         </div>

@@ -108,26 +108,26 @@ export function TasksScreen() {
 
   const createMutation = useMutation({
     mutationFn: createTask,
-    onSuccess: () => { invalidate(); toast('Tarefa criada'); setShowCreate(false) },
-    onError: (e) => toast(e instanceof Error ? e.message : 'Falha ao criar tarefa', { type: 'error' }),
+    onSuccess: () => { invalidate(); toast('Task created'); setShowCreate(false) },
+    onError: (e) => toast(e instanceof Error ? e.message : 'Failed to create task', { type: 'error' }),
   })
 
   const updateMutation = useMutation({
     mutationFn: ({ id, input }: { id: string; input: CreateTaskInput }) => updateTask(id, input),
-    onSuccess: () => { invalidate(); toast('Tarefa atualizada'); setEditingTask(null) },
-    onError: (e) => toast(e instanceof Error ? e.message : 'Falha ao atualizar tarefa', { type: 'error' }),
+    onSuccess: () => { invalidate(); toast('Task updated'); setEditingTask(null) },
+    onError: (e) => toast(e instanceof Error ? e.message : 'Failed to update task', { type: 'error' }),
   })
 
   const deleteMutation = useMutation({
     mutationFn: deleteTask,
-    onSuccess: () => { invalidate(); toast('Tarefa excluída') },
-    onError: (e) => toast(e instanceof Error ? e.message : 'Falha ao excluir tarefa', { type: 'error' }),
+    onSuccess: () => { invalidate(); toast('Task deleted') },
+    onError: (e) => toast(e instanceof Error ? e.message : 'Failed to delete task', { type: 'error' }),
   })
 
   const moveMutation = useMutation({
     mutationFn: ({ id, column }: { id: string; column: TaskColumn }) => moveTask(id, column, 'user'),
     onSuccess: () => invalidate(),
-    onError: (e) => toast(e instanceof Error ? e.message : 'Falha ao mover tarefa', { type: 'error' }),
+    onError: (e) => toast(e instanceof Error ? e.message : 'Failed to move task', { type: 'error' }),
   })
 
   function handleDragStart(e: React.DragEvent, taskId: string) {
@@ -152,7 +152,7 @@ export function TasksScreen() {
     // Hybrid autonomy: if a human reviewer is configured, only they can move
     // tasks into the 'done' column — agents may move to 'review' at most.
     if (targetColumn === 'done' && humanReviewer) {
-      toast(`Apenas ${humanReviewer} pode marcar tarefas como concluídas`, { type: 'error' })
+      toast(`Only ${humanReviewer} can mark tasks as done`, { type: 'error' })
       setDraggingId(null)
       setDragOverColumn(null)
       return
@@ -176,16 +176,16 @@ export function TasksScreen() {
       <header className="rounded-2xl border border-primary-200 bg-primary-50/85 p-4 backdrop-blur-xl">
         <div className="flex items-center justify-between">
         <div className="flex items-center gap-3 min-w-0">
-          <h1 className="text-2xl font-medium text-ink">Tarefas</h1>
+          <h1 className="text-2xl font-medium text-ink">Tasks</h1>
           {assigneeFilter && (
             <div className="flex items-center gap-2 text-xs text-[var(--theme-muted)]">
-              <span>Filtrado por: <span className="capitalize" style={{ color: '#f59e0b' }}>{assigneeFilter}</span></span>
+              <span>Filtered by: <span className="capitalize" style={{ color: '#f59e0b' }}>{assigneeFilter}</span></span>
               <button
                 type="button"
                 onClick={() => setAssigneeFilter(null)}
                 className="text-[var(--theme-muted)] hover:text-[var(--theme-text)] transition-colors"
               >
-                ✕ Limpar
+                ✕ Clear
               </button>
             </div>
           )}
@@ -193,15 +193,15 @@ export function TasksScreen() {
           <div className="flex items-center gap-2 text-xs text-[var(--theme-muted)] flex-wrap">
             <span>{stats.total} total</span>
             <span className="hidden sm:inline">·</span>
-            <span className="hidden sm:inline">{stats.inProgress} em andamento</span>
+            <span className="hidden sm:inline">{stats.inProgress} in progress</span>
             {stats.overdue > 0 && (
               <>
                 <span>·</span>
-                <span className="text-red-400">{stats.overdue} atrasadas</span>
+                <span className="text-red-400">{stats.overdue} overdue</span>
               </>
             )}
             <span className="hidden sm:inline">·</span>
-            <span className="hidden sm:inline">{stats.completion}% concluídas</span>
+            <span className="hidden sm:inline">{stats.completion}% done</span>
           </div>
         </div>
 
@@ -215,12 +215,12 @@ export function TasksScreen() {
                 : 'border-[var(--theme-border)] text-[var(--theme-muted)] hover:text-[var(--theme-text)] hover:border-[var(--theme-accent)]',
             )}
           >
-            {showDone ? 'Ocultar Concluídas' : 'Mostrar Concluídas'}
+            {showDone ? 'Hide Done' : 'Show Done'}
           </button>
           <button
             onClick={invalidate}
             className="rounded-lg p-1.5 transition-colors hover:bg-[var(--theme-hover)]"
-            title="Atualizar"
+            title="Refresh"
           >
             <HugeiconsIcon icon={RefreshIcon} size={16} className="text-[var(--theme-muted)]" />
           </button>
@@ -230,7 +230,7 @@ export function TasksScreen() {
             style={{ background: 'var(--theme-accent)' }}
           >
             <HugeiconsIcon icon={Add01Icon} size={14} />
-            Nova Tarefa
+            New Task
           </button>
         </div>
       </div>
@@ -276,7 +276,7 @@ export function TasksScreen() {
                 <button
                   onClick={() => { setCreateColumn(col); setShowCreate(true) }}
                   className="rounded p-0.5 hover:bg-[var(--theme-hover)] transition-colors"
-                  title={`Adicionar a ${COLUMN_LABELS[col]}`}
+                  title={`Add to ${COLUMN_LABELS[col]}`}
                 >
                   <HugeiconsIcon icon={Add01Icon} size={14} className="text-[var(--theme-muted)]" />
                 </button>
@@ -301,8 +301,8 @@ export function TasksScreen() {
                         className="flex flex-col items-center justify-center py-8 gap-2 text-[var(--theme-muted)] opacity-60"
                       >
                         <HugeiconsIcon icon={CheckListIcon} size={22} />
-                        <p className="text-xs font-medium">Nenhuma tarefa</p>
-                        <p className="text-[10px]">Arraste aqui ou clique + para adicionar</p>
+                        <p className="text-xs font-medium">No tasks</p>
+                        <p className="text-[10px]">Drop here or click + to add</p>
                       </motion.div>
                     ) : (
                       colTasks.map(task => (

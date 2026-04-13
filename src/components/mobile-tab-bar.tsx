@@ -22,7 +22,6 @@ import type { TouchEvent } from 'react'
 import { cn } from '@/lib/utils'
 import { hapticTap } from '@/lib/haptics'
 import { useSettings } from '@/hooks/use-settings'
-import { t } from '@/lib/i18n'
 
 /** Height constant for consistent bottom insets on mobile routes with tab bar */
 export const MOBILE_TAB_BAR_OFFSET = 'var(--tabbar-h, 80px)'
@@ -46,63 +45,63 @@ type TabItem = {
 const TABS: Array<TabItem> = [
   {
     id: 'dashboard',
-    label: t('nav.dashboard'),
+    label: 'Home',
     icon: DashboardSquare01Icon,
     to: '/dashboard',
     match: (p) => p === '/dashboard',
   },
   {
     id: 'chat',
-    label: t('nav.chat'),
+    label: 'Chat',
     icon: Chat01Icon,
     to: '/chat/main',
     match: (p) => p.startsWith('/chat') || p === '/new',
   },
   {
     id: 'files',
-    label: t('nav.files'),
+    label: 'Files',
     icon: File01Icon,
     to: '/files',
     match: (p) => p.startsWith('/files'),
   },
   {
     id: 'terminal',
-    label: t('nav.terminal'),
+    label: 'Terminal',
     icon: CommandLineIcon,
     to: '/terminal',
     match: (p) => p.startsWith('/terminal'),
   },
   {
     id: 'jobs',
-    label: t('nav.jobs'),
+    label: 'Jobs',
     icon: Clock01Icon,
     to: '/jobs',
     match: (p) => p.startsWith('/jobs'),
   },
   {
     id: 'memory',
-    label: t('nav.memory'),
+    label: 'Memory',
     icon: BrainIcon,
     to: '/memory',
     match: (p) => p.startsWith('/memory'),
   },
   {
     id: 'skills',
-    label: t('nav.skills'),
+    label: 'Skills',
     icon: PuzzleIcon,
     to: '/skills',
     match: (p) => p.startsWith('/skills'),
   },
   {
     id: 'profiles',
-    label: t('nav.profiles'),
+    label: 'Profiles',
     icon: UserGroupIcon,
     to: '/profiles',
     match: (p) => p.startsWith('/profiles'),
   },
   {
     id: 'settings',
-    label: t('nav.settings'),
+    label: 'Settings',
     icon: Settings01Icon,
     to: '/settings',
     match: (p) => p.startsWith('/settings'),

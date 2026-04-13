@@ -10,20 +10,20 @@ type SuggestionChip = {
 
 const SUGGESTIONS: Array<SuggestionChip> = [
   {
-    label: 'Analisar workspace',
+    label: 'Analyze workspace',
     prompt:
-      'Analise a estrutura deste workspace e me dê 3 riscos de engenharia. Use ferramentas e seja conciso.',
+      'Analyze this workspace structure and give me 3 engineering risks. Use tools and keep it concise.',
     icon: CodeIcon,
   },
   {
-    label: 'Salvar preferência',
+    label: 'Save a preference',
     prompt:
-      'Salve isso na memória exatamente: \"Para demos, responda em no máximo 3 bullets e coloque o risco primeiro.\" Depois confirme.',
+      'Save this to memory exactly: "For demos, respond in 3 bullets max and put risk first." Then confirm saved.',
     icon: BrainIcon,
   },
   {
-    label: 'Criar um arquivo',
-      prompt: 'Crie demo-checklist.md com 5 verificações de lançamento para este app.',
+    label: 'Create a file',
+    prompt: 'Create demo-checklist.md with 5 launch checks for this app.',
     icon: PuzzleIcon,
   },
 ]
@@ -76,7 +76,7 @@ export function ChatEmptyState({
         {!compact && (
           <>
             <p className="mt-2 text-sm" style={{ color: 'var(--theme-muted)' }}>
-              Chat de agente · ferramentas ao vivo · memória · observabilidade completa
+              Agent chat · live tools · memory · full observability
             </p>
           </>
         )}

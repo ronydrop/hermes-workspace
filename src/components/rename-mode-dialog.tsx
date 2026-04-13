@@ -59,7 +59,7 @@ export function RenameDialog({ mode, onClose }: RenameDialogProps) {
   const handleRename = useCallback(() => {
     const trimmed = name.trim()
     if (!trimmed) {
-      setError('O nome do modo é obrigatório')
+      setError('Mode name is required')
       return
     }
 
@@ -100,7 +100,7 @@ export function RenameDialog({ mode, onClose }: RenameDialogProps) {
           id="rename-mode-title"
           className="mb-4 text-lg font-semibold text-primary-900"
         >
-          Renomear Modo
+          Rename Mode
         </h2>
 
         <form onSubmit={handleSubmit}>
@@ -109,7 +109,7 @@ export function RenameDialog({ mode, onClose }: RenameDialogProps) {
               htmlFor="mode-name"
               className="mb-2 block text-sm font-medium text-primary-700"
             >
-              Nome do Modo
+              Mode Name
             </label>
             <input
               ref={inputRef}
@@ -146,13 +146,13 @@ export function RenameDialog({ mode, onClose }: RenameDialogProps) {
               onClick={onClose}
               className="rounded-lg border border-primary-200 bg-surface px-4 py-2 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-400"
             >
-              Cancelar
+              Cancel
             </button>
             <button
               type="submit"
               className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
             >
-              Renomear
+              Rename
             </button>
           </div>
         </form>

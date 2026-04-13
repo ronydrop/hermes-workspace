@@ -24,11 +24,11 @@ export function LoginScreen() {
         // Success! Reload to trigger auth check
         window.location.reload()
       } else {
-        setError(data.error || 'Senha inválida')
+        setError(data.error || 'Invalid password')
         setLoading(false)
       }
     } catch (err) {
-      setError('Autenticação falhou. Por favor, tente novamente.')
+      setError('Authentication failed. Please try again.')
       setLoading(false)
     }
   }
@@ -68,10 +68,10 @@ export function LoginScreen() {
 
           {/* Title */}
           <h2 className="mb-2 text-center text-lg font-semibold text-primary-900">
-            Inserir Senha
+            Enter Password
           </h2>
           <p className="mb-6 text-center text-sm text-primary-600">
-            Este workspace está protegido por senha
+            This workspace is password-protected
           </p>
 
           {/* Form */}
@@ -81,7 +81,7 @@ export function LoginScreen() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Senha"
+                placeholder="Password"
                 className="w-full rounded-lg border border-primary-200 bg-white px-4 py-2.5 text-primary-900 placeholder-primary-400 outline-none transition-all focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
                 disabled={loading}
                 autoFocus
@@ -99,14 +99,14 @@ export function LoginScreen() {
               disabled={loading || !password}
               className="w-full rounded-lg bg-accent-500 px-4 py-2.5 font-medium text-white transition-all hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500/50 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {loading ? 'Autenticando...' : 'Continuar'}
+              {loading ? 'Authenticating...' : 'Continue'}
             </button>
           </form>
         </div>
 
         {/* Footer */}
         <p className="mt-6 text-center text-xs text-primary-500">
-          Desenvolvido por{' '}
+          Powered by{' '}
           <a
             href="https://github.com/NousResearch/hermes-agent"
             target="_blank"

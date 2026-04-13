@@ -743,7 +743,7 @@ function ChatSidebarComponent({
   const searchItem: NavItemDef = {
     kind: 'button',
     icon: Search01Icon,
-    label: t('nav.search'),
+    label: 'Search',
     active: isSearchModalOpen,
     onClick: openSearchModal,
   }
@@ -945,7 +945,7 @@ function ChatSidebarComponent({
               strokeWidth={1.5}
               className="size-5 shrink-0"
             />
-            <span>{t('nav.newSession')}</span>
+            <span>New Session</span>
           </Link>
         </div>
       )}
@@ -955,7 +955,7 @@ function ChatSidebarComponent({
         {/* Navigation sections */}
         <div className={cn('shrink-0 space-y-0.5 px-2', isMobile && 'order-2')}>
           <SectionLabel
-            label={t('nav.section.main')}
+            label="Main"
             isCollapsed={isVisuallyCollapsed}
             transition={transition}
             collapsible
@@ -972,7 +972,7 @@ function ChatSidebarComponent({
           />
 
           <SectionLabel
-            label={t('nav.section.knowledge')}
+            label="Knowledge"
             isCollapsed={isVisuallyCollapsed}
             transition={transition}
             collapsible

@@ -21,54 +21,53 @@ import {
   selectChatProfileDisplayName,
   useChatSettingsStore,
 } from '@/hooks/use-chat-settings'
-import { t } from '@/lib/i18n'
 
 const NAV_ITEMS = [
   {
     id: 'chat',
-    label: t('nav.chat'),
+    label: 'Chat',
     icon: Chat01Icon,
     to: '/chat/main',
     match: (p: string) => p.startsWith('/chat') || p === '/new' || p === '/',
   },
   {
     id: 'dashboard',
-    label: t('nav.dashboard'),
+    label: 'Dashboard',
     icon: DashboardSquare01Icon,
     to: '/dashboard',
     match: (p: string) => p.startsWith('/dashboard'),
   },
   {
     id: 'terminal',
-    label: t('nav.terminal'),
+    label: 'Terminal',
     icon: CommandLineIcon,
     to: '/terminal',
     match: (p: string) => p.startsWith('/terminal'),
   },
   {
     id: 'jobs',
-    label: t('nav.jobs'),
+    label: 'Jobs',
     icon: Clock01Icon,
     to: '/jobs',
     match: (p: string) => p.startsWith('/jobs'),
   },
   {
     id: 'memory',
-    label: t('nav.memory'),
+    label: 'Memory',
     icon: BrainIcon,
     to: '/memory',
     match: (p: string) => p.startsWith('/memory'),
   },
   {
     id: 'skills',
-    label: t('nav.skills'),
+    label: 'Skills',
     icon: PuzzleIcon,
     to: '/skills',
     match: (p: string) => p.startsWith('/skills'),
   },
   {
     id: 'profiles',
-    label: t('nav.profiles'),
+    label: 'Profiles',
     icon: UserGroupIcon,
     to: '/profiles',
     match: (p: string) => p.startsWith('/profiles'),

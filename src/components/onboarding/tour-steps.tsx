@@ -5,7 +5,7 @@ export const tourSteps: Array<Step> = [
   {
     target: 'body',
     placement: 'center',
-    title: 'Bem-vindo ao Hermes Workspace! ⚕',
+    title: 'Welcome to Hermes Workspace! ⚕',
     content: (
       <div
         style={{
@@ -21,8 +21,8 @@ export const tourSteps: Array<Step> = [
           style={{ width: 48, height: 48, borderRadius: 12 }}
         />
         <p style={{ textAlign: 'center', margin: 0 }}>
-          Seu centro de comando com IA para gerenciar agentes, chats, arquivos e
-          mais. Vamos fazer um tour rápido!
+          Your AI-powered command center for managing agents, chats, files, and
+          more. Let&apos;s take a quick tour!
         </p>
       </div>
     ),
@@ -32,72 +32,72 @@ export const tourSteps: Array<Step> = [
   {
     target: '[data-tour="sidebar-container"]',
     placement: 'right',
-    title: 'Navegação na Barra Lateral',
+    title: 'Sidebar Navigation',
     content:
-      'Navegue entre todas as suas ferramentas aqui. Recolha/expanda seções para personalizar seu workspace.',
+      'Navigate between all your tools here. Collapse/expand sections to customize your workspace.',
   },
   // Step 3: New Session
   {
     target: '[data-tour="new-session"]',
     placement: 'right',
-    title: 'Iniciar uma Nova Sessão',
+    title: 'Start a New Chat',
     content:
-      'Clique aqui para iniciar uma nova sessão de chat com IA. Cada conversa é salva automaticamente.',
+      'Click here to start a new AI chat session. Each conversation is saved automatically.',
   },
   // Step 4: Dashboard
   {
     target: '[data-tour="dashboard"]',
     placement: 'right',
-    title: 'Seu Painel',
+    title: 'Your Dashboard',
     content:
-      'Visão geral de sessões, uso e atividade. Veja tudo de relance.',
+      'Your overview of sessions, usage, and activity. See everything at a glance.',
   },
   // Step 5: Agent Hub
   {
     target: '[data-tour="agent-hub"]',
     placement: 'right',
-    title: 'Hub de Agentes',
+    title: 'Agent Hub',
     content:
-      'Gerencie seus agentes de IA e configurações. Crie agentes personalizados com comportamentos especializados.',
+      'Manage your AI agents and configurations. Create custom agents with specialized behaviors.',
   },
   // Step 7: Skills
   {
     target: '[data-tour="skills"]',
     placement: 'right',
-    title: 'Biblioteca de Skills',
+    title: 'Skills Library',
     content:
-      'Navegue e instale skills de agentes para expandir capacidades. Adicione novas ferramentas e habilidades aos seus agentes.',
+      'Browse and install agent skills to extend capabilities. Add new tools and abilities to your agents.',
   },
   // Step 8: Terminal
   {
     target: '[data-tour="terminal"]',
     placement: 'right',
-    title: 'Terminal Integrado',
+    title: 'Built-in Terminal',
     content:
-      'Terminal integrado para comandos rápidos. Execute comandos shell sem sair do Hermes Workspace.',
+      'Built-in terminal for quick commands. Execute shell commands without leaving Hermes Workspace.',
   },
   // Step 9: Usage Meter (in header)
   {
     target: '[data-tour="usage-meter"]',
     placement: 'bottom',
-    title: 'Monitor de Uso',
+    title: 'Usage Monitor',
     content:
-      'Monitore o uso do seu provedor de IA em tempo real. Acompanhe custos e consumo de API.',
+      'Monitor your AI provider usage in real-time. Track costs and API consumption.',
   },
   // Step 10: Settings
   {
     target: '[data-tour="settings"]',
     placement: 'right',
-    title: 'Configurações e Personalização',
+    title: 'Settings & Customization',
     content:
-      'Configure provedores, temas, cores de destaque e muito mais. Faça o Hermes Workspace ser seu.',
+      'Configure providers, themes, accent colors, and more. Make Hermes Workspace yours.',
   },
   // Step 11: Finish
   {
     target: 'body',
     placement: 'center',
-    title: 'Tudo pronto! 🎉',
+    title: "You're all set! 🎉",
     content:
-      'Comece a conversar com sua IA, explore as ferramentas e personalize o Hermes Workspace para o seu fluxo de trabalho. Precisa de ajuda? Pressione ? para ver todos os atalhos de teclado.',
+      'Start chatting with your AI, explore the tools, and customize Hermes Workspace to fit your workflow. Need help? Press ? to see all keyboard shortcuts.',
   },
 ]

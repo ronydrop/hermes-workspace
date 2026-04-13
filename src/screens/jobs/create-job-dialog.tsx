@@ -144,12 +144,12 @@ export function CreateJobDialog({
               style={{ borderColor: 'var(--theme-border)' }}
             >
               <div>
-                <h2 className="text-lg font-semibold">Criar Job</h2>
+                <h2 className="text-lg font-semibold">Create Job</h2>
                 <p
                   className="mt-1 text-sm"
                   style={{ color: 'var(--theme-muted)' }}
                 >
-                  Crie uma tarefa Hermes agendada com opções de temporização predefinidas.
+                  Build a scheduled Hermes task with preset timing options.
                 </p>
               </div>
               <button
@@ -157,7 +157,7 @@ export function CreateJobDialog({
                 onClick={() => onOpenChange(false)}
                 className="rounded-lg p-2 transition-colors"
                 style={{ color: 'var(--theme-muted)' }}
-                aria-label="Fechar diálogo de criação de job"
+                aria-label="Close create job dialog"
               >
                 <HugeiconsIcon icon={Cancel01Icon} size={18} />
               </button>
@@ -165,7 +165,7 @@ export function CreateJobDialog({
 
             <div className="flex-1 space-y-5 overflow-y-auto px-5 py-4">
               <section className="space-y-2">
-                <label className="text-sm font-medium">Nome</label>
+                <label className="text-sm font-medium">Name</label>
                 <input
                   value={form.name}
                   onChange={(event) =>
@@ -174,7 +174,7 @@ export function CreateJobDialog({
                       name: event.target.value,
                     }))
                   }
-                  placeholder="Resumo diário de pesquisa"
+                  placeholder="Daily research summary"
                   required
                   className="w-full rounded-xl border px-3 py-2.5 text-sm focus:outline-none focus:ring-1"
                   style={{
@@ -188,12 +188,12 @@ export function CreateJobDialog({
 
               <section className="space-y-3">
                 <div>
-                  <h3 className="text-sm font-medium">Agendamento</h3>
+                  <h3 className="text-sm font-medium">Schedule</h3>
                   <p
                     className="mt-1 text-xs"
                     style={{ color: 'var(--theme-muted)' }}
                   >
-                    Escolha um preset ou insira uma string de agendamento personalizada abaixo.
+                    Choose a preset or enter a custom schedule string below.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -226,7 +226,7 @@ export function CreateJobDialog({
                   })}
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Agendamento personalizado</label>
+                  <label className="text-sm font-medium">Custom schedule</label>
                   <input
                     value={form.schedule}
                     onChange={(event) =>
@@ -248,7 +248,7 @@ export function CreateJobDialog({
                     className="text-xs"
                     style={{ color: 'var(--theme-muted)' }}
                   >
-                    Usuários avançados podem inserir expressões cron diretamente.
+                    Advanced users can enter cron expressions directly.
                   </p>
                 </div>
               </section>
@@ -263,7 +263,7 @@ export function CreateJobDialog({
                       prompt: event.target.value,
                     }))
                   }
-                  placeholder="O que Hermes deve fazer?"
+                  placeholder="What should Hermes do?"
                   required
                   rows={5}
                   className="w-full resize-none rounded-xl border px-3 py-2.5 text-sm focus:outline-none focus:ring-1"
@@ -277,12 +277,12 @@ export function CreateJobDialog({
 
               <section className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-medium">Opções</h3>
+                  <h3 className="text-sm font-medium">Options</h3>
                   <p
                     className="mt-1 text-xs"
                     style={{ color: 'var(--theme-muted)' }}
                   >
-                    Controles opcionais de roteamento e repetição.
+                    Optional routing and repeat controls.
                   </p>
                 </div>
 
@@ -308,12 +308,12 @@ export function CreateJobDialog({
                     className="text-xs"
                     style={{ color: 'var(--theme-muted)' }}
                   >
-                    Separados por vírgula por enquanto.
+                    Comma-separated for now.
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Entregar para</label>
+                  <label className="text-sm font-medium">Deliver to</label>
                   <div className="flex flex-wrap gap-2">
                     {DELIVERY_OPTIONS.map((option) => {
                       const isActive = form.deliver.includes(option)
@@ -326,7 +326,7 @@ export function CreateJobDialog({
                           onClick={() => toggleDelivery(option)}
                           title={
                             needsGateway
-                              ? `Requer Hermes Gateway com ${option} configurado`
+                              ? `Requires Hermes Gateway with ${option} configured`
                               : undefined
                           }
                           className="rounded-full border px-3 py-1.5 text-xs font-medium capitalize transition-colors"
@@ -379,7 +379,7 @@ export function CreateJobDialog({
                             : 'var(--theme-text)',
                       }}
                     >
-                      Ilimitado
+                      Unlimited
                     </button>
                     <button
                       type="button"
@@ -405,7 +405,7 @@ export function CreateJobDialog({
                             : 'var(--theme-text)',
                       }}
                     >
-                      Definir contagem
+                      Set count
                     </button>
                   </div>
                   {form.repeatMode === 'limited' ? (
@@ -445,7 +445,7 @@ export function CreateJobDialog({
                   color: 'var(--theme-muted)',
                 }}
               >
-                Cancelar
+                Cancel
               </button>
               <button
                 type="submit"
@@ -458,7 +458,7 @@ export function CreateJobDialog({
                 className="rounded-xl px-4 py-2 text-sm font-medium text-white transition-opacity disabled:opacity-50"
                 style={{ background: 'var(--theme-accent)' }}
               >
-                {isSubmitting ? 'Criando...' : 'Criar'}
+                {isSubmitting ? 'Creating...' : 'Create'}
               </button>
             </div>
           </motion.form>

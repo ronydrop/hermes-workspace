@@ -55,10 +55,10 @@ type AuthTypeMeta = {
 }
 
 const WIZARD_STEPS: Array<StepItem> = [
-  { id: 'provider', label: 'Escolher Provedor' },
-  { id: 'auth', label: 'Escolher Auth' },
-  { id: 'instructions', label: 'Instruções de Config' },
-  { id: 'verify', label: 'Verificar' },
+  { id: 'provider', label: 'Choose Provider' },
+  { id: 'auth', label: 'Choose Auth' },
+  { id: 'instructions', label: 'Config Instructions' },
+  { id: 'verify', label: 'Verify' },
 ]
 
 const AUTH_TYPE_ORDER: Array<ProviderAuthType> = [
@@ -72,7 +72,7 @@ function getAuthTypeMeta(authType: ProviderAuthType): AuthTypeMeta {
   if (authType === 'api-key') {
     return {
       title: 'API Key',
-      description: 'Cole sua chave de API — salva diretamente na config local',
+      description: 'Paste your API key — saved directly to local config',
     }
   }
 
@@ -80,20 +80,20 @@ function getAuthTypeMeta(authType: ProviderAuthType): AuthTypeMeta {
     return {
       title: 'CLI Token',
       description:
-        'Use seu token de auth do Claude CLI existente (do Claude Code / claude.ai)',
+        'Use your existing Claude CLI auth token (from Claude Code / claude.ai)',
     }
   }
 
   if (authType === 'oauth') {
     return {
       title: 'OAuth',
-      description: 'Faça login pelo navegador — inicia o fluxo OAuth automaticamente',
+      description: 'Sign in via browser — launches OAuth flow automatically',
     }
   }
 
   return {
     title: 'Local',
-    description: 'Sem autenticação necessária (Ollama)',
+    description: 'No auth needed (Ollama)',
   }
 }
 
@@ -334,10 +334,10 @@ export function ProviderWizard({
 
   const verifyTitle =
     verifyState === 'success'
-      ? 'Conexão Verificada ✓'
+      ? 'Connection Verified ✓'
       : verifyState === 'warning'
-        ? 'Conectado (modelos pendentes)'
-        : 'Verificando conexão…'
+        ? 'Connected (models pending)'
+        : 'Checking connection…'
 
   return (
     <DialogRoot open={open} onOpenChange={handleDialogOpenChange}>
@@ -348,12 +348,12 @@ export function ProviderWizard({
               <div className="space-y-1">
                 <DialogTitle className="text-balance">
                   {editProvider
-                    ? `Editar Provedor: ${editProvider.name}`
-                    : 'Assistente de Configuração de Provedor'}
+                    ? `Edit Provider: ${editProvider.name}`
+                    : 'Provider Setup Wizard'}
                 </DialogTitle>
                 <DialogDescription className="text-pretty">
-                  Adicione credenciais de provedor com segurança. As chaves de API ficam locais no seu
-                  arquivo de configuração Hermes e nunca são enviadas ao Studio.
+                  Add provider credentials safely. API keys stay local in your
+                  Hermes config file and are never sent to Studio.
                 </DialogDescription>
               </div>
               <Button
@@ -362,7 +362,7 @@ export function ProviderWizard({
                 onClick={function onClose() {
                   handleDialogOpenChange(false)
                 }}
-                aria-label="Fechar assistente de configuração de provedor"
+                aria-label="Close provider setup wizard"
               >
                 <HugeiconsIcon
                   icon={Cancel01Icon}
@@ -416,10 +416,10 @@ export function ProviderWizard({
             {step === 'provider' ? (
               <section className="mt-5">
                 <h3 className="text-base font-medium text-primary-900 text-balance">
-                  Passo 1: Escolher Provedor
+                  Step 1: Choose Provider
                 </h3>
                 <p className="mt-1 text-sm text-primary-600 text-pretty">
-                  Selecione o provedor que deseja configurar.
+                  Select the provider you want to configure.
                 </p>
 
                 <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -468,10 +468,10 @@ export function ProviderWizard({
             {step === 'auth' && selectedProvider ? (
               <section className="mt-5">
                 <h3 className="text-base font-medium text-primary-900 text-balance">
-                  Passo 2: Escolher Tipo de Auth
+                  Step 2: Choose Auth Type
                 </h3>
                 <p className="mt-1 text-sm text-primary-600 text-pretty">
-                  {selectedProvider.name} suporta{' '}
+                  {selectedProvider.name} supports{' '}
                   {selectedProvider.authTypes
                     .map(function mapAuthType(authType) {
                       return getAuthTypeLabel(authType)
@@ -482,7 +482,7 @@ export function ProviderWizard({
 
                 <div className="mt-3 rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
                   <p className="text-xs text-primary-700 text-pretty">
-                    Caminho do arquivo de configuração:{' '}
+                    Config file path:{' '}
                     <code className="font-mono">{HERMES_CONFIG_PATH}</code>
                   </p>
                 </div>
@@ -516,7 +516,7 @@ export function ProviderWizard({
                         </p>
                         {!supported ? (
                           <p className="mt-2 text-xs text-primary-500 text-pretty">
-                            Não suportado por {selectedProvider.name}.
+                            Not supported by {selectedProvider.name}.
                           </p>
                         ) : null}
                       </button>
@@ -542,7 +542,7 @@ export function ProviderWizard({
                       size={20}
                       strokeWidth={1.5}
                     />
-                    Voltar
+                    Back
                   </Button>
                 </div>
               </section>
@@ -551,18 +551,18 @@ export function ProviderWizard({
             {step === 'instructions' && selectedProvider && selectedAuthType ? (
               <section className="mt-5">
                 <h3 className="text-base font-medium text-primary-900 text-balance">
-                  Passo 3: Adicionar Chave de API
+                  Step 3: Add API Key
                 </h3>
 
                 {selectedAuthType === 'oauth' ? (
                   <>
                     <p className="mt-1 text-sm text-primary-600 text-pretty">
-                      Isso executará{' '}
+                      This will run{' '}
                       <code className="font-mono text-primary-800">
                         hermes setup
                       </code>{' '}
-                      no terminal para iniciar o fluxo OAuth. Uma janela do navegador
-                      será aberta para você fazer login com o Google.
+                      in the terminal to start the OAuth flow. A browser window
+                      will open for you to sign in with Google.
                     </p>
 
                     <div className="mt-4 flex flex-col gap-3">
@@ -571,52 +571,52 @@ export function ProviderWizard({
                         onClick={function onLaunchOAuth() {
                           window.open('/terminal', '_blank')
                           setVerificationMessage(
-                            'Execute "hermes setup" no terminal e selecione Google OAuth quando solicitado. ' +
-                              'Uma janela do navegador será aberta para login. Ao concluir, o Hermes reiniciará automaticamente.',
+                            'Run "hermes setup" in the terminal and select Google OAuth when prompted. ' +
+                              'A browser window will open for sign-in. Once complete, Hermes will restart automatically.',
                           )
                           setVerifyState('warning')
                           setStep('verify')
                         }}
-                        >
-                          Abrir Terminal
-                        </Button>
+                      >
+                        Open Terminal
+                      </Button>
 
-                        <div className="rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
-                          <p className="text-xs text-primary-700 text-pretty">
-                            No terminal, execute:
-                          </p>
-                          <pre className="mt-1 rounded-lg bg-primary-200/60 px-2 py-1.5 text-xs font-mono text-primary-900">
-                            hermes setup
-                          </pre>
-                          <p className="mt-1.5 text-xs text-primary-600 text-pretty">
-                            Selecione <strong>Google Antigravity</strong> →{' '}
-                            <strong>OAuth</strong>. Uma aba do navegador será aberta para
-                            login no Google.
-                          </p>
-                        </div>
-
-                        <div className="rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
-                          <p className="text-xs text-primary-700 text-pretty">
-                            Sem acesso ao terminal?{' '}
-                            <a
-                              href="https://github.com/NousResearch/hermes-agent"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-primary-800 underline decoration-primary-400 hover:text-primary-900"
-                            >
-                              Veja a documentação do Hermes Agent
-                            </a>{' '}
-                            para instruções de configuração.
-                          </p>
-                        </div>
+                      <div className="rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
+                        <p className="text-xs text-primary-700 text-pretty">
+                          In the terminal, run:
+                        </p>
+                        <pre className="mt-1 rounded-lg bg-primary-200/60 px-2 py-1.5 text-xs font-mono text-primary-900">
+                          hermes setup
+                        </pre>
+                        <p className="mt-1.5 text-xs text-primary-600 text-pretty">
+                          Select <strong>Google Antigravity</strong> →{' '}
+                          <strong>OAuth</strong>. A browser tab will open for
+                          Google sign-in.
+                        </p>
                       </div>
-                    </>
+
+                      <div className="rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
+                        <p className="text-xs text-primary-700 text-pretty">
+                          No terminal access?{' '}
+                          <a
+                            href="https://github.com/NousResearch/hermes-agent"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary-800 underline decoration-primary-400 hover:text-primary-900"
+                          >
+                            See the Hermes Agent docs
+                          </a>{' '}
+                          for setup instructions.
+                        </p>
+                      </div>
+                    </div>
+                  </>
                 ) : selectedAuthType === 'cli-token' ? (
                   <>
                     <p className="mt-1 text-sm text-primary-600 text-pretty">
-                      Se você tem o Claude Code ou o Claude CLI instalado,
-                      o Hermes pode usar o mesmo token de auth. Execute o comando de configuração
-                      para detectar e importar automaticamente.
+                      If you have Claude Code or the Claude CLI installed,
+                      Hermes can use the same auth token. Run the configure
+                      command to detect and import it automatically.
                     </p>
 
                     <div className="mt-4 flex flex-col gap-3">
@@ -625,61 +625,61 @@ export function ProviderWizard({
                         onClick={function onLaunchCLI() {
                           window.open('/terminal', '_blank')
                           setVerificationMessage(
-                            'Execute "hermes setup" no terminal e selecione Anthropic → CLI Token. ' +
-                              'Ele detectará suas credenciais do Claude CLI e as importará automaticamente.',
+                            'Run "hermes setup" in the terminal and select Anthropic → CLI Token. ' +
+                              'It will detect your Claude CLI credentials and import them automatically.',
                           )
                           setVerifyState('warning')
                           setStep('verify')
                         }}
-                        >
-                          Abrir Terminal
-                        </Button>
+                      >
+                        Open Terminal
+                      </Button>
 
-                        <div className="rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
-                          <p className="text-xs text-primary-700 text-pretty">
-                            No terminal, execute:
-                          </p>
-                          <pre className="mt-1 rounded-lg bg-primary-200/60 px-2 py-1.5 text-xs font-mono text-primary-900">
-                            hermes setup
-                          </pre>
-                          <p className="mt-1.5 text-xs text-primary-600 text-pretty">
-                            Selecione <strong>Anthropic</strong> →{' '}
-                            <strong>Setup Token (Claude CLI)</strong>. Ele
-                            detectará suas credenciais Claude existentes em{' '}
-                            <code className="font-mono">~/.claude/</code>.
-                          </p>
-                        </div>
-
-                        <div className="rounded-xl border border-amber-200 bg-amber-50/70 px-3 py-2">
-                          <p className="text-xs text-amber-800 text-pretty">
-                            <strong>Requisito:</strong> Claude Code ou Claude CLI
-                            deve estar instalado e autenticado primeiro. Execute{' '}
-                            <code className="font-mono">claude</code> no terminal
-                            para verificar.
-                          </p>
-                        </div>
-
-                        <div className="rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
-                          <p className="text-xs text-primary-700 text-pretty">
-                            Sem acesso ao terminal?{' '}
-                            <a
-                              href="https://github.com/NousResearch/hermes-agent"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-primary-800 underline decoration-primary-400 hover:text-primary-900"
-                            >
-                              Veja a documentação do Hermes Agent
-                            </a>{' '}
-                            para instruções de configuração do CLI token.
-                          </p>
-                        </div>
+                      <div className="rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
+                        <p className="text-xs text-primary-700 text-pretty">
+                          In the terminal, run:
+                        </p>
+                        <pre className="mt-1 rounded-lg bg-primary-200/60 px-2 py-1.5 text-xs font-mono text-primary-900">
+                          hermes setup
+                        </pre>
+                        <p className="mt-1.5 text-xs text-primary-600 text-pretty">
+                          Select <strong>Anthropic</strong> →{' '}
+                          <strong>Setup Token (Claude CLI)</strong>. It will
+                          detect your existing Claude credentials from{' '}
+                          <code className="font-mono">~/.claude/</code>.
+                        </p>
                       </div>
-                    </>
+
+                      <div className="rounded-xl border border-amber-200 bg-amber-50/70 px-3 py-2">
+                        <p className="text-xs text-amber-800 text-pretty">
+                          <strong>Requires:</strong> Claude Code or Claude CLI
+                          must be installed and authenticated first. Run{' '}
+                          <code className="font-mono">claude</code> in terminal
+                          to verify.
+                        </p>
+                      </div>
+
+                      <div className="rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
+                        <p className="text-xs text-primary-700 text-pretty">
+                          No terminal access?{' '}
+                          <a
+                            href="https://github.com/NousResearch/hermes-agent"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary-800 underline decoration-primary-400 hover:text-primary-900"
+                          >
+                            See the Hermes Agent docs
+                          </a>{' '}
+                          for CLI token setup instructions.
+                        </p>
+                      </div>
+                    </div>
+                  </>
                 ) : selectedAuthType === 'api-key' ? (
                   <>
                     <p className="mt-1 text-sm text-primary-600 text-pretty">
-                      Cole sua chave de API do {selectedProvider.name} abaixo. Ela será
-                      salva diretamente no seu arquivo de configuração local.
+                      Paste your {selectedProvider.name} API key below. It will
+                      be saved directly to your local config file.
                     </p>
 
                     <div className="mt-4 flex flex-col gap-3">
@@ -690,7 +690,7 @@ export function ProviderWizard({
                           onChange={function onInputChange(e) {
                             setApiKeyInput(e.target.value)
                           }}
-                          placeholder={`sk-... ou sua chave de API do ${selectedProvider.name}`}
+                          placeholder={`sk-... or your ${selectedProvider.name} API key`}
                           className="flex-1 rounded-xl border border-primary-300 bg-white px-3 py-2 text-sm text-primary-900 placeholder:text-primary-400 focus:border-accent-400 focus:outline-none focus:ring-1 focus:ring-accent-400/50"
                           autoFocus
                         />
@@ -704,10 +704,10 @@ export function ProviderWizard({
                           }}
                         >
                           {saveState === 'saving'
-                            ? 'Salvando…'
+                            ? 'Saving…'
                             : saveState === 'saved'
-                              ? 'Salvo ✓'
-                              : 'Salvar & Conectar'}
+                              ? 'Saved ✓'
+                              : 'Save & Connect'}
                         </Button>
                       </div>
 
@@ -723,7 +723,7 @@ export function ProviderWizard({
                             strokeWidth={1.5}
                             className="inline mr-1"
                           />
-                          Chave salva! O Hermes está reiniciando para aplicar as alterações.
+                          Key saved! Hermes is restarting to apply changes.
                         </p>
                       ) : null}
                     </div>
@@ -739,14 +739,14 @@ export function ProviderWizard({
                         size={20}
                         strokeWidth={1.5}
                       />
-                      Obtenha sua chave de API do {selectedProvider.name}
+                      Get your {selectedProvider.name} API key
                     </a>
 
                     <div className="mt-4 rounded-xl border border-primary-200 bg-primary-100/70 px-3 py-2">
                       <p className="text-xs text-primary-700 text-pretty">
-                        As chaves de API são armazenadas localmente em{' '}
+                        API keys are stored locally in{' '}
                         <code className="font-mono">{HERMES_CONFIG_PATH}</code>,
-                        nunca enviadas ao Studio.
+                        never sent to Studio.
                       </p>
                     </div>
 
@@ -758,8 +758,8 @@ export function ProviderWizard({
                       }}
                       className="mt-3 text-xs text-primary-500 hover:text-primary-700 underline"
                     >
-                      {showManualSnippet ? 'Ocultar' : 'Mostrar'} trecho de configuração
-                      manual
+                      {showManualSnippet ? 'Hide' : 'Show'} manual config
+                      snippet
                     </button>
 
                     {showManualSnippet ? (
@@ -777,7 +777,7 @@ export function ProviderWizard({
                               size={20}
                               strokeWidth={1.5}
                             />
-                            Copiar trecho
+                            Copy snippet
                           </Button>
                           {copyState === 'copied' ? (
                             <span className="inline-flex items-center gap-1 text-xs text-green-600">
@@ -786,7 +786,7 @@ export function ProviderWizard({
                                 size={20}
                                 strokeWidth={1.5}
                               />
-                              Copiado
+                              Copied
                             </span>
                           ) : null}
                         </div>
@@ -801,8 +801,8 @@ export function ProviderWizard({
                 ) : (
                   <>
                     <p className="mt-1 text-sm text-primary-600 text-pretty">
-                      Nenhuma configuração adicional necessária. Apenas certifique-se de que o
-                      serviço está sendo executado localmente.
+                      No additional configuration needed. Just ensure the
+                      service is running locally.
                     </p>
                   </>
                 )}
@@ -820,7 +820,7 @@ export function ProviderWizard({
                       size={20}
                       strokeWidth={1.5}
                     />
-                    Voltar
+                    Back
                   </Button>
                   {selectedAuthType === 'local' ? (
                     <Button
@@ -829,7 +829,7 @@ export function ProviderWizard({
                         handleDone()
                       }}
                     >
-                      Concluir
+                      Done
                     </Button>
                   ) : null}
                 </div>
@@ -839,7 +839,7 @@ export function ProviderWizard({
             {step === 'verify' ? (
               <section className="mt-5">
                 <h3 className="text-base font-medium text-primary-900 text-balance">
-                  Passo 4: Verificar
+                  Step 4: Verify
                 </h3>
                 <div
                   className={cn(
@@ -856,7 +856,7 @@ export function ProviderWizard({
                     {verifyTitle}
                   </p>
                   <p className="mt-1 text-sm text-primary-600 text-pretty">
-                    {verificationMessage || 'Aguardando resposta do Hermes…'}
+                    {verificationMessage || 'Waiting for Hermes to respond…'}
                   </p>
                 </div>
 
@@ -873,7 +873,7 @@ export function ProviderWizard({
                       size={20}
                       strokeWidth={1.5}
                     />
-                    Voltar
+                    Back
                   </Button>
                   <Button
                     size="sm"
@@ -881,7 +881,7 @@ export function ProviderWizard({
                       handleDone()
                     }}
                   >
-                    Concluir
+                    Done
                   </Button>
                 </div>
               </section>

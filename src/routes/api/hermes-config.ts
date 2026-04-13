@@ -28,7 +28,7 @@ const PROVIDERS = [
     id: 'anthropic',
     name: 'Anthropic',
     authType: 'api_key',
-    envKeys: ['ANTHROPIC_API_KEY', 'ANTHROPIC_TOKEN'],
+    envKeys: ['ANTHROPIC_API_KEY'],
   },
   {
     id: 'openrouter',
@@ -123,9 +123,8 @@ function writeEnv(env: Record<string, string>): void {
 }
 
 function maskKey(key: string): string {
-  const clean = key.replace(/[^\x20-\x7E]/g, '').trim()
-  if (!clean || clean.length < 8) return '***'
-  return clean.slice(0, 4) + '...' + clean.slice(-4)
+  if (!key || key.length < 8) return '***'
+  return key.slice(0, 4) + '...' + key.slice(-4)
 }
 
 function checkAuthStore(providerId: string): {

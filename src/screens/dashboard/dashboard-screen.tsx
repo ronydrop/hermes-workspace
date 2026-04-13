@@ -21,10 +21,10 @@ import { cn } from '@/lib/utils'
 
 function timeAgo(ts: number): string {
   const diff = Date.now() / 1000 - ts
-  if (diff < 60) return 'agora mesmo'
-  if (diff < 3600) return `${Math.floor(diff / 60)}m atrás`
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h atrás`
-  return `${Math.floor(diff / 86400)}d atrás`
+  if (diff < 60) return 'just now'
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`
+  return `${Math.floor(diff / 86400)}d ago`
 }
 
 function formatNumber(n: number): string {
@@ -85,7 +85,7 @@ function GlassCard({
   )
 }
 
-function EnhancedBadge({ label = 'API Avançada' }: { label?: string }) {
+function EnhancedBadge({ label = 'Enhanced API' }: { label?: string }) {
   return (
     <span className="inline-flex items-center rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-700">
       {label}
@@ -144,7 +144,7 @@ function SystemGlance({
         <span className="text-muted">·</span>
         <span className="text-xs text-neutral-500">{provider}</span>
         <span className="text-muted">·</span>
-        <span className="text-xs text-neutral-500">{sessions} sessões</span>
+        <span className="text-xs text-neutral-500">{sessions} sessions</span>
         <span className="text-muted">·</span>
         <span className="text-xs font-bold tabular-nums text-ink">
           {tokens} tokens
@@ -234,8 +234,8 @@ function ActivityChart({ sessions }: { sessions: Array<HermesSession> }) {
 
   return (
     <GlassCard
-      title="Atividade"
-      titleRight={<span className="text-[10px] text-muted">14 dias</span>}
+      title="Activity"
+      titleRight={<span className="text-[10px] text-muted">14 days</span>}
       accentColor="#6366f1"
       className="h-full"
     >
@@ -315,11 +315,11 @@ function ActivityChart({ sessions }: { sessions: Array<HermesSession> }) {
       <div className="flex items-center gap-5 mt-2 text-[10px] text-neutral-500">
         <span className="flex items-center gap-1.5">
           <span className="size-2 rounded-full bg-[#6366f1]" />
-          Sessões
+          Sessions
         </span>
         <span className="flex items-center gap-1.5">
           <span className="size-2 rounded-full bg-[#22c55e]" />
-          Mensagens
+          Messages
         </span>
       </div>
     </GlassCard>
@@ -358,7 +358,7 @@ function ModelCard() {
   if (!configAvailable) {
     return (
       <UnavailableWidget
-        title="Modelo"
+        title="Model"
         description={getUnavailableReason('config')}
       />
     )
@@ -366,7 +366,7 @@ function ModelCard() {
 
   return (
     <GlassCard
-      title="Modelo"
+      title="Model"
       titleRight={
         <span
           className={cn(
@@ -382,7 +382,7 @@ function ModelCard() {
               connected ? 'bg-emerald-500' : 'bg-red-500',
             )}
           />
-          {connected ? 'Online' : 'Offline'}{/* keep technical status labels */}
+          {connected ? 'Online' : 'Offline'}
         </span>
       }
       accentColor={connected ? '#22c55e' : '#ef4444'}
@@ -457,14 +457,14 @@ function SkillsWidget() {
       title="Skills"
       titleRight={
         <span className="text-[10px] text-muted">
-          {skills.length} instaladas
+          {skills.length} installed
         </span>
       }
       accentColor="#f59e0b"
     >
       {skills.length === 0 ? (
         <div className="text-xs text-neutral-400 py-4 text-center">
-          Nenhuma skill instalada
+          No skills installed
         </div>
       ) : (
         <div className="space-y-1.5">
@@ -475,7 +475,7 @@ function SkillsWidget() {
             >
               <span className="text-xs">📦</span>
               <span className="text-xs font-medium text-ink truncate flex-1">
-                {String(skill.name ?? 'Sem nome')}
+                {String(skill.name ?? 'Unnamed')}
               </span>
               {skill.enabled !== false && (
                 <span className="size-1.5 rounded-full bg-emerald-500/60" />
@@ -684,7 +684,7 @@ export function DashboardScreen() {
         </h1>
         <div className="mt-1 grid w-full max-w-2xl grid-cols-2 gap-2 sm:grid-cols-4">
           <QuickAction
-            label="Novo Chat"
+            label="New Chat"
             icon="💬"
             accentColor="#6366f1"
             onClick={() =>
@@ -706,10 +706,10 @@ export function DashboardScreen() {
             accentColor="#f59e0b"
             onClick={() => navigate({ to: '/skills' })}
             disabled={!skillsAvailable}
-            badge={!skillsAvailable ? 'Avançado' : undefined}
+            badge={!skillsAvailable ? 'Enhanced' : undefined}
           />
           <QuickAction
-            label="Configurações"
+            label="Settings"
             icon="⚙️"
             accentColor="#a855f7"
             onClick={() => navigate({ to: '/settings' })}
@@ -721,19 +721,19 @@ export function DashboardScreen() {
       {sessionsAvailable ? (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           <MetricTile
-            label="Sessões"
+            label="Sessions"
             value={formatNumber(stats.totalSessions)}
             icon="💬"
             accentColor="#6366f1"
           />
           <MetricTile
-            label="Mensagens"
+            label="Messages"
             value={formatNumber(stats.totalMessages)}
             icon="✉️"
             accentColor="#22c55e"
           />
           <MetricTile
-            label="Chamadas de Ferramentas"
+            label="Tool Calls"
             value={formatNumber(stats.totalToolCalls)}
             icon="🔧"
             accentColor="#f59e0b"
@@ -748,7 +748,7 @@ export function DashboardScreen() {
         </div>
       ) : (
         <UnavailableWidget
-          title="Análises do Workspace"
+          title="Workspace Analytics"
           description={getUnavailableReason('sessions')}
         />
       )}
@@ -760,7 +760,7 @@ export function DashboardScreen() {
             <ActivityChart sessions={sessions} />
           ) : (
             <UnavailableWidget
-              title="Atividade"
+              title="Activity"
               description={getUnavailableReason('sessions')}
             />
           )}
@@ -776,7 +776,7 @@ export function DashboardScreen() {
       {/* ── Recent Sessions (minimal) ── */}
       {sessionsAvailable ? (
         <GlassCard
-          title="Sessões Recentes"
+          title="Recent Sessions"
           titleRight={
             <button
               type="button"
@@ -788,7 +788,7 @@ export function DashboardScreen() {
                 })
               }
             >
-              Ver todas →
+              View all →
             </button>
           }
           accentColor="#6366f1"
@@ -797,7 +797,7 @@ export function DashboardScreen() {
           <div className="py-1">
             {recentSessions.length === 0 ? (
               <div className="text-xs text-neutral-400 py-8 text-center">
-                Nenhuma sessão ainda — inicie um chat!
+                No sessions yet — start a chat!
               </div>
             ) : (
               recentSessions.map((s) => (
@@ -818,7 +818,7 @@ export function DashboardScreen() {
         </GlassCard>
       ) : (
         <UnavailableWidget
-          title="Sessões Recentes"
+          title="Recent Sessions"
           description={getUnavailableReason('sessions')}
         />
       )}

@@ -57,9 +57,9 @@ type ScoredAction = CommandAction & {
 }
 
 const SCREEN_GROUP_ORDER = [
-  'Telas',
-  'Sessões Recentes',
-  'Comandos de Barra',
+  'Screens',
+  'Recent Sessions',
+  'Slash Commands',
 ] as const
 
 function getSessionLabel(session: SessionMeta) {
@@ -161,7 +161,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
     () => [
       {
         id: 'screen-chat',
-        group: 'Telas',
+        group: 'Screens',
         label: 'Chat',
         keywords: 'conversation new session home',
         shortcut: 'Go',
@@ -170,8 +170,8 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'screen-files',
-        group: 'Telas',
-        label: 'Arquivos',
+        group: 'Screens',
+        label: 'Files',
         keywords: 'workspace editor browser',
         shortcut: 'Go',
         icon: File01Icon,
@@ -179,7 +179,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'screen-terminal',
-        group: 'Telas',
+        group: 'Screens',
         label: 'Terminal',
         keywords: 'console shell command line',
         shortcut: 'Go',
@@ -188,8 +188,8 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'screen-memory',
-        group: 'Telas',
-        label: 'Memória',
+        group: 'Screens',
+        label: 'Memory',
         keywords: 'knowledge durable memory notes',
         shortcut: 'Go',
         icon: BrainIcon,
@@ -197,7 +197,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'screen-skills',
-        group: 'Telas',
+        group: 'Screens',
         label: 'Skills',
         keywords: 'install tools capabilities',
         shortcut: 'Go',
@@ -206,8 +206,8 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'screen-settings',
-        group: 'Telas',
-        label: 'Configurações',
+        group: 'Screens',
+        label: 'Settings',
         keywords: 'preferences configuration',
         shortcut: 'Go',
         icon: Settings01Icon,
@@ -224,7 +224,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
         .slice(0, 5)
         .map((session) => ({
           id: `session-${session.key}`,
-          group: 'Sessões Recentes',
+          group: 'Recent Sessions',
           label: getSessionLabel(session),
           keywords: `${session.key} ${session.friendlyId} ${session.title ?? ''} ${session.derivedTitle ?? ''}`,
           shortcut: 'Open',
@@ -242,7 +242,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
     () => [
       {
         id: 'slash-new',
-        group: 'Comandos de Barra',
+        group: 'Slash Commands',
         label: '/new',
         keywords: 'start new session conversation',
         shortcut: 'Run',
@@ -251,7 +251,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'slash-clear',
-        group: 'Comandos de Barra',
+        group: 'Slash Commands',
         label: '/clear',
         keywords: 'clear current chat history conversation',
         shortcut: 'Run',
@@ -260,7 +260,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'slash-model',
-        group: 'Comandos de Barra',
+        group: 'Slash Commands',
         label: '/model',
         keywords: 'open model picker settings hermes provider',
         shortcut: 'Run',
@@ -269,7 +269,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'slash-skills',
-        group: 'Comandos de Barra',
+        group: 'Slash Commands',
         label: '/skills',
         keywords: 'browse manage skills page',
         shortcut: 'Run',
@@ -278,7 +278,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'slash-skin',
-        group: 'Comandos de Barra',
+        group: 'Slash Commands',
         label: '/skin',
         keywords: 'open appearance settings theme',
         shortcut: 'Run',
@@ -287,7 +287,7 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
       },
       {
         id: 'slash-save',
-        group: 'Comandos de Barra',
+        group: 'Slash Commands',
         label: '/save',
         keywords: 'export current conversation transcript',
         shortcut: 'Run',
@@ -423,11 +423,11 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
           onValueChange={setQuery}
           mode="none"
         >
-          <CommandInput placeholder="Buscar telas, sessões e comandos" />
+          <CommandInput placeholder="Search screens, sessions, and commands" />
           <CommandPanel className="flex min-h-0 flex-1 flex-col">
             {groupedActions.length === 0 ? (
               <div className="flex h-72 items-center justify-center text-sm text-primary-600">
-                Nenhum resultado para "{query.trim()}".
+                No results for “{query.trim()}”.
               </div>
             ) : (
               <CommandList className="h-72 min-h-0">
@@ -496,20 +496,20 @@ export function CommandPalette({ pathname, sessions }: CommandPaletteProps) {
                     strokeWidth={1.5}
                   />
                 </span>
-                <span>Navegar</span>
+                <span>Navigate</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="rounded-md border border-primary-200 bg-surface px-2 py-1 text-[11px] font-medium text-primary-700">
                   Enter
                 </span>
-                <span>Selecionar</span>
+                <span>Select</span>
               </div>
             </div>
             <div className="flex items-center gap-2 text-primary-700">
               <span className="rounded-md border border-primary-200 bg-surface px-2 py-1 text-[11px] font-medium text-primary-700">
                 {isMacPlatform ? '⌘K' : 'Ctrl K'}
               </span>
-              <span>Alternar</span>
+              <span>Toggle</span>
             </div>
           </CommandFooter>
         </Command>

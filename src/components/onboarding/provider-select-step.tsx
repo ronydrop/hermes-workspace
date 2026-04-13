@@ -87,7 +87,7 @@ const PROVIDERS: Array<Provider> = [
     id: 'anthropic',
     name: 'Anthropic (Claude)',
     description:
-      'Melhor para raciocínio complexo, escrita longa e instruções precisas',
+      'Best for complex reasoning, long-form writing and precise instructions',
     badge: 'Recommended',
     logo: <AnthropicLogo className="size-8" />,
     placeholder: 'sk-ant-...',
@@ -98,7 +98,7 @@ const PROVIDERS: Array<Provider> = [
     id: 'openrouter',
     name: 'OpenRouter',
     description:
-      'Uma conexão Hermes para mais de 200 modelos de IA. Ideal para flexibilidade e experimentação',
+      'One Hermes connection to 200+ AI models. Ideal for flexibility and experimentation',
     badge: 'Popular',
     logo: <OpenRouterLogo className="size-8" />,
     placeholder: 'sk-or-v1-...',
@@ -108,7 +108,7 @@ const PROVIDERS: Array<Provider> = [
   {
     id: 'google',
     name: 'Google (Gemini)',
-    description: 'Forte com imagens, documentos e grandes quantidades de contexto',
+    description: 'Strong with images, documents and large amounts of context',
     logo: <GoogleLogo className="size-8" />,
     placeholder: 'AI...',
     helpUrl: 'https://aistudio.google.com/apikey',
@@ -117,7 +117,7 @@ const PROVIDERS: Array<Provider> = [
   {
     id: 'openai',
     name: 'OpenAI (GPT)',
-    description: 'Um recurso completo para chat, programação e tarefas do dia a dia',
+    description: 'An all-rounder for chat, coding, and everyday tasks',
     logo: <OpenAILogo className="size-8" />,
     placeholder: 'sk-...',
     helpUrl: 'https://platform.openai.com/api-keys',
@@ -163,11 +163,11 @@ export function ProviderSelectStep({
         setValidated(true)
       } else {
         setValidated(false)
-        setError(data.error || 'Chave de API inválida')
+        setError(data.error || 'Invalid API key')
       }
     } catch {
       setValidated(false)
-      setError('Falha na validação — verifique sua conexão')
+      setError('Validation failed — check your connection')
     } finally {
       setValidating(false)
     }
@@ -197,11 +197,11 @@ export function ProviderSelectStep({
       {/* Header */}
       <div className="mb-6 text-center">
         <h2 className="mb-2 text-2xl font-semibold text-primary-900">
-          Escolher Provedor de IA
+          Choose AI Provider
         </h2>
         <p className="text-sm text-primary-600">
-          Escolha o provedor de IA com o qual deseja começar. Você pode trocar ou adicionar
-          mais provedores depois.
+          Pick the AI provider you want to start with. You can switch or add
+          more providers later.
         </p>
       </div>
 
@@ -306,7 +306,7 @@ export function ProviderSelectStep({
                   type="button"
                   onClick={() => setShowKey(!showKey)}
                   className="inline-flex size-8 items-center justify-center rounded-md text-primary-400 hover:text-primary-600"
-                  title={showKey ? 'Ocultar' : 'Mostrar'}
+                  title={showKey ? 'Hide' : 'Show'}
                 >
                   <HugeiconsIcon
                     icon={showKey ? ViewOffIcon : ViewIcon}
@@ -318,7 +318,7 @@ export function ProviderSelectStep({
                   type="button"
                   onClick={handlePaste}
                   className="inline-flex size-8 items-center justify-center rounded-md text-primary-400 hover:text-primary-600"
-                  title="Colar da área de transferência"
+                  title="Paste from clipboard"
                 >
                   <HugeiconsIcon
                     icon={Copy01Icon}
@@ -335,7 +335,7 @@ export function ProviderSelectStep({
               disabled={!apiKey.trim() || validating}
               className="shrink-0"
             >
-              {validating ? 'Verificando...' : 'Validar'}
+              {validating ? 'Checking...' : 'Validate'}
             </Button>
           </div>
 
@@ -347,7 +347,7 @@ export function ProviderSelectStep({
                 size={14}
                 strokeWidth={2}
               />
-              <span>Chave de API válida!</span>
+              <span>API key is valid!</span>
             </div>
           )}
           {error && (
@@ -363,7 +363,7 @@ export function ProviderSelectStep({
       <div className="flex gap-3">
         {onSkip && (
           <Button variant="secondary" onClick={onSkip} className="flex-1">
-            Pular por Agora
+            Skip for Now
           </Button>
         )}
         <Button
@@ -375,7 +375,7 @@ export function ProviderSelectStep({
             validated === true && 'bg-green-600 hover:bg-green-700',
           )}
         >
-          {validated === true ? 'Continuar ✓' : 'Continuar'}
+          {validated === true ? 'Continue ✓' : 'Continue'}
         </Button>
       </div>
     </div>

@@ -77,13 +77,13 @@ export function ApplyModeDialog({
           id="apply-mode-title"
           className="mb-2 text-lg font-semibold text-primary-900"
         >
-          Trocar Modelo?
+          Switch Model?
         </h2>
 
         <p className="mb-6 text-sm text-primary-600">
-          O modo "{mode.name}" usa{' '}
-          <span className="font-medium">{mode.preferredModel}</span>. Deseja
-          trocar para este modelo agora?
+          Mode "{mode.name}" uses{' '}
+          <span className="font-medium">{mode.preferredModel}</span>. Would you
+          like to switch to this model now?
         </p>
 
         <div className="flex justify-end gap-2">
@@ -92,14 +92,14 @@ export function ApplyModeDialog({
             onClick={handleSkip}
             className="rounded-lg border border-primary-200 bg-surface px-4 py-2 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-400"
           >
-            Pular
+            Skip
           </button>
           <button
             type="button"
             onClick={handleSwitchNow}
             className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
           >
-            Trocar Agora
+            Switch Now
           </button>
         </div>
       </div>

@@ -234,11 +234,11 @@ async function fetchModels(): Promise<{
 }
 
 const TAB_ORDER: Array<{ id: SettingsTabId; label: string }> = [
-  { id: 'providers', label: 'Provedores' },
-  { id: 'models', label: 'Modelos' },
-  { id: 'agents', label: 'IA & Agentes' },
-  { id: 'session', label: 'Sessão' },
-  { id: 'memory', label: 'Memória' },
+  { id: 'providers', label: 'Providers' },
+  { id: 'models', label: 'Models' },
+  { id: 'agents', label: 'AI & Agents' },
+  { id: 'session', label: 'Session' },
+  { id: 'memory', label: 'Memory' },
 ]
 
 const MEMORY_PROVIDER_OPTIONS: Array<SelectOption> = [
@@ -260,9 +260,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'primary-model',
     tab: 'models',
     path: 'agents.defaults.model.primary',
-    label: 'Modelo padrão',
+    label: 'Default model',
     description:
-      'Modelo primário usado para novos agentes, a menos que um agente específico substitua.',
+      'Primary model used for new agents unless a specific agent overrides it.',
     kind: 'text',
     placeholder: 'provider/model',
   },
@@ -270,9 +270,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'fallback-chain',
     tab: 'models',
     path: 'agents.defaults.model.fallbacks',
-    label: 'Cadeia de fallback',
+    label: 'Fallback chain',
     description:
-      'Modelos de fallback ordenados. Use um por linha ou separe com vírgulas.',
+      'Ordered fallback models. Use one per line or separate with commas.',
     kind: 'multiline',
     rows: 3,
     placeholder: 'anthropic-oauth/claude-sonnet-4-6',
@@ -283,9 +283,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'context-tokens-models',
     tab: 'models',
     path: 'agents.defaults.contextTokens',
-    label: 'Tokens de contexto',
+    label: 'Context tokens',
     description:
-      'Orçamento de tokens padrão aplicado a agentes quando nenhuma substituição específica está presente.',
+      'Default token budget applied to agents when no narrower override is present.',
     kind: 'number',
     min: 1,
     step: 1000,
@@ -297,9 +297,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'context-tokens-session',
     tab: 'session',
     path: 'agents.defaults.contextTokens',
-    label: 'Tokens de contexto da sessão',
+    label: 'Session context tokens',
     description:
-      'Mesmo orçamento de contexto padrão do agente exibido aqui para fluxos de configuração de sessão.',
+      'Same agent default context budget surfaced here for session setup workflows.',
     kind: 'number',
     min: 1,
     step: 1000,
@@ -308,8 +308,8 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'memory-provider',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.provider',
-    label: 'Provedor de busca de memória',
-    description: 'Provedor de embedding usado para busca e consolidação de memória.',
+    label: 'Memory search provider',
+    description: 'Embedding provider used for memory lookup and consolidation.',
     kind: 'select',
     options: MEMORY_PROVIDER_OPTIONS,
   },
@@ -317,9 +317,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'memory-fallback',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.fallback',
-    label: 'Provedor de fallback de memória',
+    label: 'Memory fallback provider',
     description:
-      'Provedor de fallback quando o provedor primário de busca de memória não está disponível.',
+      'Fallback provider when the primary memory search provider is unavailable.',
     kind: 'select',
     options: MEMORY_FALLBACK_OPTIONS,
   },
@@ -327,24 +327,24 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'memory-sync-on-session-start',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.sync.onSessionStart',
-    label: 'Sincronizar ao iniciar sessão',
-    description: 'Atualizar caminhos de memória indexados quando uma nova sessão começa.',
+    label: 'Sync on session start',
+    description: 'Refresh indexed memory paths when a new session starts.',
     kind: 'boolean',
   },
   {
     id: 'memory-sync-on-search',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.sync.onSearch',
-    label: 'Sincronizar na busca',
-    description: 'Executar uma sincronização antes das consultas de busca de memória.',
+    label: 'Sync on search',
+    description: 'Run a sync before memory search queries.',
     kind: 'boolean',
   },
   {
     id: 'memory-sync-interval',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.sync.intervalMinutes',
-    label: 'Intervalo de consolidação',
-    description: 'Cadência de consolidação de memória em segundo plano, em minutos.',
+    label: 'Consolidation interval',
+    description: 'Background memory consolidation cadence, in minutes.',
     kind: 'number',
     min: 0,
     step: 5,
@@ -406,9 +406,9 @@ function buildProviderSummaries(payload: {
     summaries.push({
       id: providerId,
       name: getProviderDisplayName(providerId),
-          description:
-            metadata?.description ||
-            'Provedor configurado na sua instalação local do Hermes.',
+      description:
+        metadata?.description ||
+        'Configured provider in your local Hermes setup.',
       modelCount,
       status: modelCount > 0 ? 'active' : 'configured',
     })
@@ -538,7 +538,7 @@ function ProviderStatusBadge({ status }: { status: ProviderStatus }) {
   return (
     <span className="inline-flex items-center gap-1 rounded-full border border-primary-300 bg-white px-2 py-0.5 text-xs font-medium text-primary-700">
       <HugeiconsIcon icon={CheckmarkCircle02Icon} size={20} strokeWidth={1.5} />
-      {status === 'active' ? 'Ativo' : 'Configurado'}
+      {status === 'active' ? 'Active' : 'Configured'}
     </span>
   )
 }
@@ -576,7 +576,7 @@ function SettingCard(props: {
     if (setting.kind === 'number') {
       nextValue = parseNumberValue(rawValue)
       if (nextValue === null) {
-        toast(`Insira um número válido para ${setting.label}`, { type: 'error' })
+        toast(`Enter a valid number for ${setting.label}`, { type: 'error' })
         return
       }
     } else if (setting.kind === 'multiline' || setting.kind === 'text') {
@@ -617,12 +617,12 @@ function SettingCard(props: {
             </h3>
             {setting.unsupported ? (
               <span className="rounded-full border border-primary-300 bg-primary-100 px-2 py-0.5 text-[11px] font-medium text-primary-700">
-                Não disponível
+                Not available
               </span>
             ) : null}
             {isActiveSave ? (
               <span className="rounded-full border border-primary-300 bg-primary-50 px-2 py-0.5 text-[11px] font-medium text-primary-700">
-                Salvando...
+                Saving...
               </span>
             ) : null}
           </div>
@@ -665,7 +665,7 @@ function SettingCard(props: {
                 })
               }}
             >
-              <option value="">Selecionar…</option>
+              <option value="">Select…</option>
               {(setting.options ?? []).map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -904,7 +904,7 @@ function ModelConfigSection(props: {
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <label className="space-y-1.5">
           <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-            Provedor
+            Provider
           </span>
           <select
             className="h-10 w-full rounded-lg border border-[var(--theme-border)] bg-[var(--theme-card)] px-3 text-sm text-primary-900 outline-none"
@@ -926,7 +926,7 @@ function ModelConfigSection(props: {
 
         <label className="space-y-1.5">
           <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-            Nome do Modelo
+            Model Name
           </span>
           <Input
             value={value.model}

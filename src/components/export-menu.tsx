@@ -29,7 +29,7 @@ type ExportMenuProps = {
 const formats: Array<{ format: ExportFormat; label: string; ext: string }> = [
   { format: 'markdown', label: 'Markdown', ext: '.md' },
   { format: 'json', label: 'JSON', ext: '.json' },
-  { format: 'text', label: 'Texto Simples', ext: '.txt' },
+  { format: 'text', label: 'Plain Text', ext: '.txt' },
 ]
 
 export function ExportMenu({ onExport, disabled }: ExportMenuProps) {
@@ -53,7 +53,7 @@ export function ExportMenu({ onExport, disabled }: ExportMenuProps) {
                 className={cn(
                   buttonVariants({ size: 'icon-sm', variant: 'ghost' }),
                 )}
-                aria-label="Baixar conversa"
+                aria-label="Download conversation"
                 aria-disabled={disabled ? true : undefined}
               >
                 <HugeiconsIcon
@@ -64,7 +64,7 @@ export function ExportMenu({ onExport, disabled }: ExportMenuProps) {
               </MenuTrigger>
             }
           />
-          <TooltipContent side="top">Baixar</TooltipContent>
+          <TooltipContent side="top">Download</TooltipContent>
         </TooltipRoot>
       </TooltipProvider>
       <MenuContent side="bottom" align="end">

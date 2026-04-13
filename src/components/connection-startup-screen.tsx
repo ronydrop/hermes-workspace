@@ -25,28 +25,28 @@ function getSetupSteps(
 
   return [
     {
-      title: 'Use qualquer backend compatível com OpenAI',
-      command: 'Defina HERMES_API_URL para a URL base do seu backend',
-      note: 'O chat portátil funciona com qualquer backend que exponha /v1/chat/completions (Ollama, LiteLLM, vLLM, etc.)',
+      title: 'Use any OpenAI-compatible backend',
+      command: 'Set HERMES_API_URL to your backend base URL',
+      note: 'Portable chat works with any backend that exposes /v1/chat/completions (Ollama, LiteLLM, vLLM, etc.)',
     },
     {
-      title: 'Opcional: executar um gateway Hermes localmente',
+      title: 'Optional: run a Hermes gateway locally',
       command: 'git clone https://github.com/outsourc-e/hermes-agent.git',
-      note: 'As APIs do gateway Hermes desbloqueiam sessões, skills, memória e outros extras do workspace automaticamente',
+      note: 'Hermes gateway APIs unlock sessions, skills, memory, and other workspace extras automatically',
     },
     {
-      title: 'Instalar o gateway',
+      title: 'Install the gateway',
       command: `cd hermes-agent && ${python} -m venv .venv && ${platform === 'windows' ? '.venv\\Scripts\\activate' : 'source .venv/bin/activate'} && ${pip} install -e .`,
     },
     {
-      title: 'Habilitar o servidor HTTP API',
+      title: 'Enable the HTTP API server',
       command: 'echo "API_SERVER_ENABLED=true" >> ~/.hermes/.env',
-      note: 'A HTTP API do gateway é opt-in. Sem isso, o gateway serve plataformas de mensagens mas não expõe a porta 8642 para o workspace.',
+      note: 'The gateway HTTP API is opt-in. Without this, the gateway serves messaging platforms but does not expose port 8642 for the workspace.',
     },
     {
-      title: 'Iniciar o gateway',
+      title: 'Start the gateway',
       command: `cd hermes-agent && ${platform === 'windows' ? '.venv\\Scripts\\activate' : 'source .venv/bin/activate'} && hermes --gateway`,
-      note: 'Ou use o Início Automático abaixo se o hermes-agent já estiver instalado localmente',
+      note: 'Or use Auto-Start below if hermes-agent is already installed locally',
     },
   ]
 }
@@ -136,7 +136,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
   const handleAutoStart = async () => {
     setServerStarting(true)
     setServerError(null)
-    setServerLog(['Procurando hermes-agent...'])
+    setServerLog(['Looking for hermes-agent...'])
     try {
       const res = await fetch('/api/start-hermes', {
         method: 'POST',
@@ -144,8 +144,8 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
       })
       const contentType = res.headers.get('content-type') || ''
       if (!contentType.includes('application/json')) {
-        const msg = `Resposta inesperada (${res.status})`
-        setServerLog([`Erro: ${msg}`])
+        const msg = `Unexpected response (${res.status})`
+        setServerLog([`Error: ${msg}`])
         setServerError(msg)
         setServerStarting(false)
         return
@@ -154,23 +154,23 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
       const data = (await res.json()) as Record<string, unknown>
       if (res.ok && data.ok) {
         setServerLog([
-          String(data.message || 'Iniciado — aguardando conexão...'),
+          String(data.message || 'Started — waiting for connection...'),
         ])
         setServerStarting(false)
         return
       }
 
-      const msg = String(data.error || 'Não foi possível encontrar hermes-agent')
+      const msg = String(data.error || 'Could not find hermes-agent')
       const hint = data.hint ? String(data.hint) : ''
-      setServerLog([`Erro: ${msg}`])
-      if (hint) setServerLog((prev) => [...prev, `Dica: ${hint}`])
+      setServerLog([`Error: ${msg}`])
+      if (hint) setServerLog((prev) => [...prev, `Hint: ${hint}`])
       setServerError(msg)
       setServerStarting(false)
       // Show manual steps when auto-start fails
       setShowManual(true)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
-      setServerLog([`Falhou: ${msg}`])
+      setServerLog([`Failed: ${msg}`])
       setServerError(msg)
       setServerStarting(false)
       setShowManual(true)
@@ -205,7 +205,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
           aria-hidden={showFailureState}
         >
           <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white/20 border-t-white/80" />
-          <span>Conectando ao seu backend...</span>
+          <span>Connecting to your backend...</span>
         </div>
 
         {/* Failure state — setup guide */}
@@ -219,12 +219,12 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
         >
           <div className="w-full rounded-3xl border border-white/10 bg-white/5 p-5 text-left shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur-sm">
             <p className="text-base font-medium text-white">
-              Bem-vindo! Vamos conectar seu backend
+              Welcome! Let&apos;s connect your backend
             </p>
             <p className="mt-2 text-sm leading-6 text-white/60">
-              O Hermes Workspace funciona com qualquer backend compatível com OpenAI. As
-              APIs do gateway Hermes desbloqueiam recursos aprimorados automaticamente quando
-              disponíveis.
+              Hermes Workspace works with any OpenAI-compatible backend. Hermes
+              gateway APIs unlock enhanced features automatically when they are
+              available.
             </p>
 
             {/* Auto-start section */}
@@ -243,10 +243,10 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
                 {serverStarting ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white/90" />
-                    Detectando...
+                    Detecting...
                   </span>
                 ) : (
-                  'Início Automático do Gateway Hermes'
+                  'Auto-Start Hermes Gateway'
                 )}
               </button>
 
@@ -275,7 +275,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
                 onClick={() => setShowManual(!showManual)}
                 className="text-xs font-medium text-white/50 transition hover:text-white/70"
               >
-                {showManual ? 'Ocultar' : 'Mostrar'} configuração manual
+                {showManual ? 'Hide' : 'Show'} manual setup
               </button>
               <div className="h-px flex-1 bg-white/10" />
             </div>
@@ -307,7 +307,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
                         onClick={() => handleCopy(step.command, idx)}
                         className="shrink-0 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-white/60 transition hover:bg-white/10 hover:text-white/80"
                       >
-                        {copiedIdx === idx ? '✓ Copiado' : 'Copiar'}
+                        {copiedIdx === idx ? '✓ Copied' : 'Copy'}
                       </button>
                     </div>
                     <pre className="mt-2 overflow-x-auto rounded-lg bg-black/40 p-3 font-mono text-xs leading-5 text-white/80">
@@ -323,11 +323,11 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
               {/* Env var hint */}
               <div className="mt-4 rounded-xl border border-white/6 bg-white/3 p-3">
                 <p className="text-xs font-medium text-white/50">
-                  Aponte{' '}
+                  Point{' '}
                   <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-white/70">
                     HERMES_API_URL
                   </code>{' '}
-                  para qualquer backend compatível com OpenAI:
+                  at any OpenAI-compatible backend:
                 </p>
                 <pre className="mt-2 overflow-x-auto font-mono text-xs text-white/60">
                   HERMES_API_URL=http://your-server:8642 pnpm dev
@@ -339,7 +339,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
 
         {!showFailureState ? (
           <p className="mt-6 text-xs text-white/45">
-            Esta página é atualizada automaticamente quando um backend compatível é detectado
+            This page auto-refreshes when a compatible backend is detected
           </p>
         ) : null}
       </div>
