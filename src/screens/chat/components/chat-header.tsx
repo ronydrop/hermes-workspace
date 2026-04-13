@@ -45,7 +45,7 @@ function formatMobileSessionTitle(rawTitle: string): string {
   }
 
   // Common system prompts → friendly names
-  if (normalized.startsWith('read heartbeat')) return 'Main Chat'
+  if (normalized.startsWith('read heartbeat')) return 'Chat Principal'
   if (normalized.startsWith('generate daily')) return 'Resumo Diário'
   if (normalized.startsWith('morning check')) return 'Check-in Matinal'
 
@@ -362,7 +362,7 @@ function ChatHeaderComponent({
                 }
               }}
               className="h-7 w-full min-w-0 border-b border-transparent bg-transparent px-0 text-sm font-medium text-balance text-ink outline-none transition-colors focus:border-primary-300"
-              aria-label="Session name"
+              aria-label="Nome da sessão"
             />
           ) : (
             <div
@@ -430,7 +430,7 @@ function ChatHeaderComponent({
                           s.derivedTitle ||
                           s.title ||
                           s.friendlyId?.slice(0, 8) ||
-                          'Session'
+                          'Sessão'
                         const isActive =
                           Boolean(activeFriendlyId) &&
                           (s.friendlyId === activeFriendlyId ||

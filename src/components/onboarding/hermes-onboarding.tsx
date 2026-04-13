@@ -329,7 +329,7 @@ export function HermesOnboarding() {
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const reader = res.body?.getReader()
-      if (!reader) throw new Error('No stream returned')
+      if (!reader) throw new Error('Nenhum stream retornado')
 
       const decoder = new TextDecoder()
       let text = ''
@@ -598,7 +598,7 @@ export function HermesOnboarding() {
                   className="flex-1 rounded-xl border py-3 text-sm font-semibold transition-colors"
                   style={{ borderColor: 'var(--theme-border)' }}
                 >
-                  Retry
+                  Tentar novamente
                 </button>
                 <button
                   onClick={() => {
@@ -608,7 +608,7 @@ export function HermesOnboarding() {
                   disabled={backendStatus !== 'ready'}
                   className="flex-1 rounded-xl bg-accent-500 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 disabled:opacity-50"
                 >
-                  Continue
+                  Continuar
                 </button>
               </div>
             </div>
@@ -748,7 +748,7 @@ export function HermesOnboarding() {
                           onClick={startNousOAuth}
                           className="w-full rounded-lg bg-accent-500 py-2 text-xs font-medium text-white"
                         >
-                          Retry
+                          Tentar novamente
                         </button>
                       </div>
                     )}
@@ -838,7 +838,7 @@ export function HermesOnboarding() {
                   className="mb-1 block text-xs font-medium"
                   style={mutedStyle}
                 >
-                  Model
+                  Modelo
                 </label>
                 {availableModels.length > 0 ? (
                   <select
@@ -941,11 +941,11 @@ export function HermesOnboarding() {
               >
                 <p style={mutedStyle}>Backend</p>
                 <p className="mt-1 font-mono">
-                  {backendInfo?.hermesUrl || 'Configured automatically'}
+                  {backendInfo?.hermesUrl || 'Configurado automaticamente'}
                 </p>
                 {selectedModel || configuredModel ? (
                   <p className="mt-2" style={mutedStyle}>
-                    Model:{' '}
+                    Modelo:{' '}
                     <span className="font-mono text-accent-400">
                       {stripProviderPrefix(selectedModel || configuredModel)}
                     </span>
@@ -987,7 +987,7 @@ export function HermesOnboarding() {
                     onClick={() => setStep('done')}
                     className="w-full rounded-xl bg-green-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-700"
                   >
-                    Continue
+                    Continuar
                   </button>
                 </div>
               ) : null}

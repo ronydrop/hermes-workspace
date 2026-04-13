@@ -136,7 +136,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
   const handleAutoStart = async () => {
     setServerStarting(true)
     setServerError(null)
-    setServerLog(['Looking for hermes-agent...'])
+    setServerLog(['Procurando hermes-agent...'])
     try {
       const res = await fetch('/api/start-hermes', {
         method: 'POST',
@@ -144,8 +144,8 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
       })
       const contentType = res.headers.get('content-type') || ''
       if (!contentType.includes('application/json')) {
-        const msg = `Unexpected response (${res.status})`
-        setServerLog([`Error: ${msg}`])
+        const msg = `Resposta inesperada (${res.status})`
+        setServerLog([`Erro: ${msg}`])
         setServerError(msg)
         setServerStarting(false)
         return
@@ -154,23 +154,23 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
       const data = (await res.json()) as Record<string, unknown>
       if (res.ok && data.ok) {
         setServerLog([
-          String(data.message || 'Started — waiting for connection...'),
+          String(data.message || 'Iniciado — aguardando conexão...'),
         ])
         setServerStarting(false)
         return
       }
 
-      const msg = String(data.error || 'Could not find hermes-agent')
+      const msg = String(data.error || 'Não foi possível encontrar hermes-agent')
       const hint = data.hint ? String(data.hint) : ''
-      setServerLog([`Error: ${msg}`])
-      if (hint) setServerLog((prev) => [...prev, `Hint: ${hint}`])
+      setServerLog([`Erro: ${msg}`])
+      if (hint) setServerLog((prev) => [...prev, `Dica: ${hint}`])
       setServerError(msg)
       setServerStarting(false)
       // Show manual steps when auto-start fails
       setShowManual(true)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
-      setServerLog([`Failed: ${msg}`])
+      setServerLog([`Falhou: ${msg}`])
       setServerError(msg)
       setServerStarting(false)
       setShowManual(true)

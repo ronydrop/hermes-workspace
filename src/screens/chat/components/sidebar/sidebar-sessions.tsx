@@ -70,7 +70,7 @@ export const SidebarSessions = memo(function SidebarSessions({
       defaultOpen={defaultOpen}
     >
       <CollapsibleTrigger className="w-full flex items-center gap-1.5 rounded-none px-5 pt-3 pb-1 shrink-0 text-[10px] font-semibold uppercase tracking-wider hover:bg-transparent data-panel-open:text-primary-500">
-        <span className="select-none">Sessions</span>
+        <span className="select-none">Sessões</span>
         <span className="ml-auto p-0.5 rounded hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors">
           <HugeiconsIcon
             icon={ArrowDown01Icon}

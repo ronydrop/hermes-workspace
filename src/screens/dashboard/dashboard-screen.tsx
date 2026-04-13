@@ -85,7 +85,7 @@ function GlassCard({
   )
 }
 
-function EnhancedBadge({ label = 'Enhanced API' }: { label?: string }) {
+function EnhancedBadge({ label = 'API Avançada' }: { label?: string }) {
   return (
     <span className="inline-flex items-center rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-700">
       {label}
@@ -366,7 +366,7 @@ function ModelCard() {
 
   return (
     <GlassCard
-      title="Model"
+      title="Modelo"
       titleRight={
         <span
           className={cn(
@@ -382,7 +382,7 @@ function ModelCard() {
               connected ? 'bg-emerald-500' : 'bg-red-500',
             )}
           />
-          {connected ? 'Online' : 'Offline'}
+          {connected ? 'Online' : 'Offline'}{/* keep technical status labels */}
         </span>
       }
       accentColor={connected ? '#22c55e' : '#ef4444'}
@@ -475,7 +475,7 @@ function SkillsWidget() {
             >
               <span className="text-xs">📦</span>
               <span className="text-xs font-medium text-ink truncate flex-1">
-                {String(skill.name ?? 'Unnamed')}
+                {String(skill.name ?? 'Sem nome')}
               </span>
               {skill.enabled !== false && (
                 <span className="size-1.5 rounded-full bg-emerald-500/60" />
@@ -706,7 +706,7 @@ export function DashboardScreen() {
             accentColor="#f59e0b"
             onClick={() => navigate({ to: '/skills' })}
             disabled={!skillsAvailable}
-            badge={!skillsAvailable ? 'Enhanced' : undefined}
+            badge={!skillsAvailable ? 'Avançado' : undefined}
           />
           <QuickAction
             label="Configurações"

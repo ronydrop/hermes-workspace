@@ -260,9 +260,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'primary-model',
     tab: 'models',
     path: 'agents.defaults.model.primary',
-    label: 'Default model',
+    label: 'Modelo padrão',
     description:
-      'Primary model used for new agents unless a specific agent overrides it.',
+      'Modelo primário usado para novos agentes, a menos que um agente específico substitua.',
     kind: 'text',
     placeholder: 'provider/model',
   },
@@ -270,9 +270,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'fallback-chain',
     tab: 'models',
     path: 'agents.defaults.model.fallbacks',
-    label: 'Fallback chain',
+    label: 'Cadeia de fallback',
     description:
-      'Ordered fallback models. Use one per line or separate with commas.',
+      'Modelos de fallback ordenados. Use um por linha ou separe com vírgulas.',
     kind: 'multiline',
     rows: 3,
     placeholder: 'anthropic-oauth/claude-sonnet-4-6',
@@ -283,9 +283,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'context-tokens-models',
     tab: 'models',
     path: 'agents.defaults.contextTokens',
-    label: 'Context tokens',
+    label: 'Tokens de contexto',
     description:
-      'Default token budget applied to agents when no narrower override is present.',
+      'Orçamento de tokens padrão aplicado a agentes quando nenhuma substituição específica está presente.',
     kind: 'number',
     min: 1,
     step: 1000,
@@ -297,9 +297,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'context-tokens-session',
     tab: 'session',
     path: 'agents.defaults.contextTokens',
-    label: 'Session context tokens',
+    label: 'Tokens de contexto da sessão',
     description:
-      'Same agent default context budget surfaced here for session setup workflows.',
+      'Mesmo orçamento de contexto padrão do agente exibido aqui para fluxos de configuração de sessão.',
     kind: 'number',
     min: 1,
     step: 1000,
@@ -308,8 +308,8 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'memory-provider',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.provider',
-    label: 'Memory search provider',
-    description: 'Embedding provider used for memory lookup and consolidation.',
+    label: 'Provedor de busca de memória',
+    description: 'Provedor de embedding usado para busca e consolidação de memória.',
     kind: 'select',
     options: MEMORY_PROVIDER_OPTIONS,
   },
@@ -317,9 +317,9 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'memory-fallback',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.fallback',
-    label: 'Memory fallback provider',
+    label: 'Provedor de fallback de memória',
     description:
-      'Fallback provider when the primary memory search provider is unavailable.',
+      'Provedor de fallback quando o provedor primário de busca de memória não está disponível.',
     kind: 'select',
     options: MEMORY_FALLBACK_OPTIONS,
   },
@@ -327,24 +327,24 @@ const SETTINGS: Array<SettingDefinition> = [
     id: 'memory-sync-on-session-start',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.sync.onSessionStart',
-    label: 'Sync on session start',
-    description: 'Refresh indexed memory paths when a new session starts.',
+    label: 'Sincronizar ao iniciar sessão',
+    description: 'Atualizar caminhos de memória indexados quando uma nova sessão começa.',
     kind: 'boolean',
   },
   {
     id: 'memory-sync-on-search',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.sync.onSearch',
-    label: 'Sync on search',
-    description: 'Run a sync before memory search queries.',
+    label: 'Sincronizar na busca',
+    description: 'Executar uma sincronização antes das consultas de busca de memória.',
     kind: 'boolean',
   },
   {
     id: 'memory-sync-interval',
     tab: 'memory',
     path: 'agents.defaults.memorySearch.sync.intervalMinutes',
-    label: 'Consolidation interval',
-    description: 'Background memory consolidation cadence, in minutes.',
+    label: 'Intervalo de consolidação',
+    description: 'Cadência de consolidação de memória em segundo plano, em minutos.',
     kind: 'number',
     min: 0,
     step: 5,
@@ -406,9 +406,9 @@ function buildProviderSummaries(payload: {
     summaries.push({
       id: providerId,
       name: getProviderDisplayName(providerId),
-      description:
-        metadata?.description ||
-        'Configured provider in your local Hermes setup.',
+          description:
+            metadata?.description ||
+            'Provedor configurado na sua instalação local do Hermes.',
       modelCount,
       status: modelCount > 0 ? 'active' : 'configured',
     })
@@ -904,7 +904,7 @@ function ModelConfigSection(props: {
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <label className="space-y-1.5">
           <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-            Provider
+            Provedor
           </span>
           <select
             className="h-10 w-full rounded-lg border border-[var(--theme-border)] bg-[var(--theme-card)] px-3 text-sm text-primary-900 outline-none"
@@ -926,7 +926,7 @@ function ModelConfigSection(props: {
 
         <label className="space-y-1.5">
           <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-            Model Name
+            Nome do Modelo
           </span>
           <Input
             value={value.model}

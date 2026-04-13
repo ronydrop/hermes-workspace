@@ -114,11 +114,11 @@ function buildDraft(server?: McpServer | null): ServerDraft {
 }
 
 function formatServerSummary(server: McpServer): string {
-  if (server.transport === 'http') return server.url || 'No URL configured'
+  if (server.transport === 'http') return server.url || 'Nenhuma URL configurada'
   const args = server.args?.join(' ') || ''
   return (
     [server.command, args].filter(Boolean).join(' ').trim() ||
-    'No command configured'
+    'Nenhum comando configurado'
   )
 }
 
@@ -411,7 +411,7 @@ export function McpSettingsScreen() {
         setNotice(payload.message ?? null)
       } catch {
         setNotice(
-          'Could not load MCP config from Hermes. You can still draft servers here.',
+          'Não foi possível carregar a configuração MCP do Hermes. Você ainda pode rascunhar servidores aqui.',
         )
       } finally {
         setLoading(false)
@@ -478,8 +478,8 @@ export function McpSettingsScreen() {
     setDialogOpen(false)
     toast(
       editingName
-        ? 'MCP server updated in local draft.'
-        : 'MCP server added to local draft.',
+        ? 'Servidor MCP atualizado no rascunho local.'
+        : 'Servidor MCP adicionado ao rascunho local.',
       {
         type: 'success',
       },
@@ -490,9 +490,9 @@ export function McpSettingsScreen() {
     try {
       await writeTextToClipboard(yamlSnippet)
       setOriginalServers(servers)
-      toast('YAML snippet copied.', { type: 'success' })
+      toast('Trecho YAML copiado.', { type: 'success' })
     } catch {
-      toast('Clipboard unavailable.', { type: 'error' })
+      toast('Área de transferência indisponível.', { type: 'error' })
     }
   }
 
@@ -506,13 +506,13 @@ export function McpSettingsScreen() {
       }
       toast(
         payload.message ||
-          (payload.ok ? 'Reload requested.' : 'Reload unavailable.'),
+          (payload.ok ? 'Recarregamento solicitado.' : 'Recarregamento indisponível.'),
         {
           type: payload.ok ? 'success' : 'info',
         },
       )
     } catch {
-      toast('Could not reach reload endpoint.', { type: 'error' })
+      toast('Não foi possível acessar o endpoint de recarregamento.', { type: 'error' })
     } finally {
       setReloadPending(false)
     }
@@ -685,7 +685,7 @@ export function McpSettingsScreen() {
                                 (entry) => entry.name !== server.name,
                               ),
                             )
-                            toast(`Removed ${server.name} from local draft.`, {
+                            toast(`${server.name} removido do rascunho local.`, {
                               type: 'success',
                             })
                           }}
