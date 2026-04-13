@@ -61,7 +61,7 @@ export const SaveModeDialog = memo(function SaveModeDialog({
   const handleSave = useCallback(() => {
     const trimmed = name.trim()
     if (!trimmed) {
-      setError('Mode name is required')
+      setError('O nome do modo é obrigatório')
       return
     }
 
@@ -102,7 +102,7 @@ export const SaveModeDialog = memo(function SaveModeDialog({
           id="save-mode-title"
           className="mb-4 text-lg font-semibold text-primary-900"
         >
-          Save Mode
+          Salvar Modo
         </h2>
 
         <form onSubmit={handleSubmit}>
@@ -111,7 +111,7 @@ export const SaveModeDialog = memo(function SaveModeDialog({
               htmlFor="mode-name"
               className="mb-2 block text-sm font-medium text-primary-700"
             >
-              Mode Name
+              Nome do Modo
             </label>
             <input
               ref={inputRef}
@@ -127,7 +127,7 @@ export const SaveModeDialog = memo(function SaveModeDialog({
                 error &&
                   'border-red-500 focus:border-red-500 focus:ring-red-500',
               )}
-              placeholder="e.g., Work Mode"
+              placeholder="ex.: Modo Trabalho"
               maxLength={50}
               aria-invalid={!!error}
               aria-describedby={error ? 'mode-name-error' : undefined}
@@ -151,11 +151,11 @@ export const SaveModeDialog = memo(function SaveModeDialog({
                 onChange={(e) => setIncludeModel(e.target.checked)}
                 className="size-4 rounded border-primary-300 text-primary-600 focus:ring-2 focus:ring-primary-400 focus:ring-offset-0"
               />
-              <span>Include current model ({currentModel || 'none'})</span>
+              <span>Incluir modelo atual ({currentModel || 'nenhum'})</span>
             </label>
             <p className="ml-6 mt-1 text-xs text-primary-500">
-              If unchecked, applying this mode will only update settings (not
-              model).
+              Se desmarcado, aplicar este modo só atualizará as configurações (não
+              o modelo).
             </p>
           </div>
 
@@ -165,13 +165,13 @@ export const SaveModeDialog = memo(function SaveModeDialog({
               onClick={onClose}
               className="rounded-lg border border-primary-200 bg-surface px-4 py-2 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-400"
             >
-              Cancel
+              Cancelar
             </button>
             <button
               type="submit"
               className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
             >
-              Save Mode
+              Salvar Modo
             </button>
           </div>
         </form>

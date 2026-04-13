@@ -11,28 +11,28 @@ const MOD = isMac ? '⌘' : 'Ctrl'
 
 const SHORTCUT_GROUPS = [
   {
-    title: 'Navigation',
+    title: 'Navegação',
     items: [
-      { keys: [`${MOD}+K`], label: 'Open Search' },
-      { keys: [`${MOD}+P`], label: 'Quick Open File' },
-      { keys: [`${MOD}+B`], label: 'Toggle Sidebar' },
-      { keys: [`${MOD}+J`], label: 'Toggle Chat Panel' },
-      { keys: [`${MOD}+Shift+L`], label: 'Activity Log' },
-      { keys: ['Ctrl+`'], label: 'Toggle Terminal' },
-      { keys: ['?'], label: 'Keyboard Shortcuts' },
+      { keys: [`${MOD}+K`], label: 'Abrir Busca' },
+      { keys: [`${MOD}+P`], label: 'Abrir Arquivo Rápido' },
+      { keys: [`${MOD}+B`], label: 'Alternar Barra Lateral' },
+      { keys: [`${MOD}+J`], label: 'Alternar Painel de Chat' },
+      { keys: [`${MOD}+Shift+L`], label: 'Log de Atividades' },
+      { keys: ['Ctrl+`'], label: 'Alternar Terminal' },
+      { keys: ['?'], label: 'Atalhos de Teclado' },
     ],
   },
   {
     title: 'Chat',
     items: [
-      { keys: ['Enter'], label: 'Send Message' },
-      { keys: ['Shift+Enter'], label: 'New Line' },
-      { keys: ['Escape'], label: 'Close Modal / Cancel' },
+      { keys: ['Enter'], label: 'Enviar Mensagem' },
+      { keys: ['Shift+Enter'], label: 'Nova Linha' },
+      { keys: ['Escape'], label: 'Fechar Modal / Cancelar' },
     ],
   },
   {
     title: 'Editor',
-    items: [{ keys: [`${MOD}+S`], label: 'Save File' }],
+    items: [{ keys: [`${MOD}+S`], label: 'Salvar Arquivo' }],
   },
 ]
 
@@ -103,12 +103,12 @@ export function KeyboardShortcutsModal() {
             {/* Header */}
             <div className="flex items-center justify-between border-b border-primary-200 px-5 py-3.5">
               <h2 className="text-sm font-semibold text-primary-900">
-                Keyboard Shortcuts
+                Atalhos de Teclado
               </h2>
               <button
                 onClick={() => setIsOpen(false)}
                 className="rounded-lg p-1.5 text-primary-500 transition hover:bg-primary-100 hover:text-primary-900"
-                aria-label="Close"
+                aria-label="Fechar"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path
@@ -156,15 +156,15 @@ export function KeyboardShortcutsModal() {
 
             {/* Footer */}
             <div className="border-t border-primary-200 px-5 py-2.5 text-center text-xs text-primary-500">
-              Press{' '}
+              Pressione{' '}
               <kbd className="mx-0.5 rounded border border-primary-200 bg-primary-100/80 px-1 text-[10px] font-medium">
                 ?
               </kbd>{' '}
-              to toggle ·{' '}
+              para alternar ·{' '}
               <kbd className="mx-0.5 rounded border border-primary-200 bg-primary-100/80 px-1 text-[10px] font-medium">
                 Esc
               </kbd>{' '}
-              to close
+              para fechar
             </div>
           </motion.div>
         </motion.div>

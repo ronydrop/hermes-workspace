@@ -71,24 +71,24 @@ function getLastRunStatus(job: HermesJob): {
 } {
   if (!job.last_run_at) {
     return {
-      label: 'Never run',
+      label: 'Nunca executado',
       color: 'var(--theme-muted)',
     }
   }
   if (job.last_run_success === true) {
     return {
-      label: 'Last run succeeded',
+      label: 'Última execução bem-sucedida',
       color: 'var(--theme-success)',
     }
   }
   if (job.last_run_success === false) {
     return {
-      label: 'Last run failed',
+      label: 'Última execução falhou',
       color: 'var(--theme-danger)',
     }
   }
   return {
-    label: 'Last run unknown',
+      label: 'Última execução desconhecida',
     color: 'var(--theme-muted)',
   }
 }
@@ -178,7 +178,7 @@ function JobCard({
           <button
             onClick={() => onTrigger(job.id)}
             className="rounded-lg p-1.5 transition-colors hover:bg-[var(--theme-hover)]"
-            title="Run now"
+            title="Executar agora"
           >
             <HugeiconsIcon
               icon={PlayIcon}
@@ -189,7 +189,7 @@ function JobCard({
           <button
             onClick={() => (isPaused ? onResume(job.id) : onPause(job.id))}
             className="rounded-lg p-1.5 transition-colors hover:bg-[var(--theme-hover)]"
-            title={isPaused ? 'Resume' : 'Pause'}
+            title={isPaused ? 'Retomar' : 'Pausar'}
           >
             <HugeiconsIcon
               icon={isPaused ? PlayIcon : PauseIcon}
@@ -200,7 +200,7 @@ function JobCard({
           <button
             onClick={() => onEdit(job)}
             className="rounded-lg p-1.5 transition-colors hover:bg-[var(--theme-hover)]"
-            title="Edit"
+            title="Editar"
           >
             <HugeiconsIcon
               icon={PencilEdit02Icon}
@@ -211,7 +211,7 @@ function JobCard({
           <button
             onClick={() => setExpanded((current) => !current)}
             className="rounded-lg p-1.5 transition-colors hover:bg-[var(--theme-hover)]"
-            title={expanded ? 'Hide run history' : 'Show run history'}
+            title={expanded ? 'Ocultar histórico' : 'Mostrar histórico'}
           >
             <HugeiconsIcon
               icon={expanded ? ArrowUp01Icon : ArrowDown01Icon}
@@ -222,7 +222,7 @@ function JobCard({
           <button
             onClick={() => onDelete(job.id)}
             className="rounded-lg p-1.5 transition-colors hover:bg-[var(--theme-hover)]"
-            title="Delete"
+            title="Excluir"
           >
             <HugeiconsIcon
               icon={Delete01Icon}
@@ -245,19 +245,19 @@ function JobCard({
             <div className="mt-3 border-t border-[var(--theme-border)] pt-3">
               <div className="mb-2 flex items-center justify-between">
                 <p className="text-xs font-medium text-[var(--theme-text)]">
-                  Run history
+                  Histórico de execuções
                 </p>
                 <p className="text-[10px] text-[var(--theme-muted)]">
-                  Showing recent outputs
+                  Exibindo saídas recentes
                 </p>
               </div>
               {outputQuery.isLoading ? (
                 <div className="rounded-lg border border-[var(--theme-border)] bg-[var(--theme-bg)] px-3 py-3 text-xs text-[var(--theme-muted)]">
-                  Loading outputs...
+                  Carregando saídas...
                 </div>
               ) : outputQuery.isError ? (
                 <div className="rounded-lg border border-[var(--theme-border)] bg-[var(--theme-bg)] px-3 py-3 text-xs text-[var(--theme-muted)]">
-                  Failed to load outputs.
+                  Falha ao carregar saídas.
                 </div>
               ) : outputQuery.data && outputQuery.data.length > 0 ? (
                 <div className="space-y-2">
@@ -272,14 +272,14 @@ function JobCard({
                       </div>
                       <p className="text-xs leading-5 text-[var(--theme-text)]">
                         {getOutputPreview(output.content) ||
-                          'No output content'}
+                          'Sem conteúdo de saída'}
                       </p>
                     </div>
                   ))}
                 </div>
               ) : (
                 <div className="rounded-lg border border-[var(--theme-border)] bg-[var(--theme-bg)] px-3 py-3 text-xs text-[var(--theme-muted)]">
-                  No run outputs yet.
+                  Nenhuma saída de execução ainda.
                 </div>
               )}
             </div>
@@ -306,39 +306,39 @@ export function JobsScreen() {
     mutationFn: pauseJob,
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: QUERY_KEY })
-      toast('Job paused')
+      toast('Job pausado')
     },
   })
   const resumeMutation = useMutation({
     mutationFn: resumeJob,
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: QUERY_KEY })
-      toast('Job resumed')
+      toast('Job retomado')
     },
   })
   const triggerMutation = useMutation({
     mutationFn: triggerJob,
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: QUERY_KEY })
-      toast('Job triggered')
+      toast('Job iniciado')
     },
   })
   const deleteMutation = useMutation({
     mutationFn: deleteJob,
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: QUERY_KEY })
-      toast('Job deleted')
+      toast('Job excluído')
     },
   })
   const createMutation = useMutation({
     mutationFn: createJob,
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: QUERY_KEY })
-      toast('Job created')
+      toast('Job criado')
       setShowCreate(false)
     },
     onError: (error) => {
-      toast(error instanceof Error ? error.message : 'Failed to create job', {
+      toast(error instanceof Error ? error.message : 'Falha ao criar job', {
         type: 'error',
       })
     },
@@ -357,11 +357,11 @@ export function JobsScreen() {
     }) => updateJob(payload.jobId, payload.updates),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: QUERY_KEY })
-      toast('Job updated')
+      toast('Job atualizado')
       setEditingJob(null)
     },
     onError: (error) => {
-      toast(error instanceof Error ? error.message : 'Failed to update job', {
+      toast(error instanceof Error ? error.message : 'Falha ao atualizar job', {
         type: 'error',
       })
     },
@@ -418,7 +418,7 @@ export function JobsScreen() {
               void queryClient.invalidateQueries({ queryKey: QUERY_KEY })
             }
             className="rounded-lg p-1.5 transition-colors hover:bg-[var(--theme-hover)]"
-            title="Refresh"
+            title="Atualizar"
           >
             <HugeiconsIcon
               icon={RefreshIcon}
@@ -432,7 +432,7 @@ export function JobsScreen() {
             style={{ background: 'var(--theme-accent)' }}
           >
             <HugeiconsIcon icon={Add01Icon} size={14} />
-            New Job
+            Novo Job
           </button>
         </div>
       </div>
@@ -447,7 +447,7 @@ export function JobsScreen() {
           />
           <input
             type="text"
-            placeholder="Search jobs..."
+            placeholder="Buscar jobs..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full rounded-lg border border-[var(--theme-border)] bg-[var(--theme-input)] py-1.5 pl-8 pr-3 text-xs text-[var(--theme-text)] placeholder:text-[var(--theme-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--theme-accent)]"
@@ -458,17 +458,17 @@ export function JobsScreen() {
       <div className="flex-1 space-y-2 overflow-y-auto px-4 py-3">
         {jobsQuery.isLoading ? (
           <div className="flex items-center justify-center py-12 text-sm text-[var(--theme-muted)]">
-            Loading jobs...
+            Carregando jobs...
           </div>
         ) : jobsQuery.isError ? (
           <div
             className="flex items-center justify-center py-12 text-sm"
             style={{ color: 'var(--theme-danger)' }}
           >
-            Failed to load jobs:{' '}
+            Falha ao carregar jobs:{' '}
             {jobsQuery.error instanceof Error
               ? jobsQuery.error.message
-              : 'Unknown error'}
+              : 'Erro desconhecido'}
           </div>
         ) : filteredJobs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-[var(--theme-muted)]">
@@ -477,8 +477,8 @@ export function JobsScreen() {
               size={32}
               className="mb-3 opacity-40"
             />
-            <p className="text-sm font-medium">No scheduled jobs</p>
-            <p className="mt-1 text-xs">Create one to get started</p>
+            <p className="text-sm font-medium">Nenhum job agendado</p>
+            <p className="mt-1 text-xs">Crie um para começar</p>
           </div>
         ) : (
           <AnimatePresence mode="popLayout">

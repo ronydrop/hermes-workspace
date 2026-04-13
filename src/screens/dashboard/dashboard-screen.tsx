@@ -21,10 +21,10 @@ import { cn } from '@/lib/utils'
 
 function timeAgo(ts: number): string {
   const diff = Date.now() / 1000 - ts
-  if (diff < 60) return 'just now'
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`
-  return `${Math.floor(diff / 86400)}d ago`
+  if (diff < 60) return 'agora mesmo'
+  if (diff < 3600) return `${Math.floor(diff / 60)}m atrás`
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h atrás`
+  return `${Math.floor(diff / 86400)}d atrás`
 }
 
 function formatNumber(n: number): string {
@@ -144,7 +144,7 @@ function SystemGlance({
         <span className="text-muted">·</span>
         <span className="text-xs text-neutral-500">{provider}</span>
         <span className="text-muted">·</span>
-        <span className="text-xs text-neutral-500">{sessions} sessions</span>
+        <span className="text-xs text-neutral-500">{sessions} sessões</span>
         <span className="text-muted">·</span>
         <span className="text-xs font-bold tabular-nums text-ink">
           {tokens} tokens
@@ -234,8 +234,8 @@ function ActivityChart({ sessions }: { sessions: Array<HermesSession> }) {
 
   return (
     <GlassCard
-      title="Activity"
-      titleRight={<span className="text-[10px] text-muted">14 days</span>}
+      title="Atividade"
+      titleRight={<span className="text-[10px] text-muted">14 dias</span>}
       accentColor="#6366f1"
       className="h-full"
     >
@@ -315,11 +315,11 @@ function ActivityChart({ sessions }: { sessions: Array<HermesSession> }) {
       <div className="flex items-center gap-5 mt-2 text-[10px] text-neutral-500">
         <span className="flex items-center gap-1.5">
           <span className="size-2 rounded-full bg-[#6366f1]" />
-          Sessions
+          Sessões
         </span>
         <span className="flex items-center gap-1.5">
           <span className="size-2 rounded-full bg-[#22c55e]" />
-          Messages
+          Mensagens
         </span>
       </div>
     </GlassCard>
@@ -358,7 +358,7 @@ function ModelCard() {
   if (!configAvailable) {
     return (
       <UnavailableWidget
-        title="Model"
+        title="Modelo"
         description={getUnavailableReason('config')}
       />
     )
@@ -457,14 +457,14 @@ function SkillsWidget() {
       title="Skills"
       titleRight={
         <span className="text-[10px] text-muted">
-          {skills.length} installed
+          {skills.length} instaladas
         </span>
       }
       accentColor="#f59e0b"
     >
       {skills.length === 0 ? (
         <div className="text-xs text-neutral-400 py-4 text-center">
-          No skills installed
+          Nenhuma skill instalada
         </div>
       ) : (
         <div className="space-y-1.5">
@@ -684,7 +684,7 @@ export function DashboardScreen() {
         </h1>
         <div className="mt-1 grid w-full max-w-2xl grid-cols-2 gap-2 sm:grid-cols-4">
           <QuickAction
-            label="New Chat"
+            label="Novo Chat"
             icon="💬"
             accentColor="#6366f1"
             onClick={() =>
@@ -709,7 +709,7 @@ export function DashboardScreen() {
             badge={!skillsAvailable ? 'Enhanced' : undefined}
           />
           <QuickAction
-            label="Settings"
+            label="Configurações"
             icon="⚙️"
             accentColor="#a855f7"
             onClick={() => navigate({ to: '/settings' })}
@@ -721,19 +721,19 @@ export function DashboardScreen() {
       {sessionsAvailable ? (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           <MetricTile
-            label="Sessions"
+            label="Sessões"
             value={formatNumber(stats.totalSessions)}
             icon="💬"
             accentColor="#6366f1"
           />
           <MetricTile
-            label="Messages"
+            label="Mensagens"
             value={formatNumber(stats.totalMessages)}
             icon="✉️"
             accentColor="#22c55e"
           />
           <MetricTile
-            label="Tool Calls"
+            label="Chamadas de Ferramentas"
             value={formatNumber(stats.totalToolCalls)}
             icon="🔧"
             accentColor="#f59e0b"
@@ -748,7 +748,7 @@ export function DashboardScreen() {
         </div>
       ) : (
         <UnavailableWidget
-          title="Workspace Analytics"
+          title="Análises do Workspace"
           description={getUnavailableReason('sessions')}
         />
       )}
@@ -760,7 +760,7 @@ export function DashboardScreen() {
             <ActivityChart sessions={sessions} />
           ) : (
             <UnavailableWidget
-              title="Activity"
+              title="Atividade"
               description={getUnavailableReason('sessions')}
             />
           )}
@@ -776,7 +776,7 @@ export function DashboardScreen() {
       {/* ── Recent Sessions (minimal) ── */}
       {sessionsAvailable ? (
         <GlassCard
-          title="Recent Sessions"
+          title="Sessões Recentes"
           titleRight={
             <button
               type="button"
@@ -788,7 +788,7 @@ export function DashboardScreen() {
                 })
               }
             >
-              View all →
+              Ver todas →
             </button>
           }
           accentColor="#6366f1"
@@ -797,7 +797,7 @@ export function DashboardScreen() {
           <div className="py-1">
             {recentSessions.length === 0 ? (
               <div className="text-xs text-neutral-400 py-8 text-center">
-                No sessions yet — start a chat!
+                Nenhuma sessão ainda — inicie um chat!
               </div>
             ) : (
               recentSessions.map((s) => (
@@ -818,7 +818,7 @@ export function DashboardScreen() {
         </GlassCard>
       ) : (
         <UnavailableWidget
-          title="Recent Sessions"
+          title="Sessões Recentes"
           description={getUnavailableReason('sessions')}
         />
       )}

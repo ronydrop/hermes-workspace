@@ -234,11 +234,11 @@ async function fetchModels(): Promise<{
 }
 
 const TAB_ORDER: Array<{ id: SettingsTabId; label: string }> = [
-  { id: 'providers', label: 'Providers' },
-  { id: 'models', label: 'Models' },
-  { id: 'agents', label: 'AI & Agents' },
-  { id: 'session', label: 'Session' },
-  { id: 'memory', label: 'Memory' },
+  { id: 'providers', label: 'Provedores' },
+  { id: 'models', label: 'Modelos' },
+  { id: 'agents', label: 'IA & Agentes' },
+  { id: 'session', label: 'Sessão' },
+  { id: 'memory', label: 'Memória' },
 ]
 
 const MEMORY_PROVIDER_OPTIONS: Array<SelectOption> = [
@@ -538,7 +538,7 @@ function ProviderStatusBadge({ status }: { status: ProviderStatus }) {
   return (
     <span className="inline-flex items-center gap-1 rounded-full border border-primary-300 bg-white px-2 py-0.5 text-xs font-medium text-primary-700">
       <HugeiconsIcon icon={CheckmarkCircle02Icon} size={20} strokeWidth={1.5} />
-      {status === 'active' ? 'Active' : 'Configured'}
+      {status === 'active' ? 'Ativo' : 'Configurado'}
     </span>
   )
 }
@@ -576,7 +576,7 @@ function SettingCard(props: {
     if (setting.kind === 'number') {
       nextValue = parseNumberValue(rawValue)
       if (nextValue === null) {
-        toast(`Enter a valid number for ${setting.label}`, { type: 'error' })
+        toast(`Insira um número válido para ${setting.label}`, { type: 'error' })
         return
       }
     } else if (setting.kind === 'multiline' || setting.kind === 'text') {
@@ -617,12 +617,12 @@ function SettingCard(props: {
             </h3>
             {setting.unsupported ? (
               <span className="rounded-full border border-primary-300 bg-primary-100 px-2 py-0.5 text-[11px] font-medium text-primary-700">
-                Not available
+                Não disponível
               </span>
             ) : null}
             {isActiveSave ? (
               <span className="rounded-full border border-primary-300 bg-primary-50 px-2 py-0.5 text-[11px] font-medium text-primary-700">
-                Saving...
+                Salvando...
               </span>
             ) : null}
           </div>
@@ -665,7 +665,7 @@ function SettingCard(props: {
                 })
               }}
             >
-              <option value="">Select…</option>
+              <option value="">Selecionar…</option>
               {(setting.options ?? []).map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}

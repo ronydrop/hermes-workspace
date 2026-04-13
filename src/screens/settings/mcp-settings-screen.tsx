@@ -188,23 +188,23 @@ function validateDraft(
   originalName?: string,
 ): string | null {
   const name = draft.name.trim()
-  if (!name) return 'Server name is required.'
+  if (!name) return 'O nome do servidor é obrigatório.'
   if (!/^[A-Za-z0-9_-]+$/.test(name)) {
-    return 'Use letters, numbers, underscores, or hyphens for the server name.'
+    return 'Use letras, números, sublinhados ou hifens para o nome do servidor.'
   }
   if (existingNames.includes(name) && name !== originalName) {
-    return 'A server with that name already exists.'
+    return 'Já existe um servidor com esse nome.'
   }
   if (draft.transport === 'stdio' && !draft.command.trim()) {
-    return 'Command is required for stdio servers.'
+    return 'O comando é obrigatório para servidores stdio.'
   }
   if (draft.transport === 'http' && !draft.url.trim()) {
-    return 'URL is required for HTTP servers.'
+    return 'A URL é obrigatória para servidores HTTP.'
   }
   if (draft.timeout.trim()) {
     const timeout = Number(draft.timeout)
     if (!Number.isFinite(timeout) || timeout <= 0) {
-      return 'Timeout must be a positive number.'
+      return 'O timeout deve ser um número positivo.'
     }
   }
   return null
@@ -226,18 +226,17 @@ function ServerDialog(props: {
         <div className="space-y-5 p-5 md:p-6">
           <div className="space-y-1">
             <DialogTitle>
-              {editingName ? 'Edit MCP Server' : 'Add MCP Server'}
+              {editingName ? 'Editar Servidor MCP' : 'Adicionar Servidor MCP'}
             </DialogTitle>
             <DialogDescription>
-              Configure the server details, then generate an updated YAML
-              snippet.
+              Configure os detalhes do servidor e gere um trecho YAML atualizado.
             </DialogDescription>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
             <label className="space-y-1.5 md:col-span-2">
               <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-                Name
+                Nome
               </span>
               <Input
                 value={draft.name}
@@ -268,7 +267,7 @@ function ServerDialog(props: {
                 <TabsContent value="stdio" className="mt-4 space-y-4">
                   <label className="space-y-1.5">
                     <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-                      Command
+                      Comando
                     </span>
                     <Input
                       value={draft.command}
@@ -283,7 +282,7 @@ function ServerDialog(props: {
                   </label>
                   <label className="space-y-1.5">
                     <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-                      Args
+                      Argumentos
                     </span>
                     <Input
                       value={draft.args}
@@ -298,7 +297,7 @@ function ServerDialog(props: {
                   </label>
                   <label className="space-y-1.5">
                     <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-                      Env Vars
+                      Variáveis de Ambiente
                     </span>
                     <textarea
                       value={draft.envText}
@@ -332,7 +331,7 @@ function ServerDialog(props: {
                   </label>
                   <label className="space-y-1.5">
                     <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-                      Headers
+                      Cabeçalhos
                     </span>
                     <textarea
                       value={draft.headersText}
@@ -355,7 +354,7 @@ function ServerDialog(props: {
 
             <label className="space-y-1.5 md:col-span-2">
               <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
-                Timeout (seconds)
+                Timeout (segundos)
               </span>
               <Input
                 type="number"
@@ -373,9 +372,9 @@ function ServerDialog(props: {
           </div>
 
           <div className="flex items-center justify-end gap-2">
-            <DialogClose>Cancel</DialogClose>
+            <DialogClose>Cancelar</DialogClose>
             <Button onClick={onSave}>
-              {editingName ? 'Save Changes' : 'Add Server'}
+              {editingName ? 'Salvar Alterações' : 'Adicionar Servidor'}
             </Button>
           </div>
         </div>
@@ -537,27 +536,27 @@ export function McpSettingsScreen() {
                         size={16}
                         strokeWidth={1.8}
                       />
-                      Back to Settings
+                      Voltar às Configurações
                     </Link>
                   }
                 />
                 <div>
                   <h1 className="text-lg font-semibold text-primary-900">
-                    MCP Servers
+                    Servidores MCP
                   </h1>
                   <p className="mt-1 text-sm text-primary-600">
-                    Review configured MCP servers, draft changes locally, and
-                    copy the YAML into
+                    Revise os servidores MCP configurados, rascunhe alterações localmente e
+                    copie o YAML em
                     <code className="mx-1 rounded bg-white px-1.5 py-0.5 font-mono text-xs">
                       config.yaml
                     </code>
-                    until gateway config writes land.
+                    até que as gravações de configuração do gateway sejam implementadas.
                   </p>
                 </div>
               </div>
               <Button size="sm" onClick={openAddDialog}>
                 <HugeiconsIcon icon={Add01Icon} size={16} strokeWidth={1.8} />
-                Add Server
+                Adicionar Servidor
               </Button>
             </div>
           </header>
@@ -570,8 +569,8 @@ export function McpSettingsScreen() {
 
           {isDirty ? (
             <div className="rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800 shadow-sm">
-              You have unsaved changes. Copy the YAML below and paste it into
-              your{' '}
+              Você tem alterações não salvas. Copie o YAML abaixo e cole em
+              seu{' '}
               <code className="rounded bg-amber-100 px-1.5 py-0.5 font-mono text-xs">
                 config.yaml
               </code>
@@ -583,11 +582,11 @@ export function McpSettingsScreen() {
             <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
                 <h2 className="text-base font-medium text-primary-900">
-                  Configured Servers
+                  Servidores Configurados
                 </h2>
                 <p className="mt-1 text-xs text-primary-600">
-                  {servers.length} server{servers.length === 1 ? '' : 's'} in
-                  the current local draft.
+                  {servers.length} servidor{servers.length === 1 ? '' : 'es'} no
+                  rascunho local atual.
                 </p>
               </div>
               {reloadAvailable ? (
@@ -602,28 +601,27 @@ export function McpSettingsScreen() {
                     size={16}
                     strokeWidth={1.8}
                   />
-                  {reloadPending ? 'Reloading...' : 'Reload MCP Servers'}
+                  {reloadPending ? 'Recarregando...' : 'Recarregar Servidores MCP'}
                 </Button>
               ) : (
                 <span
                   className="text-xs text-primary-400"
-                  title="MCP reload not available on this gateway"
+                  title="Recarregamento MCP não disponível neste gateway"
                 >
-                  Reload unavailable
+                  Recarregamento indisponível
                 </span>
               )}
             </div>
 
             {loading ? (
               <div className="rounded-xl border border-primary-200 bg-white px-4 py-3 text-sm text-primary-600">
-                Loading MCP servers...
+                Carregando servidores MCP...
               </div>
             ) : null}
 
             {!loading && servers.length === 0 ? (
               <div className="rounded-xl border border-dashed border-primary-300 bg-white px-4 py-8 text-center text-sm text-primary-600">
-                No MCP servers found yet. Add one to generate a starter config
-                snippet.
+                Nenhum servidor MCP encontrado ainda. Adicione um para gerar um trecho de configuração inicial.
               </div>
             ) : null}
 
@@ -653,12 +651,12 @@ export function McpSettingsScreen() {
                         <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-primary-500">
                           <span>
                             timeout:{' '}
-                            {server.timeout ? `${server.timeout}s` : 'default'}
+                            {server.timeout ? `${server.timeout}s` : 'padrão'}
                           </span>
                           {server.connectTimeout ? (
                             <span>connect: {server.connectTimeout}s</span>
                           ) : null}
-                          {server.auth ? <span>auth configured</span> : null}
+                          {server.auth ? <span>autenticação configurada</span> : null}
                         </div>
                       </div>
 
@@ -673,7 +671,7 @@ export function McpSettingsScreen() {
                             size={14}
                             strokeWidth={1.8}
                           />
-                          Edit
+                          Editar
                         </Button>
                         <Button
                           variant="outline"
@@ -697,7 +695,7 @@ export function McpSettingsScreen() {
                             size={14}
                             strokeWidth={1.8}
                           />
-                          Delete
+                          Excluir
                         </Button>
                       </div>
                     </div>
@@ -711,14 +709,14 @@ export function McpSettingsScreen() {
             <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
               <div>
                 <h2 className="text-base font-medium text-primary-900">
-                  Generated YAML
+                  YAML Gerado
                 </h2>
                 <p className="mt-1 text-sm text-primary-600">
-                  Add this to your{' '}
+                  Adicione isso ao seu{' '}
                   <code className="rounded bg-white px-1.5 py-0.5 font-mono text-xs">
                     config.yaml
                   </code>{' '}
-                  under{' '}
+                  sob{' '}
                   <code className="rounded bg-white px-1.5 py-0.5 font-mono text-xs">
                     mcp_servers
                   </code>
@@ -727,7 +725,7 @@ export function McpSettingsScreen() {
               </div>
               <Button variant="outline" size="sm" onClick={handleCopySnippet}>
                 <HugeiconsIcon icon={Copy01Icon} size={16} strokeWidth={1.8} />
-                Copy to Clipboard
+                Copiar para Área de Transferência
               </Button>
             </div>
 

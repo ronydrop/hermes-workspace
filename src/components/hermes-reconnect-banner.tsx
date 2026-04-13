@@ -116,7 +116,7 @@ export function HermesReconnectBanner({
             wasDisconnectedRef.current = true
             setBannerState('disconnected')
             setMessage(
-              error instanceof Error ? error.message : 'Connection failed',
+              error instanceof Error ? error.message : 'Conexão falhou',
             )
           }
           return false
@@ -170,17 +170,17 @@ export function HermesReconnectBanner({
       }
 
       if (!response.ok || !payload.ok) {
-        throw new Error(payload.error || 'Failed to start Hermes agent')
+        throw new Error(payload.error || 'Falha ao iniciar o agente Hermes')
       }
 
       setMessage(
-        payload.message === 'already running'
-          ? 'Hermes agent is already running'
-          : 'Starting Hermes agent…',
+          payload.message === 'already running'
+            ? 'Agente Hermes já está em execução'
+            : 'Iniciando agente Hermes…',
       )
     } catch (error) {
       setMessage(
-        error instanceof Error ? error.message : 'Failed to start Hermes agent',
+        error instanceof Error ? error.message : 'Falha ao iniciar o agente Hermes',
       )
     } finally {
       setIsStarting(false)
@@ -220,7 +220,7 @@ export function HermesReconnectBanner({
           />
           <div className="min-w-0">
             <p className="text-sm font-semibold">
-              {isDisconnected ? 'Hermes agent not connected' : 'Connected'}
+              {isDisconnected ? 'Agente Hermes não conectado' : 'Conectado'}
             </p>
             {message ? (
               <p className="truncate text-xs opacity-80">{message}</p>
@@ -241,7 +241,7 @@ export function HermesReconnectBanner({
                 color: 'inherit',
               }}
             >
-              {isChecking ? 'Retrying…' : 'Retry'}
+              {isChecking ? 'Tentando…' : 'Tentar novamente'}
             </button>
             <button
               type="button"
@@ -252,7 +252,7 @@ export function HermesReconnectBanner({
                 background: 'var(--theme-danger)',
               }}
             >
-              {isStarting ? 'Starting…' : 'Start Agent'}
+              {isStarting ? 'Iniciando…' : 'Iniciar Agente'}
             </button>
           </div>
         ) : null}

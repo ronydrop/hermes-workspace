@@ -22,13 +22,13 @@ function toTitleCase(value: string): string {
 
 function formatMobileSessionTitle(rawTitle: string): string {
   const title = rawTitle.trim()
-  if (!title) return 'New Chat'
+  if (!title) return 'Novo Chat'
 
   const normalized = title.toLowerCase()
 
   // Agent session patterns
   if (normalized === 'agent:main:main' || normalized === 'agent:main') {
-    return 'Main Chat'
+    return 'Chat Principal'
   }
   const parts = title
     .split(':')
@@ -40,14 +40,14 @@ function formatMobileSessionTitle(rawTitle: string): string {
     parts[1].length > 0
   ) {
     const candidate = parts[parts.length - 1]
-    if (candidate.toLowerCase() === 'main') return 'Main Chat'
+    if (candidate.toLowerCase() === 'main') return 'Chat Principal'
     return `${toTitleCase(candidate)} Chat`
   }
 
   // Common system prompts → friendly names
   if (normalized.startsWith('read heartbeat')) return 'Main Chat'
-  if (normalized.startsWith('generate daily')) return 'Daily Brief'
-  if (normalized.startsWith('morning check')) return 'Morning Check-in'
+  if (normalized.startsWith('generate daily')) return 'Resumo Diário'
+  if (normalized.startsWith('morning check')) return 'Check-in Matinal'
 
   // If it looks like a command/prompt (starts with a verb + long), summarize it
   const MAX_LEN = 20
@@ -254,7 +254,7 @@ function ChatHeaderComponent({
             type="button"
             onClick={openHamburgerMenu}
             className="shrink-0 flex items-center justify-center w-11 h-11 -ml-1 rounded-xl active:bg-white/10 transition-colors z-10"
-            aria-label="Open navigation menu"
+            aria-label="Abrir menu de navegação"
           >
             <svg
               width="20"
@@ -277,10 +277,10 @@ function ChatHeaderComponent({
             type="button"
             onClick={onOpenSessions}
             className="flex items-center gap-1 min-w-0 max-w-[55vw] px-3 py-1.5 rounded-full bg-white/5 hover:bg-primary-100 active:bg-primary-150 transition-colors"
-            aria-label="Switch session"
+            aria-label="Trocar sessão"
           >
             <span className="truncate text-[13px] font-medium text-ink">
-              {mobileTitle === 'new' ? 'New Chat' : mobileTitle}
+              {mobileTitle === 'new' ? 'Novo Chat' : mobileTitle}
             </span>
             <svg
               width="8"
@@ -323,7 +323,7 @@ function ChatHeaderComponent({
                     variant="ghost"
                     className="mr-2 text-primary-800 hover:bg-primary-100 dark:hover:bg-primary-800"
                     aria-label={
-                      fileExplorerCollapsed ? 'Show files' : 'Hide files'
+                      fileExplorerCollapsed ? 'Mostrar arquivos' : 'Ocultar arquivos'
                     }
                   >
                     <HugeiconsIcon
@@ -335,7 +335,7 @@ function ChatHeaderComponent({
                 }
               />
               <TooltipContent side="bottom">
-                {fileExplorerCollapsed ? 'Show files' : 'Hide files'}
+                {fileExplorerCollapsed ? 'Mostrar arquivos' : 'Ocultar arquivos'}
               </TooltipContent>
             </TooltipRoot>
           </TooltipProvider>
@@ -373,7 +373,7 @@ function ChatHeaderComponent({
                 type="button"
                 onClick={() => setSessionPopoverOpen((p) => !p)}
                 className="min-w-0 truncate text-sm font-medium text-balance hover:text-accent-600 transition-colors rounded-sm text-left"
-                title="Click to switch session"
+                title="Clique para trocar sessão"
               >
                 {activeTitle}
               </button>
@@ -382,7 +382,7 @@ function ChatHeaderComponent({
                   type="button"
                   onClick={startTitleEdit}
                   className="text-xs text-primary-400 opacity-0 group-hover:opacity-100 hover:text-primary-600 transition-opacity shrink-0"
-                  title="Rename session"
+                  title="Renomear sessão"
                 >
                   ✏️
                 </button>
@@ -405,7 +405,7 @@ function ChatHeaderComponent({
                     <input
                       autoFocus
                       type="text"
-                      placeholder="Search sessions..."
+                      placeholder="Buscar sessões..."
                       value={sessionSearch}
                       onChange={(e) => setSessionSearch(e.target.value)}
                       className="flex-1 bg-transparent text-sm outline-none text-neutral-700 placeholder-neutral-400 dark:text-neutral-200"
@@ -461,7 +461,7 @@ function ChatHeaderComponent({
                       })}
                     {sessions.length === 0 && (
                       <p className="px-3 py-4 text-sm text-neutral-400">
-                        No sessions
+                        Nenhuma sessão
                       </p>
                     )}
                   </div>
@@ -473,7 +473,7 @@ function ChatHeaderComponent({
         {renamingTitle ? (
           <span
             className="mr-1 inline-flex size-3 animate-spin rounded-full border border-primary-300 border-t-primary-700"
-            aria-label="Saving session name"
+            aria-label="Salvando nome da sessão"
           />
         ) : null}
         {showThinkingIndicator ? (
@@ -483,7 +483,7 @@ function ChatHeaderComponent({
                 render={
                   <span
                     className="mr-2 inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
-                    aria-label="Thinking: Adaptive"
+                    aria-label="Pensamento: Adaptativo"
                     role="status"
                     style={{ boxShadow: '0 0 6px 1px rgba(251,191,36,0.4)' }}
                   >
@@ -492,7 +492,7 @@ function ChatHeaderComponent({
                 }
               />
               <TooltipContent side="bottom">
-                Thinking: Adaptive — Claude reasons before responding
+                Pensamento: Adaptativo — Claude raciocina antes de responder
               </TooltipContent>
             </TooltipRoot>
           </TooltipProvider>
@@ -505,7 +505,7 @@ function ChatHeaderComponent({
                 render={
                   <button
                     type="button"
-                    aria-label={isStale ? 'Stale — click to sync' : 'Live'}
+                    aria-label={isStale ? 'Desatualizado — clique para sincronizar' : 'Ao vivo'}
                     className={cn(
                       'mr-2 inline-flex items-center justify-center rounded-full transition-colors',
                       isRefreshing && 'animate-pulse',
@@ -524,7 +524,7 @@ function ChatHeaderComponent({
                 }
               />
               <TooltipContent side="bottom">
-                {isStale ? 'Stale — click to sync' : 'Live'}
+                {isStale ? 'Desatualizado — clique para sincronizar' : 'Ao vivo'}
               </TooltipContent>
             </TooltipRoot>
           </TooltipProvider>
@@ -540,13 +540,13 @@ function ChatHeaderComponent({
                     size="icon-sm"
                     variant="ghost"
                     className="text-primary-500 hover:bg-primary-100 dark:hover:bg-primary-800"
-                    aria-label="Undo last message"
+                    aria-label="Desfazer última mensagem"
                   >
                     <span className="text-sm">↩️</span>
                   </Button>
                 }
               />
-              <TooltipContent side="bottom">Undo last message</TooltipContent>
+              <TooltipContent side="bottom">Desfazer última mensagem</TooltipContent>
             </TooltipRoot>
           </TooltipProvider>
         )}
@@ -572,7 +572,7 @@ function ChatHeaderComponent({
                       clearConfirm ? 'text-red-500' : 'text-primary-500',
                     )}
                     aria-label={
-                      clearConfirm ? 'Confirm clear' : 'Clear session'
+                      clearConfirm ? 'Confirmar limpeza' : 'Limpar sessão'
                     }
                   >
                     <span className="text-sm">
@@ -582,7 +582,7 @@ function ChatHeaderComponent({
                 }
               />
               <TooltipContent side="bottom">
-                {clearConfirm ? 'Click again to confirm' : 'Clear session'}
+                {clearConfirm ? 'Clique novamente para confirmar' : 'Limpar sessão'}
               </TooltipContent>
             </TooltipRoot>
           </TooltipProvider>

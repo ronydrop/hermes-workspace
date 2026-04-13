@@ -183,12 +183,12 @@ export function EditJobDialog({
               style={{ borderColor: 'var(--theme-border)' }}
             >
               <div>
-                <h2 className="text-lg font-semibold">Edit Job</h2>
+                <h2 className="text-lg font-semibold">Editar Job</h2>
                 <p
                   className="mt-1 text-sm"
                   style={{ color: 'var(--theme-muted)' }}
                 >
-                  Update the schedule, prompt, and routing for this Hermes task.
+                  Atualize o agendamento, prompt e roteamento para esta tarefa Hermes.
                 </p>
               </div>
               <button
@@ -196,7 +196,7 @@ export function EditJobDialog({
                 onClick={() => onOpenChange(false)}
                 className="rounded-lg p-2 transition-colors"
                 style={{ color: 'var(--theme-muted)' }}
-                aria-label="Close edit job dialog"
+                aria-label="Fechar diálogo de edição de job"
               >
                 <HugeiconsIcon icon={Cancel01Icon} size={18} />
               </button>
@@ -204,7 +204,7 @@ export function EditJobDialog({
 
             <div className="flex-1 space-y-5 overflow-y-auto px-5 py-4">
               <section className="space-y-2">
-                <label className="text-sm font-medium">Name</label>
+                <label className="text-sm font-medium">Nome</label>
                 <input
                   value={form.name}
                   onChange={(event) =>
@@ -213,7 +213,7 @@ export function EditJobDialog({
                       name: event.target.value,
                     }))
                   }
-                  placeholder="Daily research summary"
+                  placeholder="Resumo diário de pesquisa"
                   required
                   className="w-full rounded-xl border px-3 py-2.5 text-sm focus:outline-none focus:ring-1"
                   style={{
@@ -227,12 +227,12 @@ export function EditJobDialog({
 
               <section className="space-y-3">
                 <div>
-                  <h3 className="text-sm font-medium">Schedule</h3>
+                  <h3 className="text-sm font-medium">Agendamento</h3>
                   <p
                     className="mt-1 text-xs"
                     style={{ color: 'var(--theme-muted)' }}
                   >
-                    Choose a preset or enter a custom schedule string below.
+                    Escolha um preset ou insira uma string de agendamento personalizada abaixo.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -265,7 +265,7 @@ export function EditJobDialog({
                   })}
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Custom schedule</label>
+                  <label className="text-sm font-medium">Agendamento personalizado</label>
                   <input
                     value={form.schedule}
                     onChange={(event) =>
@@ -296,7 +296,7 @@ export function EditJobDialog({
                       prompt: event.target.value,
                     }))
                   }
-                  placeholder="What should Hermes do?"
+                  placeholder="O que Hermes deve fazer?"
                   required
                   rows={5}
                   className="w-full resize-none rounded-xl border px-3 py-2.5 text-sm focus:outline-none focus:ring-1"
@@ -310,12 +310,12 @@ export function EditJobDialog({
 
               <section className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-medium">Options</h3>
+                  <h3 className="text-sm font-medium">Opções</h3>
                   <p
                     className="mt-1 text-xs"
                     style={{ color: 'var(--theme-muted)' }}
                   >
-                    Optional routing and repeat controls.
+                    Controles opcionais de roteamento e repetição.
                   </p>
                 </div>
 
@@ -340,7 +340,7 @@ export function EditJobDialog({
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Deliver to</label>
+                  <label className="text-sm font-medium">Entregar para</label>
                   <div className="flex flex-wrap gap-2">
                     {DELIVERY_OPTIONS.map((option) => {
                       const isActive = form.deliver.includes(option)
@@ -353,7 +353,7 @@ export function EditJobDialog({
                           onClick={() => toggleDelivery(option)}
                           title={
                             needsGateway
-                              ? `Requires Hermes Gateway with ${option} configured`
+                              ? `Requer Hermes Gateway com ${option} configurado`
                               : undefined
                           }
                           className="rounded-full border px-3 py-1.5 text-xs font-medium capitalize transition-colors"
@@ -405,7 +405,7 @@ export function EditJobDialog({
                             : 'var(--theme-text)',
                       }}
                     >
-                      Unlimited
+                      Ilimitado
                     </button>
                     <button
                       type="button"
@@ -431,7 +431,7 @@ export function EditJobDialog({
                             : 'var(--theme-text)',
                       }}
                     >
-                      Set count
+                      Definir contagem
                     </button>
                   </div>
                   {form.repeatMode === 'limited' ? (
@@ -471,7 +471,7 @@ export function EditJobDialog({
                   color: 'var(--theme-muted)',
                 }}
               >
-                Cancel
+                Cancelar
               </button>
               <button
                 type="submit"
@@ -484,7 +484,7 @@ export function EditJobDialog({
                 className="rounded-xl px-4 py-2 text-sm font-medium text-white transition-opacity disabled:opacity-50"
                 style={{ background: 'var(--theme-accent)' }}
               >
-                {isSubmitting ? 'Saving...' : 'Save changes'}
+                {isSubmitting ? 'Salvando...' : 'Salvar alterações'}
               </button>
             </div>
           </motion.form>

@@ -108,11 +108,11 @@ export const SidebarSessions = memo(function SidebarSessions({
             <div className="flex flex-col gap-px pl-3 pr-2">
               {loading ? (
                 <div className="px-2 py-2 text-xs text-primary-500">
-                  Loading sessions…
+                  Carregando sessões…
                 </div>
               ) : error ? (
                 <div className="px-2 py-2 text-xs text-primary-500">
-                  <div className="mb-2">Failed to load sessions.</div>
+                  <div className="mb-2">Falha ao carregar sessões.</div>
                   <div className="text-[11px] opacity-80">{error}</div>
                   <Button
                     type="button"
@@ -121,7 +121,7 @@ export const SidebarSessions = memo(function SidebarSessions({
                     className="mt-2"
                     onClick={onRetry}
                   >
-                    Retry
+                    Tentar novamente
                   </Button>
                 </div>
               ) : unpinnedSessions.length > 0 ? (
@@ -145,13 +145,13 @@ export const SidebarSessions = memo(function SidebarSessions({
               ) : (
                 <div className="px-2 py-2 text-xs text-primary-500">
                   {pinnedSessions.length > 0
-                    ? 'All sessions are pinned.'
-                    : 'No sessions yet. Start a conversation →'}
+                    ? 'Todas as sessões estão fixadas.'
+                    : 'Nenhuma sessão ainda. Inicie uma conversa →'}
                 </div>
               )}
               {fetching && !loading && !error && sessions.length > 0 ? (
                 <div className="px-2 py-1 text-[11px] text-primary-400">
-                  Updating…
+                  Atualizando…
                 </div>
               ) : null}
             </div>
