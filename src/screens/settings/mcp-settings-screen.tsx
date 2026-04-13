@@ -547,7 +547,7 @@ export function McpSettingsScreen() {
                   <p className="mt-1 text-sm text-primary-600">
                     Revise os servidores MCP configurados, rascunhe alterações localmente e
                     copie o YAML em
-                    <code className="mx-1 rounded bg-white px-1.5 py-0.5 font-mono text-xs">
+                    <code className="mx-1 rounded bg-primary-100 px-1.5 py-0.5 font-mono text-xs">
                       config.yaml
                     </code>
                     até que as gravações de configuração do gateway sejam implementadas.
@@ -562,7 +562,7 @@ export function McpSettingsScreen() {
           </header>
 
           {notice ? (
-            <div className="rounded-2xl border border-primary-200 bg-white px-4 py-3 text-sm text-primary-600 shadow-sm">
+            <div className="rounded-2xl border border-primary-200 bg-primary-100 px-4 py-3 text-sm text-primary-600 shadow-sm">
               {notice}
             </div>
           ) : null}
@@ -614,13 +614,13 @@ export function McpSettingsScreen() {
             </div>
 
             {loading ? (
-              <div className="rounded-xl border border-primary-200 bg-white px-4 py-3 text-sm text-primary-600">
+              <div className="rounded-xl border border-primary-200 bg-primary-100 px-4 py-3 text-sm text-primary-600">
                 Carregando servidores MCP...
               </div>
             ) : null}
 
             {!loading && servers.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-primary-300 bg-white px-4 py-8 text-center text-sm text-primary-600">
+              <div className="rounded-xl border border-dashed border-primary-300 bg-primary-100 px-4 py-8 text-center text-sm text-primary-600">
                 Nenhum servidor MCP encontrado ainda. Adicione um para gerar um trecho de configuração inicial.
               </div>
             ) : null}
@@ -630,7 +630,7 @@ export function McpSettingsScreen() {
                 {servers.map((server) => (
                   <article
                     key={server.name}
-                    className="rounded-2xl border border-primary-200 bg-white p-4 shadow-sm"
+                    className="rounded-2xl border border-primary-200 bg-primary-100 p-4 shadow-sm"
                   >
                     <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                       <div className="min-w-0 space-y-2">
@@ -713,11 +713,11 @@ export function McpSettingsScreen() {
                 </h2>
                 <p className="mt-1 text-sm text-primary-600">
                   Adicione isso ao seu{' '}
-                  <code className="rounded bg-white px-1.5 py-0.5 font-mono text-xs">
+                  <code className="rounded bg-primary-100 px-1.5 py-0.5 font-mono text-xs">
                     config.yaml
                   </code>{' '}
                   sob{' '}
-                  <code className="rounded bg-white px-1.5 py-0.5 font-mono text-xs">
+                  <code className="rounded bg-primary-100 px-1.5 py-0.5 font-mono text-xs">
                     mcp_servers
                   </code>
                   .
@@ -729,7 +729,7 @@ export function McpSettingsScreen() {
               </Button>
             </div>
 
-            <pre className="mt-4 overflow-x-auto rounded-2xl border border-primary-200 bg-white p-4 text-xs leading-6 text-primary-800">
+            <pre className="mt-4 overflow-x-auto rounded-2xl border border-primary-200 bg-primary-100 p-4 text-xs leading-6 text-primary-800">
               <code>{yamlSnippet}</code>
             </pre>
           </section>

@@ -5,7 +5,7 @@ import { McpSettingsScreen } from '@/screens/settings/mcp-settings-screen'
 export const Route = createFileRoute('/settings/mcp')({
   ssr: false,
   component: function SettingsMcpRoute() {
-    usePageTitle('MCP Servers')
+    usePageTitle('Servidores MCP')
     return <McpSettingsScreen />
   },
 })

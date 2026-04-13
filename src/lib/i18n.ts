@@ -3,7 +3,7 @@
  * Add new languages by adding a locale map below.
  */
 
-export type LocaleId = 'en' | 'es' | 'fr' | 'de' | 'zh' | 'ja' | 'ko' | 'pt' | 'ru' | 'ar'
+export type LocaleId = 'en' | 'es' | 'fr' | 'de' | 'zh' | 'ja' | 'ko' | 'pt' | 'pt-BR' | 'ru' | 'ar'
 
 export type TranslationKey = keyof typeof EN
 
@@ -19,6 +19,14 @@ const EN = {
   'nav.skills': 'Skills',
   'nav.profiles': 'Profiles',
   'nav.settings': 'Settings',
+  // Nav section headers
+  'nav.section.main': 'Main',
+  'nav.section.knowledge': 'Knowledge',
+  // Nav actions
+  'nav.search': 'Search',
+  'nav.newSession': 'New Session',
+  // Nav user label
+  'nav.user': 'User',
   // Skills
   'skills.installed': 'Installed',
   'skills.marketplace': 'Marketplace',
@@ -52,6 +60,49 @@ const EN = {
   'common.noData': 'No data',
 } as const
 
+const PT: typeof EN = {
+  'nav.dashboard': 'Painel',
+  'nav.chat': 'Chat',
+  'nav.files': 'Arquivos',
+  'nav.terminal': 'Terminal',
+  'nav.jobs': 'Agendamentos',
+  'nav.tasks': 'Tarefas',
+  'nav.memory': 'Memória',
+  'nav.skills': 'Habilidades',
+  'nav.profiles': 'Perfis',
+  'nav.settings': 'Configurações',
+  'nav.section.main': 'PRINCIPAL',
+  'nav.section.knowledge': 'CONHECIMENTO',
+  'nav.search': 'Buscar',
+  'nav.newSession': 'Nova Sessão',
+  'nav.user': 'Usuário',
+  'skills.installed': 'Instaladas',
+  'skills.marketplace': 'Mercado',
+  'skills.search': 'Buscar por nome, tags ou descrição',
+  'skills.noResults': 'Nenhuma habilidade encontrada',
+  'profiles.profiles': 'Perfis',
+  'profiles.monitoring': 'Monitoramento',
+  'tasks.title': 'Tarefas',
+  'tasks.newTask': 'Nova Tarefa',
+  'tasks.backlog': 'Backlog',
+  'tasks.todo': 'A Fazer',
+  'tasks.inProgress': 'Em Progresso',
+  'tasks.review': 'Revisão',
+  'tasks.done': 'Concluído',
+  'jobs.title': 'Agendamentos',
+  'jobs.newJob': 'Novo Agendamento',
+  'settings.title': 'Configurações',
+  'settings.language': 'Idioma',
+  'settings.languageDesc': 'Escolha o idioma de exibição da interface do workspace.',
+  'common.save': 'Salvar',
+  'common.cancel': 'Cancelar',
+  'common.delete': 'Excluir',
+  'common.search': 'Buscar',
+  'common.loading': 'Carregando...',
+  'common.error': 'Erro',
+  'common.noData': 'Sem dados',
+}
+
 const ES: typeof EN = {
   'nav.dashboard': 'Panel',
   'nav.chat': 'Chat',
@@ -63,6 +114,11 @@ const ES: typeof EN = {
   'nav.skills': 'Habilidades',
   'nav.profiles': 'Perfiles',
   'nav.settings': 'Configuración',
+  'nav.section.main': 'PRINCIPAL',
+  'nav.section.knowledge': 'CONOCIMIENTO',
+  'nav.search': 'Buscar',
+  'nav.newSession': 'Nueva Sesión',
+  'nav.user': 'Usuario',
   'skills.installed': 'Instaladas',
   'skills.marketplace': 'Mercado',
   'skills.search': 'Buscar por nombre, etiquetas o descripción',
@@ -101,6 +157,11 @@ const FR: typeof EN = {
   'nav.skills': 'Compétences',
   'nav.profiles': 'Profils',
   'nav.settings': 'Paramètres',
+  'nav.section.main': 'PRINCIPAL',
+  'nav.section.knowledge': 'CONNAISSANCE',
+  'nav.search': 'Rechercher',
+  'nav.newSession': 'Nouvelle Session',
+  'nav.user': 'Utilisateur',
   'skills.installed': 'Installées',
   'skills.marketplace': 'Marché',
   'skills.search': 'Rechercher par nom, tags ou description',
@@ -139,6 +200,11 @@ const ZH: typeof EN = {
   'nav.skills': '技能',
   'nav.profiles': '配置',
   'nav.settings': '设置',
+  'nav.section.main': '主要',
+  'nav.section.knowledge': '知识',
+  'nav.search': '搜索',
+  'nav.newSession': '新会话',
+  'nav.user': '用户',
   'skills.installed': '已安装',
   'skills.marketplace': '市场',
   'skills.search': '按名称、标签或描述搜索',
@@ -167,7 +233,7 @@ const ZH: typeof EN = {
 }
 
 const LOCALES: Record<LocaleId, typeof EN> = {
-  en: EN, es: ES, fr: FR, de: EN, zh: ZH, ja: EN, ko: EN, pt: EN, ru: EN, ar: EN,
+  en: EN, es: ES, fr: FR, de: EN, zh: ZH, ja: EN, ko: EN, pt: PT, 'pt-BR': PT, ru: EN, ar: EN,
 }
 
 export const LOCALE_LABELS: Record<LocaleId, string> = {
@@ -179,6 +245,7 @@ export const LOCALE_LABELS: Record<LocaleId, string> = {
   ja: '日本語',
   ko: '한국어',
   pt: 'Português',
+  'pt-BR': 'Português (BR)',
   ru: 'Русский',
   ar: 'العربية',
 }

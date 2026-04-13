@@ -181,7 +181,7 @@ function WorkspaceThemePicker() {
               <span className="text-xs font-semibold">{t.label}</span>
               {isActive && (
                 <span className="ml-auto text-[9px] font-bold uppercase tracking-wide text-[var(--theme-accent)]">
-                  Active
+                  Ativo
                 </span>
               )}
             </div>
@@ -264,20 +264,20 @@ type SettingsNavItem = {
 }
 
 const SETTINGS_NAV_ITEMS: Array<SettingsNavItem> = [
-  { id: 'hermes', label: 'Model & Provider' },
-  { id: 'agent', label: 'Agent Behavior' },
-  { id: 'routing', label: 'Smart Routing' },
-  { id: 'voice', label: 'Voice' },
-  { id: 'display', label: 'Display' },
-  { id: 'appearance', label: 'Appearance' },
+  { id: 'hermes', label: 'Modelo & Provedor' },
+  { id: 'agent', label: 'Comportamento do Agente' },
+  { id: 'routing', label: 'Roteamento Inteligente' },
+  { id: 'voice', label: 'Voz' },
+  { id: 'display', label: 'Exibição' },
+  { id: 'appearance', label: 'Aparência' },
   { id: 'chat', label: 'Chat' },
-  { id: 'notifications', label: 'Notifications' },
-  { id: 'mcp', label: 'MCP Servers', to: '/settings/mcp' },
-  { id: 'language' as SettingsSectionId, label: 'Language' },
+  { id: 'notifications', label: 'Notificações' },
+  { id: 'mcp', label: 'Servidores MCP', to: '/settings/mcp' },
+  { id: 'language' as SettingsSectionId, label: 'Idioma' },
 ]
 
 function SettingsRoute() {
-  usePageTitle('Settings')
+  usePageTitle('Configurações')
   const { settings, updateSettings } = useSettings()
 
   // Phase 4.2: Fetch models for preferred model dropdowns
@@ -323,7 +323,7 @@ function SettingsRoute() {
         <nav className="hidden w-48 shrink-0 md:block">
           <div className="sticky top-8">
             <h1 className="mb-4 text-lg font-semibold text-primary-900 px-3">
-              Settings
+              Configurações
             </h1>
             <div className="flex flex-col gap-0.5">
               {SETTINGS_NAV_ITEMS.map((item) =>
@@ -411,13 +411,13 @@ function SettingsRoute() {
           {activeSection === 'appearance' && (
             <>
               <SettingsSection
-                title="Appearance"
-                description="Choose a workspace theme and accent color."
+                title="Aparência"
+                description="Escolha um tema de workspace e cor de destaque."
                 icon={PaintBoardIcon}
               >
                 <SettingsRow
-                  label="Theme"
-                  description="All workspace themes are dark. Pick the palette you want to use."
+                  label="Tema"
+                  description="Todos os temas do workspace são escuros. Escolha a paleta que deseja usar."
                 >
                   <div className="w-full">
                     <WorkspaceThemePicker />
@@ -494,13 +494,13 @@ function SettingsRoute() {
           {/* ── Notifications ───────────────────────────────────── */}
           {activeSection === ('language' as SettingsSectionId) && (
             <SettingsSection
-              title="Language"
-              description="Choose the display language for the workspace UI."
+              title="Idioma"
+              description="Escolha o idioma de exibição da interface do workspace."
               icon={Settings02Icon}
             >
               <SettingsRow
-                label="Interface Language"
-                description="Translates navigation, labels, and buttons. Content from the agent remains in the agent's language."
+                label="Idioma da interface"
+                description="Traduz navegação, rótulos e botões. O conteúdo do agente permanece no idioma do agente."
               >
                 <select
                   value={getLocale()}
@@ -521,25 +521,25 @@ function SettingsRoute() {
           {activeSection === 'notifications' && (
             <>
               <SettingsSection
-                title="Notifications"
-                description="Control alert delivery and usage warning threshold."
+                title="Notificações"
+                description="Controle o envio de alertas e o limite de aviso de uso."
                 icon={Notification03Icon}
               >
                 <SettingsRow
-                  label="Enable alerts"
-                  description="Show usage and system alert notifications."
+                  label="Ativar alertas"
+                  description="Mostrar notificações de alertas de uso e do sistema."
                 >
                   <Switch
                     checked={settings.notificationsEnabled}
                     onCheckedChange={(checked) =>
                       updateSettings({ notificationsEnabled: checked })
                     }
-                    aria-label="Enable alerts"
+                    aria-label="Ativar alertas"
                   />
                 </SettingsRow>
                 <SettingsRow
-                  label="Usage threshold"
-                  description="Set usage warning trigger between 50% and 100%."
+                  label="Limite de uso"
+                  description="Defina o gatilho de aviso de uso entre 50% e 100%."
                 >
                   <div className="flex w-full items-center gap-2 md:max-w-xs">
                     <input
@@ -567,25 +567,25 @@ function SettingsRoute() {
               </SettingsSection>
 
               <SettingsSection
-                title="Smart Suggestions"
-                description="Get proactive model suggestions to optimize cost and quality."
+                title="Sugestões Inteligentes"
+                description="Receba sugestões proativas de modelos para otimizar custo e qualidade."
                 icon={Settings02Icon}
               >
                 <SettingsRow
-                  label="Enable smart suggestions"
-                  description="Suggest cheaper models for simple tasks or better models for complex work."
+                  label="Ativar sugestões inteligentes"
+                  description="Sugere modelos mais baratos para tarefas simples ou melhores para trabalhos complexos."
                 >
                   <Switch
                     checked={settings.smartSuggestionsEnabled}
                     onCheckedChange={(checked) =>
                       updateSettings({ smartSuggestionsEnabled: checked })
                     }
-                    aria-label="Enable smart suggestions"
+                    aria-label="Ativar sugestões inteligentes"
                   />
                 </SettingsRow>
                 <SettingsRow
-                  label="Preferred budget model"
-                  description="Default model for cheaper suggestions (leave empty for auto-detect)."
+                  label="Modelo econômico preferido"
+                  description="Modelo padrão para sugestões mais baratas (deixe vazio para detecção automática)."
                 >
                   <select
                     value={settings.preferredBudgetModel}
@@ -593,11 +593,11 @@ function SettingsRoute() {
                       updateSettings({ preferredBudgetModel: e.target.value })
                     }
                     className="h-9 w-full rounded-lg border border-primary-200 dark:border-gray-600 bg-primary-50 dark:bg-gray-800 px-3 text-sm text-primary-900 dark:text-gray-100 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400 dark:focus-visible:ring-primary-500 md:max-w-xs"
-                    aria-label="Preferred budget model"
+                    aria-label="Modelo econômico preferido"
                   >
-                    <option value="">Auto-detect</option>
+                    <option value="">Detecção automática</option>
                     {modelsError && (
-                      <option disabled>Failed to load models</option>
+                      <option disabled>Falha ao carregar modelos</option>
                     )}
                     {availableModels.map((model) => (
                       <option key={model.id} value={model.id}>
@@ -607,8 +607,8 @@ function SettingsRoute() {
                   </select>
                 </SettingsRow>
                 <SettingsRow
-                  label="Preferred premium model"
-                  description="Default model for upgrade suggestions (leave empty for auto-detect)."
+                  label="Modelo premium preferido"
+                  description="Modelo padrão para sugestões de upgrade (deixe vazio para detecção automática)."
                 >
                   <select
                     value={settings.preferredPremiumModel}
@@ -616,11 +616,11 @@ function SettingsRoute() {
                       updateSettings({ preferredPremiumModel: e.target.value })
                     }
                     className="h-9 w-full rounded-lg border border-primary-200 dark:border-gray-600 bg-primary-50 dark:bg-gray-800 px-3 text-sm text-primary-900 dark:text-gray-100 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400 dark:focus-visible:ring-primary-500 md:max-w-xs"
-                    aria-label="Preferred premium model"
+                    aria-label="Modelo premium preferido"
                   >
-                    <option value="">Auto-detect</option>
+                    <option value="">Detecção automática</option>
                     {modelsError && (
-                      <option disabled>Failed to load models</option>
+                      <option disabled>Falha ao carregar modelos</option>
                     )}
                     {availableModels.map((model) => (
                       <option key={model.id} value={model.id}>
@@ -630,15 +630,15 @@ function SettingsRoute() {
                   </select>
                 </SettingsRow>
                 <SettingsRow
-                  label="Only suggest cheaper models"
-                  description="Never suggest upgrades, only suggest cheaper alternatives."
+                  label="Sugerir apenas modelos mais baratos"
+                  description="Nunca sugerir upgrades, apenas sugerir alternativas mais baratas."
                 >
                   <Switch
                     checked={settings.onlySuggestCheaper}
                     onCheckedChange={(checked) =>
                       updateSettings({ onlySuggestCheaper: checked })
                     }
-                    aria-label="Only suggest cheaper models"
+                    aria-label="Sugerir apenas modelos mais baratos"
                   />
                 </SettingsRow>
               </SettingsSection>
@@ -653,7 +653,7 @@ function SettingsRoute() {
                 strokeWidth={1.5}
               />
               <span className="text-pretty">
-                Changes are saved automatically to local storage.
+                As alterações são salvas automaticamente no armazenamento local.
               </span>
             </div>
           </footer>
@@ -817,32 +817,32 @@ function ChatDisplaySection() {
   return (
     <>
       <SettingsSection
-        title="Chat Display"
-        description="Control what's visible in chat messages."
+        title="Exibição do Chat"
+        description="Controle o que é visível nas mensagens do chat."
         icon={MessageMultiple01Icon}
       >
         <SettingsRow
-          label="Show tool messages"
-          description="Display tool call details when the agent uses tools."
+          label="Mostrar mensagens de ferramentas"
+          description="Exibir detalhes das chamadas de ferramentas quando o agente as usa."
         >
           <Switch
             checked={chatSettings.showToolMessages}
             onCheckedChange={(checked) =>
               updateChatSettings({ showToolMessages: checked })
             }
-            aria-label="Show tool messages"
+            aria-label="Mostrar mensagens de ferramentas"
           />
         </SettingsRow>
         <SettingsRow
-          label="Show reasoning blocks"
-          description="Display model thinking and reasoning process."
+          label="Mostrar blocos de raciocínio"
+          description="Exibir o processo de pensamento e raciocínio do modelo."
         >
           <Switch
             checked={chatSettings.showReasoningBlocks}
             onCheckedChange={(checked) =>
               updateChatSettings({ showReasoningBlocks: checked })
             }
-            aria-label="Show reasoning blocks"
+            aria-label="Mostrar blocos de raciocínio"
           />
         </SettingsRow>
       </SettingsSection>
@@ -1476,13 +1476,13 @@ function HermesConfigSection({
 
   const renderAgentBehavior = () => (
     <SettingsSection
-      title="Agent Behavior"
-      description="Control agent execution limits and tool access."
+      title="Comportamento do Agente"
+      description="Controle os limites de execução do agente e o acesso às ferramentas."
       icon={Settings02Icon}
     >
       <SettingsRow
-        label="Max turns"
-        description="Maximum agent turns per request (1-100)."
+        label="Máx. turnos"
+        description="Máximo de turnos do agente por solicitação (1-100)."
       >
         <Input
           type="number"
@@ -1496,8 +1496,8 @@ function HermesConfigSection({
         />
       </SettingsRow>
       <SettingsRow
-        label="Gateway timeout"
-        description="Seconds before gateway times out a request."
+        label="Timeout do gateway"
+        description="Segundos antes do gateway expirar a solicitação."
       >
         <Input
           type="number"
@@ -1511,8 +1511,8 @@ function HermesConfigSection({
         />
       </SettingsRow>
       <SettingsRow
-        label="Tool use enforcement"
-        description="Whether the agent must use tools when available."
+        label="Aplicação de uso de ferramentas"
+        description="Se o agente deve usar ferramentas quando disponíveis."
       >
         <select
           value={(agentConfig.tool_use_enforcement as string) || 'auto'}
@@ -1533,13 +1533,13 @@ function HermesConfigSection({
 
   const renderSmartRouting = () => (
     <SettingsSection
-      title="Smart Model Routing"
-      description="Automatically route simple queries to cheaper models."
+      title="Roteamento Inteligente de Modelos"
+      description="Roteia automaticamente consultas simples para modelos mais baratos."
       icon={SparklesIcon}
     >
       <SettingsRow
-        label="Enable smart routing"
-        description="Route simple queries to a cheaper model automatically."
+        label="Ativar roteamento inteligente"
+        description="Roteia consultas simples para um modelo mais barato automaticamente."
       >
         <Switch
           checked={readBoolean(smartRouting.enabled, false)}
@@ -1551,8 +1551,8 @@ function HermesConfigSection({
         />
       </SettingsRow>
       <SettingsRow
-        label="Cheap model"
-        description="Model to use for simple queries."
+        label="Modelo econômico"
+        description="Modelo a usar para consultas simples."
       >
         <select
           value={(smartRouting.cheap_model as string) || ''}
@@ -1563,7 +1563,7 @@ function HermesConfigSection({
           }
           className={selectClassName}
         >
-          <option value="">Select model</option>
+          <option value="">Selecionar modelo</option>
           {availableModels.map((model) => (
             <option key={model.id} value={model.id}>
               {model.id}
@@ -1572,8 +1572,8 @@ function HermesConfigSection({
         </select>
       </SettingsRow>
       <SettingsRow
-        label="Max simple chars"
-        description="Messages shorter than this use the cheap model."
+        label="Máx. caracteres simples"
+        description="Mensagens menores que isso usam o modelo econômico."
       >
         <Input
           type="number"
@@ -1591,8 +1591,8 @@ function HermesConfigSection({
         />
       </SettingsRow>
       <SettingsRow
-        label="Max simple words"
-        description="Messages with fewer words use the cheap model."
+        label="Máx. palavras simples"
+        description="Mensagens com menos palavras usam o modelo econômico."
       >
         <Input
           type="number"
@@ -1615,13 +1615,13 @@ function HermesConfigSection({
   const renderVoice = () => (
     <div className="space-y-4">
       <SettingsSection
-        title="Text-to-Speech"
-        description="Configure voice output for agent responses."
+        title="Texto para Fala"
+        description="Configure a saída de voz para respostas do agente."
         icon={VolumeHighIcon}
       >
         <SettingsRow
-          label="TTS provider"
-          description="Which TTS engine to use."
+          label="Provedor TTS"
+          description="Qual mecanismo de TTS usar."
         >
           <select
             value={ttsProvider}
@@ -1630,7 +1630,7 @@ function HermesConfigSection({
             }
             className={selectClassName}
           >
-            <option value="edge">Edge TTS (free)</option>
+            <option value="edge">Edge TTS (gratuito)</option>
             <option value="elevenlabs">ElevenLabs</option>
             <option value="openai">OpenAI TTS</option>
             <option value="neutts">NeuTTS</option>
@@ -1638,7 +1638,7 @@ function HermesConfigSection({
         </SettingsRow>
 
         {ttsProvider === 'edge' && (
-          <SettingsRow label="Voice" description="Edge voice name.">
+          <SettingsRow label="Voz" description="Nome da voz Edge.">
             <Input
               value={(ttsEdge.voice as string) || ''}
               onChange={(e) =>
@@ -1654,7 +1654,7 @@ function HermesConfigSection({
 
         {ttsProvider === 'elevenlabs' && (
           <>
-            <SettingsRow label="Voice ID" description="ElevenLabs voice_id.">
+            <SettingsRow label="ID da voz" description="voice_id do ElevenLabs.">
               <Input
                 value={(ttsElevenLabs.voice_id as string) || ''}
                 onChange={(e) =>
@@ -1667,7 +1667,7 @@ function HermesConfigSection({
                 className="md:w-64"
               />
             </SettingsRow>
-            <SettingsRow label="Model" description="ElevenLabs model name.">
+            <SettingsRow label="Modelo" description="Nome do modelo ElevenLabs.">
               <Input
                 value={(ttsElevenLabs.model as string) || ''}
                 onChange={(e) =>
@@ -1684,7 +1684,7 @@ function HermesConfigSection({
         {ttsProvider === 'openai' && (
           <>
             <SettingsRow
-              label="Voice"
+              label="Voz"
               description="alloy, echo, fable, onyx, nova, shimmer"
             >
               <select
@@ -1705,7 +1705,7 @@ function HermesConfigSection({
                 )}
               </select>
             </SettingsRow>
-            <SettingsRow label="Model" description="OpenAI TTS model.">
+            <SettingsRow label="Modelo" description="Modelo TTS do OpenAI.">
               <Input
                 value={(ttsOpenAi.model as string) || ''}
                 onChange={(e) =>
@@ -1722,11 +1722,11 @@ function HermesConfigSection({
       </SettingsSection>
 
       <SettingsSection
-        title="Speech-to-Text"
-        description="Configure voice input recognition."
+        title="Fala para Texto"
+        description="Configure o reconhecimento de voz."
         icon={Mic01Icon}
       >
-        <SettingsRow label="Enable STT" description="Turn on voice input.">
+        <SettingsRow label="Ativar STT" description="Ativar entrada de voz.">
           <Switch
             checked={readBoolean(sttConfig.enabled, false)}
             onCheckedChange={(checked) =>
@@ -1735,8 +1735,8 @@ function HermesConfigSection({
           />
         </SettingsRow>
         <SettingsRow
-          label="STT provider"
-          description="Which speech engine to use."
+          label="Provedor STT"
+          description="Qual mecanismo de fala usar."
         >
           <select
             value={sttProvider}
@@ -1751,7 +1751,7 @@ function HermesConfigSection({
         </SettingsRow>
         {sttProvider === 'local' && (
           <SettingsRow
-            label="Model size"
+            label="Tamanho do modelo"
             description="tiny, base, small, medium, large"
           >
             <select
@@ -1777,11 +1777,11 @@ function HermesConfigSection({
 
   const renderDisplay = () => (
     <SettingsSection
-      title="Display"
-      description="CLI display preferences reflected in the agent UI."
+      title="Exibição"
+      description="Preferências de exibição da CLI refletidas na interface do agente."
       icon={PaintBoardIcon}
     >
-      <SettingsRow label="Personality" description="Agent response style.">
+      <SettingsRow label="Personalidade" description="Estilo de resposta do agente.">
         <select
           value={(displayConfig.personality as string) || 'default'}
           onChange={(e) =>
@@ -1800,7 +1800,7 @@ function HermesConfigSection({
       </SettingsRow>
       <SettingsRow
         label="Streaming"
-        description="Stream tokens as they arrive."
+        description="Transmitir tokens conforme chegam."
       >
         <Switch
           checked={readBoolean(displayConfig.streaming, true)}
@@ -1810,8 +1810,8 @@ function HermesConfigSection({
         />
       </SettingsRow>
       <SettingsRow
-        label="Show reasoning"
-        description="Expose model reasoning blocks in the UI."
+        label="Mostrar raciocínio"
+        description="Expor blocos de raciocínio do modelo na interface."
       >
         <Switch
           checked={readBoolean(displayConfig.show_reasoning, false)}
@@ -1822,7 +1822,7 @@ function HermesConfigSection({
           }
         />
       </SettingsRow>
-      <SettingsRow label="Show cost" description="Display usage cost metadata.">
+      <SettingsRow label="Mostrar custo" description="Exibir metadados de custo de uso.">
         <Switch
           checked={readBoolean(displayConfig.show_cost, false)}
           onCheckedChange={(checked) =>
@@ -1830,7 +1830,7 @@ function HermesConfigSection({
           }
         />
       </SettingsRow>
-      <SettingsRow label="Compact" description="Use a denser display layout.">
+      <SettingsRow label="Compacto" description="Usar um layout de exibição mais denso.">
         <Switch
           checked={readBoolean(displayConfig.compact, false)}
           onCheckedChange={(checked) =>
@@ -1838,7 +1838,7 @@ function HermesConfigSection({
           }
         />
       </SettingsRow>
-      <SettingsRow label="Skin" description="CLI theme skin.">
+      <SettingsRow label="Skin" description="Skin de tema da CLI.">
         <span
           className="text-sm font-mono"
           style={{ color: 'var(--theme-muted)' }}
